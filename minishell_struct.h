@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_struct.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:23:09 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/02 00:34:59 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/08/04 17:43:30 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELLSTRUCT_H
-# define MINISHELLSTRUCT_H
+#ifndef MINISHELL_STRUCT_H
+# define MINISHELL_STRUCT_H
 
 enum	e_exit_status
 {
@@ -152,3 +152,5 @@ enum	e_characters
 	N_LOW = 110,
 	PIPE = 124,
 };
+
+#endif
