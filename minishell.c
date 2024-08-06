@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:39:11 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/04 13:35:31 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/07 00:17:35 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,29 @@ void		signal_set(int status);
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_minishell		*shell;
-	t_command_data	cmd_data;
+	t_minishell		shell;
+	
+	(void)argc;
+	(void)argv;
 
 	if (!argv || argc < 1)
 		return (0);
-	signal_interceptor(IGNORE);
-	signal_set(IMPLICIT);
+	//shell_init(&shell, envp);
+	//switch_signal(INTERACTIVE);
+	while(shell.status == RUNNING)
+	{
+		shell.line = readline("my_minishell: ");
+		if (shell.line == NULL)
+			shell_exit(&shell);
+		if(*shell.line)
+		{
+			add_history(shell.line);
+			parse_line(&shell);
+		}
+	}
 }
 
-void	signal_intercept(int status)
+/* void	signal_intercept(int status)
 {
 	if (status == DEFAULT)
 		init_intercept(SIG_DFL, SIG_DFL);
@@ -85,3 +98,4 @@ void	signal_set(int status)
 		term.c_lflag &= ~ECHOCTL;
 	tcsetattr(STDIN_FILENO, TCSANOW, &term);
 }
+*/

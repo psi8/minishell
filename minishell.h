@@ -6,7 +6,7 @@
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:23:15 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/05 15:56:58 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/08/06 23:15:45 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,18 @@
 
 # include <unistd.h>
 # include <stdio.h>
-# include <signal.h>
+# include <signal.h> // signals on Linux
 # include <fcntl.h>
 # include <stdlib.h>
 # include <stdbool.h>
-# include <termios.h>
-# include <errno.h>
-# include <dirent.h>
+# include <termios.h> // signals on MAC
+# include <errno.h> // eror handling
 # include <sys/wait.h>
 # include <sys/stat.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "minishell_struct.h"
+# include "errors.h"
 
 extern volatile sig_atomic_t	g_sigint_received;
 
