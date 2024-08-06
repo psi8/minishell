@@ -6,18 +6,13 @@
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:39:11 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/07 00:17:35 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/08/07 00:19:05 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 volatile sig_atomic_t	g_sigint_received = 0;
-
-void		signal_intercept(int status);
-static void	interceptor_init(void (*hand_one)(int), void (*hand_two)(int));
-void		int_sig_handler(int signum);
-void		signal_set(int status);
 
 int	main(int argc, char **argv, char **envp)
 {
