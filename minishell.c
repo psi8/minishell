@@ -6,7 +6,7 @@
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:39:11 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/07 00:19:05 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/08/08 20:40:34 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int argc, char **argv, char **envp)
 		if(*shell.line)
 		{
 			add_history(shell.line);
-			parse_line(&shell);
+			line_parse(&shell);
 		}
 	}
 }
