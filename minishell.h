@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:23:15 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/06 23:15:45 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/08/10 18:39:40 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 # include <sys/stat.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "minishell_struct.h"
-# include "errors.h"
+# include"minishell_struct.h"
+# include"errors.h"
 
 extern volatile sig_atomic_t	g_sigint_received;
 
@@ -38,6 +38,9 @@ void		signal_intercept(int status);
 static void	interceptor_init(void (*hand_one)(int), void (*hand_two)(int));
 void		int_sig_handler(int signum);
 void		signal_set(int status);
+
+//DLevinsc
+static char	**get_paths(char **env);
 
 
 #endif

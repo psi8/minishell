@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_struct.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:23:09 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/07 00:10:23 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/08/10 18:23:28 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,36 +60,36 @@ typedef struct s_parsed_data
 
 typedef struct s_cmd_data
 {
-	char	*line;
-	char	*cmd;
-	char	**args;
-	char	**redir;
-	int		redir_count;
-	int		infile;
-	int		out;
-	int		index;
-	int		arg_count;
+	char	*line; //прочитанное readline
+	char	*cmd; //команда
+	char	**args; //аргументы
+	char	**redir; //редиректы
+	int		redir_count; //количество редиректов
+	int		infile; //?
+	int		out; //?
+	int		index; //?
+	int		arg_count; //количество аргументов
 }	t_cmd_data;
 
 typedef struct s_minishell
 {
-	char			**env;
-	char			*line;
-	t_cmd_data		*cmd_tree;
-	char			**paths;
-	int				cmd_count;
-	t_exit_status	status;
-	int				exit_status;
-	int				*pid;
-	int				pid_allocated;
-	int				**pipe;
-	int				pipes_allocated;
-	int				heredoc_index;
-	int				std_in;
-	int				std_out;
-	int				parent_redir;
-	char			*pwd;
-	char			*old_pwd;
+	char			**env; //переменные окружения
+	char			*line; // прочитанное readline
+	t_cmd_data		*cmd_tree; //массив комманд (t_cmd_data) 
+	char			**paths; // переменная $PATH (разделенный на директории)
+	int				cmd_count; // количество команд
+	t_exit_status	status; //статус
+	int				exit_status; //критерий выхода (?)
+	int				*pid; // массив pid
+	int				pid_allocated; // ?
+	int				**pipe; //массив fd [out] , [in]
+	int				pipes_allocated; //?
+	int				heredoc_index; // количество heredoc
+	int				std_in; //?
+	int				std_out; //?
+	int				parent_redir; //?
+	char			*pwd; //путь к текущей директории
+	char			*old_pwd; //путь к директории, где были до этого
 }	t_minishell;
 
 enum	e_characters
