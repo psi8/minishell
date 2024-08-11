@@ -1,33 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   close_pipes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/10 18:22:09 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/11 21:50:04 by dlevinsc         ###   ########.fr       */
+/*   Created: 2024/08/11 21:37:11 by dlevinsc          #+#    #+#             */
+/*   Updated: 2024/08/11 21:58:03 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#import "minishell.h"
+#include <minishell.h>
 
-char	**get_paths(char **env)
+void	close_pipe_fds(t_minishell *shell)
 {
-	size_t	i;
-	char	**paths;
-	char	*trim_path;
+	int	i;
 
 	i = 0;
-	while (env[i] && ft_strncmp(env[i], "PATH=", 5))
-		i++;
-	if (env[i])
+	while (i < shell->pipes_allocated)
 	{
-		trim_path = ft_substr(env[i], 5, ft_strlen(env[i]));
-		paths = ft_split(trim_path, ':');
-		free(trim_path);
-		return (paths);
+		if (shell->pipe[i])
+		{
+			close(shell->pipe[i][0]);
+			close(shell->pipe[i][1]);
+		}
+		i++;
 	}
-	else
-		return (NULL);
+}
+
+void	close_exec_pipe_fds(t_minishell *shell)
+{
+	int	i;
+
+	i = 0;
+	while (i < shell->pipes_allocated)
+	{
+		if (shell->pipe[i])
+		{
+			close(cmds->pipe[i][0]);
+			close(cmds->pipe[i][1]);
+		}
+		i++;
+	}
 }

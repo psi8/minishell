@@ -26,8 +26,8 @@ int	exec_main(t_minishell shell)
 	status_code = 0;
 	while (shell->cmd_tree->index < shell->cmd_count)
 	{
-		if (shell->cmd_tree[i].args[0] && is_builtin_without_output(shell->cmd_tree[i]))
-			exec_builtin_without_output(shell->cmd_tree[i]);
+		if (shell->cmd_tree[i].args[0] && is_builtin_without_output(&shell->cmd_tree[i]))
+			exec_builtin_without_output(shell, &shell->cmd_tree[i]);
 		else
 		{
 			status_code = exec_child(data, cmds, cmds->num_exec);

@@ -58,10 +58,10 @@ static int	wait_child(t_commands *cmds)
 	return (status);
 }
 
-void	exec_builtin_without_output(t_minishell shell)
+void	exec_builtin_without_output(t_minishell shell, t_cmd_data *cmd)
 {
-	if (is_redirection_command(shell->cmd_tree))
-		redirection_handler(shell->cmd_tree);
+	if (cmd->redir_count)
+		redirection_handler(shell, cmd);
 	cmds->num_exec++;
 	if (is_redirection_command(shell->cmd_tree)
 		&& check_in_out_file(cmds->io, cmds, false) == false)

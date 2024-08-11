@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:23:15 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/10 22:44:41 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/11 21:51:03 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,18 @@ void		int_sig_handler(int signum);
 void		signal_set(int status);
 
 //DLevinsc
-static char **get_paths(char **env);
-int         exec_main(t_minishell *shell);
+char **get_paths(char **env);
+int         exec_main(t_minishell shell);
 bool	    is_builtin_without_output(t_cmd_data *cmd);
-void	    exec_builtin_without_output(t_minishell shell);
+void	exec_builtin_without_output(t_minishell shell, t_cmd_data *cmd);
 int         cmd_cd(t_minishell *shell, char **argv);
 void	cmd_echo(char **argv);
 void	cmd_env(t_minishell *shell);
 void	cmd_exit(t_minishell *shell, char **argv);
 void	cmd_export(t_minishell *shell, char **argv);
 void	cmd_pwd(void);
+void	close_fds(t_minishell shell, t_bool reset_file);
+int	error_msg_cmd(char *cmd, char *detail, char *msg, int status_code);
+
 
 #endif

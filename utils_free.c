@@ -6,20 +6,24 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 18:06:20 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/10 18:06:26 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/11 21:30:55 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	close_fds(t_commands *cmds, bool reset_io)
+#include "minishell.h"
+void	free_pipes(t_commands *cmds);
+void	free_io(t_io *io);
+
+void	close_fds(t_minishell shell, t_bool reset_file)
 {
-	if (cmds->io)
+	if (shell->pipes_allocated)
 	{
-		if (cmds->io->fd_in != -1)
-			close(cmds->io->fd_in);
-		if (cmds->io->fd_out != -1)
-			close(cmds->io->fd_out);
-		if (reset_io == true)
-			restore_io(cmds->io);
+		if (shell->std_in != -1) 
+			close(shell->std_in);
+		if (shell->std_out != -1)
+			close(shell->std_out);
+		if (reset_file == true)
+			restore_file(cmds->io);
 	}
 	close_pipe_fds(cmds);
 }

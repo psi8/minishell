@@ -6,11 +6,14 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 18:02:06 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/10 19:01:15 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/11 18:50:54 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#import <minishell.h>
+#include "minishell.h"
+
+void	init_cmds(t_minishell *shell);
+static void	init_pipe(t_minishell *shell);
 
 static int	exec_cmd(t_minishell *shell)
 {
@@ -19,7 +22,7 @@ static int	exec_cmd(t_minishell *shell)
 	shell->exit_status = 0;
 	status_code = 0;
 	init_cmds(data, cmds);
-	shell->exit_status = exec_handler(shell); //f+s
+	shell->exit_status = exec_main(shell);
 	if (status_code == 0 && shell->exit_status != 0)
 		status_code = shell->exit_status;
 	close_fds(shell, false);
