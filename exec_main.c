@@ -16,17 +16,18 @@ static int	exec_local_bin(t_data *data, t_commands *cmds, int num_cmd);
 static int	exec_path_var_bin(t_data *data, t_commands *cmds, int num_cmd);
 static int	wait_child(t_commands *cmds);
 
-int	exec_handler(t_data *data, t_commands *cmds)
+int	exec_main(t_minishell shell)
 {
 	int	status_code;
+	int	g_status_code;
+	int i;
 
+	i = 0;
 	status_code = 0;
-	while (cmds->num_exec < cmds->num_cmds)
+	while (shell->cmd_tree->index < shell->cmd_count)
 	{
-		if (cmds->cmd[cmds->num_exec].args[0] && \
-			cmds->operators[cmds->num_exec] \
-			!= PIPE && is_builtin_without_output(cmds))
-			exec_builtin_without_output(cmds, data);
+		if (shell->cmd_tree[i].args[0] && is_builtin_without_output(shell->cmd_tree[i]))
+			exec_builtin_without_output(shell->cmd_tree[i]);
 		else
 		{
 			status_code = exec_child(data, cmds, cmds->num_exec);
