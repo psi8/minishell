@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:23:09 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/11 22:03:24 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/12 22:52:10 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct s_parsed_data
 
 typedef struct s_cmd_data
 {
-	char	*line; //прочитанное readline
+	char	*line; //full comand line
 	char	*cmd; //команда
 	char	**args; //аргументы
 	char	**redir; //редиректы

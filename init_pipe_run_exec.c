@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 18:02:06 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/11 18:50:54 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/12 20:11:36 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	exec_cmd(t_minishell *shell)
 
 	shell->exit_status = 0;
 	status_code = 0;
-	init_cmds(data, cmds);
+	init_cmds(shell);
 	shell->exit_status = exec_main(shell);
 	if (status_code == 0 && shell->exit_status != 0)
 		status_code = shell->exit_status;
@@ -55,7 +55,7 @@ void	init_cmds(t_minishell *shell)
 		shell->paths = get_paths(shell->env);
 		init_pipe(shell);
 		shell->pid = (int *)ft_calloc(sizeof(int *), shell->cmd_count + 1);
-		shell->cmd_tree = (t_cmd_data *) ft_calloc(sizeof(t_cmd_data *), shell->cmd_count + 1);
+//		shell->cmd_tree = (t_cmd_data *) ft_calloc(sizeof(t_cmd_data *), shell->cmd_count + 1); //Pavel initializes it
 	}
 }
 

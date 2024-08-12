@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 14:36:23 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/10 22:21:42 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/12 20:07:39 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ bool	is_builtin_without_output(t_cmd_data *cmd)
 		return (true);
 	else if (ft_strncmp(cmd->cmd, "unset", 6) == 0)
 		return (true);
-	else if (ft_strncmp(cmd->cmd, "export", 7) == 0 && argv[1])
+	else if (ft_strncmp(cmd->cmd, "export", 7) == 0 && cmd->args[0])
 		return (true);
 	else
 		return (false);

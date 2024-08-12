@@ -22,9 +22,9 @@ int	exec_main(t_minishell shell)
 	int	g_status_code;
 	int i;
 
-	i = 0;
+	i = -1;
 	status_code = 0;
-	while (shell->cmd_tree->index < shell->cmd_count)
+	while (++i < shell->cmd_count)
 	{
 		if (shell->cmd_tree[i].args[0] && is_builtin_without_output(&shell->cmd_tree[i]))
 			exec_builtin_without_output(shell, &shell->cmd_tree[i]);

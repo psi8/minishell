@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:23:15 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/11 21:51:03 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/12 22:52:12 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	cmd_export(t_minishell *shell, char **argv);
 void	cmd_pwd(void);
 void	close_fds(t_minishell shell, t_bool reset_file);
 int	error_msg_cmd(char *cmd, char *detail, char *msg, int status_code);
-
+void	redirection_handler(t_minishell shell, t_cmd_data *cmd);
+int	open_out_file(t_minishell shell, int cmd_indx, char *file, bool trunc);
 
 #endif

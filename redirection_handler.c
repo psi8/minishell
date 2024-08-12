@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 21:32:35 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/11 21:32:38 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/12 22:41:28 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,27 +20,23 @@ bool	is_redirection_command(t_commands *cmds, int i)
 		return (false);
 }
 
-void	redirection_handler(t_commands *cmds, int j)
+void	redirection_handler(t_minishell shell, t_cmd_data *cmd)
 {
 	int	i;
-	int	status_code;
+	int status;
 
 	i = 0;
-	status_code = -1;
-	while (cmds->cmd[j].redirections[i])
+	while (cmd.redirections[i])
 	{
-		if (ft_strncmp(cmds->cmd[j].redirections[i], ">>", 2) == 0)
-			status_code = rd_output_handler(cmds, cmds->cmd[j].redirections[i],
-					false);
-		else if (ft_strncmp(cmds->cmd[j].redirections[i], "<<", 2) == 0)
+		if (ft_strncmp(cmd.redirections[i], ">>", 2) == 0)
+			cmd->out = open_out_file(shell, cmd.redirections[i] + 2);
+		else if (ft_strncmp(cmd.redirections[i], "<<", 2) == 0)
 			rd_heredoc(cmds, cmds->cmd[j].redirections[i]);
-		else if (ft_strncmp(cmds->cmd[j].redirections[i], "<", 1) == 0)
-			status_code = rd_input_handler(cmds, cmds->cmd[j].redirections[i]);
-		else if (ft_strncmp(cmds->cmd[j].redirections[i], ">", 1) == 0)
-			status_code = rd_output_handler(cmds, cmds->cmd[j].redirections[i],
-					true);
-		cmds->io->cmd_index = j;
-		if (status_code != -1)
+		else if (ft_strncmp(cmd.redirections[i], "<", 1) == 0)
+			status = rd_input_handler(shell, cmd.redirections[i] + 2);
+		else if (ft_strncmp(cmd.redirections[i], ">", 1) == 0)
+			cmd->infile = rd_output_handler(cmds, cmds->cmd[j].redirections[i], true);
+		if (cmd->out != -1 || cmd->infile != -1 || status != -1)
 			break ;
 		i++;
 	}
