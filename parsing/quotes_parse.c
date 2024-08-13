@@ -1,34 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initialization.c                                   :+:      :+:    :+:   */
+/*   quotes_parse.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/08 20:42:00 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/14 00:52:36 by psitkin          ###   ########.fr       */
+/*   Created: 2024/08/13 16:42:29 by psitkin           #+#    #+#             */
+/*   Updated: 2024/08/13 18:03:43 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	promt_init(t_minishell *shell)
+int	quotes_skip(char *str, int i)
 {
-	shell->pipes_allocated = 0;
-	shell->pipe = NULL;
-	shell->pid_allocated = 0;
-	shell->pid = NULL;
-	shell->cmd_count = 0;
-	shell->cmd_tree = NULL;
-	shell->heredoc_index = 0;
-	shell->paths = NULL;
-	shell->parent_redir = 0;
+	char quote;
+	
+	quote = str[i];
+	i++;
+	while (str[i] && str[i] != quote)
+		i++;
+	return (i);
 }
 
-void	tree_init(t_minishell *shell)
+int	quotes_not_closed(char *str)
 {
-	int	i;
-	
+	int		i;
+	char	quote;
+
 	i = 0;
-	
+	while(str[i])
+	{
+		if(str[i] == '\"' || str[i] == '\'')
+		{
+			quote = str[i];
+			i++;
+			while(str[i] && str[i] != quote)
+				i++;
+			if(!str[i])
+				return (1);
+		}
+		i++;
+	}
+	return (0);
 }

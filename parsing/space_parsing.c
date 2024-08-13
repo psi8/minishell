@@ -1,34 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initialization.c                                   :+:      :+:    :+:   */
+/*   space_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/08 20:42:00 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/14 00:52:36 by psitkin          ###   ########.fr       */
+/*   Created: 2024/08/13 16:38:21 by psitkin           #+#    #+#             */
+/*   Updated: 2024/08/13 17:44:45 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	promt_init(t_minishell *shell)
+void	tabs_to_spaces(char *str)
 {
-	shell->pipes_allocated = 0;
-	shell->pipe = NULL;
-	shell->pid_allocated = 0;
-	shell->pid = NULL;
-	shell->cmd_count = 0;
-	shell->cmd_tree = NULL;
-	shell->heredoc_index = 0;
-	shell->paths = NULL;
-	shell->parent_redir = 0;
-}
-
-void	tree_init(t_minishell *shell)
-{
-	int	i;
+	int i;
 	
 	i = 0;
-	
+	while (str[i])
+	{
+		if(str[i] == '\'' || str[i] '\"')
+			i = quotes_skip(str, i);
+		if(str[i] == '\t')
+			str[i] = ' ';
+		i++;
+	}
 }
+
+int	only_spaces(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == ' ')
+			return(1);
+		i++;
+	}
+	return (1);
+}
+
