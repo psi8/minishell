@@ -6,12 +6,14 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 17:47:19 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/07 22:57:15 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/15 23:36:43 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ERRORS_H
 # define ERRORS_H
+
+# define SYNTAX_QUOTES "syntax error with unclosed quotes"
 
 # define ERR_MALLOC "malloc unexpectedly failed"
 # define ERR_PIPE "unexpected error while opening pipe"

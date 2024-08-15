@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:23:15 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/12 22:52:12 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/15 23:40:04 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,6 @@
 
 extern volatile sig_atomic_t	g_sigint_received;
 
-void		signal_intercept(int status);
-static void	interceptor_init(void (*hand_one)(int), void (*hand_two)(int));
-void		int_sig_handler(int signum);
-void		signal_set(int status);
-
 //DLevinsc
 char **get_paths(char **env);
 int         exec_main(t_minishell shell);
@@ -55,5 +50,17 @@ void	close_fds(t_minishell shell, t_bool reset_file);
 int	error_msg_cmd(char *cmd, char *detail, char *msg, int status_code);
 void	redirection_handler(t_minishell shell, t_cmd_data *cmd);
 int	open_out_file(t_minishell shell, int cmd_indx, char *file, bool trunc);
+
+//Pavel
+int		quotes_skip(char *str, int i);
+void	tabs_to_spaces(char *str);
+int		only_spaces(char *str);
+int		quotes_not_closed(char *str);
+void	promt_init(t_minishell *shell);
+void	split_pipe(t_minishell *shell, char *str);
+void	line_parse(t_minishell *shell);
+int		invalid_pipe(t_minishell *shell, char *str);
+void	mark_work_pipe(char *str)
+void	tree_init(t_minishell *shell);
 
 #endif
