@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:23:15 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/15 23:40:04 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/15 23:49:46 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	promt_init(t_minishell *shell);
 void	split_pipe(t_minishell *shell, char *str);
 void	line_parse(t_minishell *shell);
 int		invalid_pipe(t_minishell *shell, char *str);
-void	mark_work_pipe(char *str)
+void	mark_work_pipe(char *str);
 void	tree_init(t_minishell *shell);
 
 #endif
