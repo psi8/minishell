@@ -6,7 +6,7 @@
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:23:09 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/07 00:10:23 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/08/15 22:07:06 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,14 @@ typedef struct s_parsed_data
 
 typedef struct s_cmd_data
 {
-	char	*line;
 	char	*cmd;
-	char	**args;
+	char	*line;
 	char	**redir;
+	char	**args;
 	int		redir_count;
+	int		index;
 	int		infile;
 	int		out;
-	int		index;
 	int		arg_count;
 }	t_cmd_data;
 
