@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:23:09 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/15 21:31:16 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/15 23:14:04 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ typedef struct s_cmd_data
 {
 	char	*line; //full comand line
 	char	*cmd; //команда
-	char	**args; //аргументы
-	char	**redir; //редиректы
+	char	**args; //аргументы ?
+	char	**redir; //редиректы ?
 	int		redir_count; //количество редиректов
 	int		infile; //?
 	int		out; //?
@@ -76,20 +76,20 @@ typedef struct s_minishell
 	char			**env; //переменные окружения
 	char			*line; // прочитанное readline
 	t_cmd_data		*cmd_tree; //массив комманд (t_cmd_data) 
-	char			**paths; // переменная $PATH (разделенный на директории)
+	char			**paths; // переменная $PATH (divided на директории by ':'?)
 	int				cmd_count; // количество команд
 	t_exit_status	status; //статус
 	int				exit_status; //критерий выхода (?)
 	int				*pid; // массив pid
 	int				pid_allocated; // ?
 	int				**pipe; //массив fd [out] , [in]
-	int				pipes_allocated; //numbers of pipes
+	int				pipes_allocated; //numbers of pipes ?
 	int				heredoc_index; // heredoc index use to create heredoc file name 
 	int				std_in; //?
 	int				std_out; //?
 	int				parent_redir; //?
 	char			*pwd; //путь к текущей директории
-	char			*old_pwd; //путь к директории, где были до этого
+	char			*old_pwd; //путь к директории, где были до этого ?
 }	t_minishell;
 
 enum	e_characters
