@@ -6,7 +6,7 @@
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 20:42:00 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/14 00:52:36 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/08/14 23:29:01 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,14 @@ void	tree_init(t_minishell *shell)
 	int	i;
 	
 	i = 0;
+	shell->cmd_tree = ((t_cmd_data *)malloc(sizeof(t_cmd) * (shell->cmd_count + 1)));
+	if(!shell->cmd_count)
+	{
+		error(shell, ERR_MALLOC, FATAL, 1);
+	}
 	
+	if(!shell->pid)
+		error();
+	shell->pid_allocated = 1;
+	paths(shell, shell->env);
 }
