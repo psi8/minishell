@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:23:09 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/12 22:52:10 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/15 21:31:16 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ typedef struct s_minishell
 	int				pid_allocated; // ?
 	int				**pipe; //массив fd [out] , [in]
 	int				pipes_allocated; //numbers of pipes
-	int				heredoc_index; // количество heredoc
+	int				heredoc_index; // heredoc index use to create heredoc file name 
 	int				std_in; //?
 	int				std_out; //?
 	int				parent_redir; //?
