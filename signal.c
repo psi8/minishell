@@ -1,15 +1,9 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/15 22:12:42 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/15 22:15:16 by dlevinsc         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
+/*
+*   Pavel! You are able to delete all this function and file. Needs only for test.
+*
+*
+*/
 
 #include <minishell.h>
 
@@ -30,15 +24,41 @@ void	signals_run_cmd(void)
 
 static void	new_line(int signo)
 {
-	g_sigint_receive = 128 + signo;
+	g_sigint_received = 128 + signo;
 	rl_on_new_line();
 }
 
 static void	reset_prompt(int signo)
 {
-	g_sigint_receive = 128 + signo;
+	g_sigint_received = 128 + signo;
 	ft_putchar_fd('\n', STDOUT_FILENO);
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
+}
+
+void	toggle_signal(t_signal mode)
+{
+	if (mode == DEFAULT)
+	{
+		toggle_caret(1);
+		signal(SIGQUIT, SIG_DFL);
+		signal(SIGINT, SIG_DFL);
+	}
+	else if (mode == HANDLER)
+	{
+		toggle_caret(0);
+		signal(SIGQUIT, SIG_IGN);
+		signal(SIGINT, signal_handler);
+	}
+	else if (mode == HEREDOC)
+	{
+		signal(SIGQUIT, SIG_IGN);
+		signal(SIGINT, heredoc_handler);
+	}
+	else if (mode == NO_SIGNALS)
+	{
+		signal(SIGQUIT, SIG_IGN);
+		signal(SIGINT, SIG_IGN);
+	}
 }

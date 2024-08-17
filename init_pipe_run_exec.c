@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 18:02:06 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/12 20:11:36 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/17 22:44:56 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	exec_cmd(t_minishell *shell)
 	if (status_code == 0 && shell->exit_status != 0)
 		status_code = shell->exit_status;
 	close_fds(shell, false);
-	free_cmds(shell);
+//	free_cmds(shell);
 	return (status_code);
 }
 

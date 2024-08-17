@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 14:36:23 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/12 20:07:39 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/17 18:42:02 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	call_builtin(t_minishell *shell, t_cmd_data *cmd)
 	if (ft_strncmp(cmd->cmd, "echo", 5) == 0)
 		cmd_code = cmd_echo(cmd->args);
 	else if (ft_strncmp(cmd->cmd, "exit", 5) == 0)
-		cmd_code = cmd_exit(shell, argv);
+		cmd_code = cmd_exit(shell, cmd->args);
 	else if (ft_strncmp(cmd->cmd, "pwd", 4) == 0)
 		cmd_code = cmd_pwd();
 	else if (ft_strncmp(cmd->cmd, "env", 4) == 0)
@@ -62,9 +62,9 @@ int	call_builtin(t_minishell *shell, t_cmd_data *cmd)
 	else if (ft_strncmp(cmd->cmd, "cd", 3) == 0)
 		cmd_code = cmd_cd(shell, cmd->args);
 	else if (ft_strncmp(cmd->cmd, "unset", 6) == 0)
-		cmd_code = cmd_unset(shell, argv);
+		cmd_code = cmd_unset(shell, cmd->args);
 	else if (ft_strncmp(cmd->cmd, "export", 7) == 0)
-		cmd_code = cmd_export(shell, argv);
+		cmd_code = cmd_export(shell, cmd->args);
 	else
 		exit(EXIT_SUCCESS);
 	return (cmd_code);

@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 21:32:35 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/15 21:25:53 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/17 18:24:06 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ void	redirection_handler(t_minishell shell, t_cmd_data *cmd)
 	{
 		if (ft_strncmp(cmd.redir[i], ">>", 2) == 0)
 			cmd->out = open_out_file(cmd.redir[i] + 2, false);
-		else if (ft_strncmp(cmd.redirections[i], "<<", 2) == 0)
-			cmd->infile = rd_heredoc(cmds, cmd.redirections[i]);
-		else if (ft_strncmp(cmd.redirections[i], "<", 1) == 0)
-			cmd->infile = open_in_file(shell, cmd.redirections[i] + 2);
-		else if (ft_strncmp(cmd.redirections[i], ">", 1) == 0)
-			cmd->out = open_out_file(cmd.redir[i], true);
+		else if (ft_strncmp(cmd.redir[i], "<<", 2) == 0)
+			cmd->infile = heredoc(shell, cmd);
+		else if (ft_strncmp(cmd.redir[i], "<", 1) == 0)
+			cmd->infile = open_in_file(shell, cmd.redir[i] + 2);
+		else if (ft_strncmp(cmd.redir[i], ">", 1) == 0)
+			cmd->out = open_out_file(cmd.redir[i] + 2, true);
 		if (cmd->out != -1 || cmd->infile != -1)
 			break ;
 		i++;
