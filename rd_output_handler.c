@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 21:33:00 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/15 21:03:28 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/19 22:47:04 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	rd_output_handler(t_minishell shell, t_cmd_data *cmd, char *red, t_bool trun
 }
 */
 
-int	open_out_file(char *file, bool trunc)
+int	open_out_file(char *file, t_bool trunc)
 {
 //	if (cmds->io->out_file && cmds->io->out_file[0] == '\0')
 //		return (error_msg_cmd(file, NULL, "ambiguous redirect", false));

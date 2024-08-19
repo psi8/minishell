@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 18:02:06 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/17 22:44:56 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/19 21:47:16 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	init_cmds(t_minishell *shell);
 static void	init_pipe(t_minishell *shell);
 
-static int	exec_cmd(t_minishell *shell)
+int	exec_cmd(t_minishell *shell)
 {
 	int			status_code;
 

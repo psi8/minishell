@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 18:06:20 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/17 22:36:04 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/19 23:17:39 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,13 @@ void	close_fds(t_minishell shell, t_bool reset_file)
 			restore_file(cmds->io);
 	}
 	close_pipe_fds(cmds);
+}
+
+void	free_ptr(void *ptr)
+{
+	if (ptr)
+	{
+		free(ptr);
+		ptr = NULL;
+	}
 }

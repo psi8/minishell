@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:23:15 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/17 22:45:51 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/19 23:30:32 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <signal.h> // signals on Linux
 # include <fcntl.h>
 # include <stdlib.h>
-# include <stdbool.h>
+//# include <stdbool.h>
 # include <termios.h> // signals on MAC
 # include <errno.h> // eror handling
 # include <sys/wait.h>
@@ -37,27 +37,27 @@ extern volatile sig_atomic_t	g_sigint_received;
 
 # define IS_DIR ": is a directory"
 # define NO_CMD ": command not found"
+# define MAX_PATH 4096
 
 //DLevinsc
 char **get_paths(char **env);
 int         exec_main(t_minishell *shell);
-bool	    is_builtin_without_output(t_cmd_data *cmd);
+t_bool	    is_builtin_without_output(t_cmd_data *cmd);
 void	exec_builtin_without_output(t_minishell *shell, t_cmd_data *cmd);
 int         cmd_cd(t_minishell *shell, char **argv);
-void	cmd_echo(char **argv);
-void	cmd_env(t_minishell *shell);
-void	cmd_exit(t_minishell *shell, char **argv);
-void	cmd_export(t_minishell *shell, char **argv);
-void	cmd_pwd(void);
-void	cmd_unset(t_minishell *shell, char **argv);
+int	cmd_echo(char **argv);
+int	cmd_env(t_minishell *shell, t_cmd_data *cmd);
+int	cmd_exit(t_minishell *shell, char **argv);
+int	cmd_export(t_minishell *shell, char **argv);
+int	cmd_pwd(void);
+int	cmd_unset(t_minishell *shell, char **argv);
 void	close_fds(t_minishell shell, t_bool reset_file);
 int	error_msg_cmd(char *cmd, char *detail, char *msg, int status_code);
 void	redirection_handler(t_minishell shell, t_cmd_data *cmd);
-int	open_out_file(char *file, bool trunc);
+int	open_out_file(char *file, t_bool trunc);
 void	heredoc(t_minishell *shell, t_cmd_data *cmd);
-static int	open_in_file(char *file);
+int	open_in_file(char *file);
 int	call_builtin(t_minishell *shell, t_cmd_data *cmd);
-void	cmd_unset(t_minishell *shell, char **argv);
 void	redir_to_pipe(t_minishell *shell, t_cmd_data *cmd_vars);
 void	redir_to_file(t_minishell *shell, t_cmd_data *c, t_exit_status mode);
 char	*get_env_var_value(char **env, char *var);
@@ -67,7 +67,9 @@ void	execute_cmd(t_minishell *shell, int n_cmd);
 void	set_pipe_fds(t_minishell *shell, int i);
 void	validate_command(t_minishell *shell, t_cmd_data *cmd_vars);
 int	exec_child(t_minishell *shell, t_cmd_data *cmd, int num_cmd);
-static int	exec_cmd(t_minishell *shell);
+int	exec_cmd(t_minishell *shell);
+int	get_env_var_index(char **env, char *var);
+void	env_var_remove(t_minishell *shell, int index);
 
 //Pavel
 int		quotes_skip(char *str, int i);

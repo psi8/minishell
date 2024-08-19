@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:23:09 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/15 23:36:20 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/19 22:39:07 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ enum	e_characters
 	L_REDIR_SEPARATOR = 29,
 	R_REDIR_SEPARATOR = 30,
 	SEPARATOR = 31,
-	SPACE = 32,
+	S_SPACE = 32,
 	D_QUO = 34,
 	D_SIGN = 36,
 	AND = 38,

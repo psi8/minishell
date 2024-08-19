@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:17:28 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/04/05 20:04:49 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/19 22:36:56 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ typedef struct s_list
 
 typedef enum e_bool
 {
-	false,
-	true
+	false = 0,
+	true = 1
 }	t_bool;
 
 int		ft_isalpha(int c);

@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 14:45:12 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/03 14:45:12 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/19 22:48:29 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static bool	exist_n_option(char **argv);
 
-void	cmd_echo(char **argv)
+int	cmd_echo(char **argv)
 {
 	int		i;
 	bool	option_n;
@@ -33,6 +33,7 @@ void	cmd_echo(char **argv)
 	}
 	if (option_n == false)
 		ft_putchar_fd('\n', STDOUT_FILENO);
+	return(EXIT_SUCCESS);
 }
 
 static bool	exist_n_option(char **argv)

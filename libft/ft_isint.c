@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 15:36:34 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/02/13 22:56:35 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/19 22:31:11 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,9 @@ t_bool	ft_isint(char *str)
 {
 	int	sign;
 	int	i;
-	int	res;
 
 	sign = 1;
 	i = 0;
-	res = 0;
 	while (is_space(str[i]))
 		i++;
 	if (str[i] == '+' || str[i] == '-')

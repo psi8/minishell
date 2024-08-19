@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 19:19:25 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/17 19:19:39 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/19 23:25:40 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,25 +36,25 @@ char	*get_env_var_value(char **env, char *var)
 	return (NULL);
 }
 
-void	env_var_remove(t_data *data, int index)
+void	env_var_remove(t_minishell *shell, int index)
 {
 	int	i;
 	int	j;
 
-	free_ptr(data->env[index]);
+	free_ptr(shell->env[index]);
 	i = index;
 	j = index;
-	while (data->env[i + 1])
+	while (shell->env[i + 1])
 	{
-		data->env[i] = ft_strdup(data->env[i + 1]);
-		free_ptr(data->env[i + 1]);
+		shell->env[i] = ft_strdup(shell->env[i + 1]);
+		free_ptr(shell->env[i + 1]);
 		j++;
 		i++;
 	}
-	data->env = env_var_realloc(data, j);
+	shell->env = env_var_realloc(shell, j);
 }
 
-char	**env_var_realloc(t_data *data, int size)
+char	**env_var_realloc(t_minishell *shell, int size)
 {
 	char	**new_env_var;
 	int		i;
@@ -63,12 +63,12 @@ char	**env_var_realloc(t_data *data, int size)
 	new_env_var = ft_calloc((size + 1), sizeof * new_env_var);
 	if (!new_env_var)
 		return (NULL);
-	while (data->env[i] && i < size)
+	while (shell->env[i] && i < size)
 	{
-		new_env_var[i] = ft_strdup(data->env[i]);
+		new_env_var[i] = ft_strdup(shell->env[i]);
 		free_ptr(data->env[i]);
 		i++;
 	}
-	free_ptr(data->env);
+	free_ptr(shell->env);
 	return (new_env_var);
 }

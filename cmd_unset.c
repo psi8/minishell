@@ -6,36 +6,41 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 14:52:35 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/03 14:52:35 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/19 23:21:58 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	cmd_unset(t_minishell *shell, char **argv)
+t_bool	is_valid_var_name(char *name);
+
+int	cmd_unset(t_minishell *shell, char **args)
 {
 	int	i;
+	int	index;
 	int	status_code;
 
 	status_code = EXIT_SUCCESS;
 	i = 1;
-	while (argv[i])
+	while (args[i])
 	{
-		if (!is_valid_var_name(argv[i]))
+		if (is_valid_var_name(args[i]) == false)
 		{
-			print_arg_err_msg("unset", argv[i], "not a valid identifier");
-			status_code = EXIT_FAILURE;
+			status_code = error_msg_cmd("unset", args[i],
+					"not a valid identifier", EXIT_FAILURE);
 		}
 		else
 		{
-			ft_remove_env_hash(shell->hashmap, argv[i]);
+			index = get_env_var_index(shell->env, args[i]);
+			if (index != -1)
+				env_var_remove(shell, index);
 		}
 		i++;
 	}
-	shell->exit_status = status_code;
+	return (status_code);
 }
 
-bool	is_valid_var_name(char *name)
+t_bool	is_valid_var_name(char *name)
 {
 	int	i;
 

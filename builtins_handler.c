@@ -6,13 +6,13 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 14:36:23 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/17 18:42:02 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/19 22:51:25 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool	is_builtin_without_output(t_cmd_data *cmd)
+t_bool	is_builtin_without_output(t_cmd_data *cmd)
 {
 	if (ft_strncmp(cmd->cmd, "cd", 3) == 0)
 		return (true);
@@ -26,7 +26,7 @@ bool	is_builtin_without_output(t_cmd_data *cmd)
 		return (false);
 }
 
-bool	is_builtin(char *cmd)
+t_bool	is_builtin(char *cmd)
 {
 	if (ft_strncmp(cmd, "echo", 5) == 0)
 		return (true);
@@ -58,7 +58,7 @@ int	call_builtin(t_minishell *shell, t_cmd_data *cmd)
 	else if (ft_strncmp(cmd->cmd, "pwd", 4) == 0)
 		cmd_code = cmd_pwd();
 	else if (ft_strncmp(cmd->cmd, "env", 4) == 0)
-		cmd_code = cmd_env(shell);
+		cmd_code = cmd_env(shell, cmd);
 	else if (ft_strncmp(cmd->cmd, "cd", 3) == 0)
 		cmd_code = cmd_cd(shell, cmd->args);
 	else if (ft_strncmp(cmd->cmd, "unset", 6) == 0)

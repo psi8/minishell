@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 14:50:36 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/03 14:50:36 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/19 23:00:32 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,5 @@ void	cmd_export(t_minishell *shell, char **argv)
 		index++;
 	}
 	shell->exit_status = result;
+	return (result);
 }

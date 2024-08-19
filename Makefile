@@ -1,44 +1,67 @@
-# Имя целевого исполняемого файла
+# Variables
 NAME = minishell
-
-# Компилятор и флаги компиляции
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-
-# Путь к заголовочным файлам
-INCLUDES = -I.
-
-# Список исходных файлов
-SRCS = main.c \
-       builtins_handler.c \
-       cmd_cd.c \
-       cmd_echo.c \
+LIBFT_DIR = ./libft
+LIBFT = $(LIBFT_DIR)/libft.a
+SRCS = builtins_handler.c \
        cmd_env.c \
+       cmd_unset.c \
+       exec_builtin.c \
+       initialization.c \
+       minishell.c \
+       paths.c \
+       rd_output_handler.c \
+       syntax.c \
+       validate_cmd.c \
+       close_pipes.c \
        cmd_exit.c \
+       env.c \
+       env_partial.c \
+       exec_child.c \
+       exec_main.c \
+       in_out_redirection.c \
+       init_pipe_run_exec.c \
+       pipe.c \
+       rd_heredoc.c \
+       redirection_handler.c \
+       signal.c \
+       utils.c \
+       utils_free.c \
+       cmd_cd.c \
        cmd_export.c \
+       error_handler.c \
+       ft_libft.c \
+       cmd_echo.c \
        cmd_pwd.c \
-       cmd_unset.c
+       errors_handling/errors_handling.c \
+       exit/exit.c \
+       parsing/parsing.c \
+       parsing/quotes_parse.c \
+       parsing/space_parsing.c
 
-# Создание списка объектных файлов
 OBJS = $(SRCS:.c=.o)
 
-# Правило сборки целевого файла
-all: $(NAME)
+# Rules
+all: $(LIBFT) $(NAME)
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(INCLUDES) -o $(NAME) $(OBJS) -lreadline
+$(LIBFT):
+	@$(MAKE) -C $(LIBFT_DIR)
 
-# Правило для сборки объектных файлов
+$(NAME): $(OBJS) $(LIBFT)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT)
+
 %.o: %.c
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
-# Правило для очистки объектных файлов
 clean:
+	@$(MAKE) -C $(LIBFT_DIR) clean
 	rm -f $(OBJS)
 
-# Правило для полной очистки
 fclean: clean
+	@$(MAKE) -C $(LIBFT_DIR) fclean
 	rm -f $(NAME)
 
-# Правило для пересборки
 re: fclean all
+
+.PHONY: all clean fclean re

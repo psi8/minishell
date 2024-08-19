@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 14:49:13 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/03 14:49:13 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/19 22:59:11 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	exit_code_handler(char *arg, bool *error);
 
-void	cmd_exit(t_minishell *shell, char **argv)
+int	cmd_exit(t_minishell *shell, char **argv)
 {
 	int		exit_code;
 	bool	error;
@@ -35,8 +35,8 @@ void	cmd_exit(t_minishell *shell, char **argv)
 		}
 	}
 	ft_putendl_fd("exit", STDOUT_FILENO);
-	free_minishell(shell);
-	exit(exit_code);
+	free_and_exit(shell, exit_code);
+	return (STDERR_FILENO);
 }
 
 static int	exit_code_handler(char *arg, bool *error)
