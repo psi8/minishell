@@ -6,7 +6,7 @@
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:23:15 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/15 23:56:47 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/08/20 14:34:29 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,9 @@ void	line_parse(t_minishell *shell);
 int		invalid_pipe(t_minishell *shell, char *str);
 void	mark_work_pipe(char *str);
 void	tree_init(t_minishell *shell);
+void	paths(t_minishell *shell, char **envp);
+char	*ft_substr(char *s, unsigned int start, size_t len);
+void	redir_extract(t_minishell *shell, t_cmd_data *cmd);
+void	init_t_parse(t_parsed_data *parsed);
 
 #endif

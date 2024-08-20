@@ -6,7 +6,7 @@
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 20:42:00 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/15 22:05:24 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/08/20 14:34:16 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,14 @@ void	tree_init(t_minishell *shell)
 		error();
 	shell->pid_allocated = 1;
 	paths(shell, shell->env);
+}
+
+void	init_t_parse(t_parsed_data *parsed)
+{
+	parsed->i = 0;
+	parsed->k = 0;
+	parsed->inside_singles = 0;
+	parsed->inside_doubles = 0;
+	parsed->in_quotes = 0;
+	parsed->quote = 0;
 }
