@@ -6,7 +6,7 @@
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 00:12:00 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/20 16:20:55 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/08/20 16:27:23 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,10 @@ void	mark_work_pipe(char *str)
 			str[i] = 31;
 		i++;
 	}
+}
+
+int	wrong_arrows(t_minishell *shell, char *line, char arrow, int i)
+{
+	if (line[i] == '\0')
+		return (error)
 }
