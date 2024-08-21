@@ -6,7 +6,7 @@
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 21:35:23 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/20 17:02:27 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/08/21 17:27:02 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,11 @@ void	free_and_exit(t_minishell *shell, int status)
 {
 	if (shell->parent_redir)
 		restore_std(shell);
-	free_all(shell);
+	all_free(shell);
+	array_free(&shell->env);
+	if (shell->pwd)
+		free(shell->pwd);
+	if (shell->old_pwd)
+		free(shell->old_pwd);
+	signal_toggle()
 }
