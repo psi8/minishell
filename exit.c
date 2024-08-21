@@ -6,17 +6,24 @@
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 21:35:23 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/21 17:27:02 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/08/21 21:58:42 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include <minishell.h>
 
-void	exit_shell(t_data *data, int status_code)
+void	exit_shell(t_minishell *shell)
 {
-	free_data(data, true);
-	exit(status_code);
+	if (isatty(STDIN_FILENO))
+	{
+		ft_putstr_fd("EXIT", 2);
+		ft_putchar_fd('\n', 2);
+	}
+	array_free(&shell->env);
+	all_free(shell);
+	signal_toggle(DEFAULT);
+	exit(shell->exit_status);
 }
 
 void	free_and_exit(t_minishell *shell, int status)
@@ -29,5 +36,6 @@ void	free_and_exit(t_minishell *shell, int status)
 		free(shell->pwd);
 	if (shell->old_pwd)
 		free(shell->old_pwd);
-	signal_toggle()
+	signal_toggle(DEFAULT);
+	exit(status);
 }

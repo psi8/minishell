@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 17:47:19 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/15 23:36:43 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/21 22:38:41 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # define SYNTAX_QUOTES "syntax error with unclosed quotes"
 
-# define ERR_MALLOC "malloc unexpectedly failed"
+# define ERR_MALLOC "Error: malloc unexpectedly failed"
 # define ERR_PIPE "unexpected error while opening pipe"
 # define ERR_EXEC "unexpected error while executing command"
 # define ERR_CWD "unexpected error while executing cwd"

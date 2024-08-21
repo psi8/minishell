@@ -7,7 +7,7 @@ int	error(t_minishell *shell, char *msg, t_exit_status status, int code)
 	if(!msg)
 		free_and_exit(shell, 1);
 	if (shell->parent_redir)
-		//restore_std(shell);
+		restore_std(shell);
 	err_msg = make_err_msg(msg);
 	if (!err_msg)
 		free_and_exit(shell, 1);

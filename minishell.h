@@ -6,7 +6,7 @@
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:23:15 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/21 18:29:10 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/08/21 21:59:04 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	tree_free(t_minishell *shell);
 void	all_free(t_minishell *shell);
 void	free_and_exit(t_minishell *shell, int status);
 void	signal_toggle(t_signals status);
+void	exit_shell(t_minishell *shell);
 
 
 #endif
