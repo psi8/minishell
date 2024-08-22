@@ -6,7 +6,7 @@
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 00:12:00 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/21 22:40:30 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/08/22 23:44:14 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,18 @@ void	mark_work_pipe(char *str)
 			str[i] = 31;
 		i++;
 	}
+}
+
+static void	print_errors(char *errmsg, char *str, char c)
+{
+	ft_putstr_fd(errmsg, 2);
+	if (c)
+		ft_putchar_fd(c, 2);
+	else
+		ft_putstr_fd(" newline", 2);
+	if (str)
+		ft_putstr_fd(str, 2);
+	ft_putstr_fd(" \"\n", 2);
 }
 
 int	wrong_arrows(t_minishell *shell, char *line, char arrow, int i)
