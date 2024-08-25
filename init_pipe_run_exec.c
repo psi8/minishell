@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 18:02:06 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/19 21:47:16 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/25 12:31:55 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	init_pipe(t_minishell *shell)
 	int	i;
 
 	i = 0;
-	shell->pipe = ft_calloc(shell->cmd_count, sizeof(* int));
+	shell->pipe = (int **) ft_calloc(shell->cmd_count, sizeof(int *));
 	while (i < shell->cmd_count)
 	{
 		shell->pipe[i] = ft_calloc(sizeof(int), 2);
@@ -47,9 +47,6 @@ static void	init_pipe(t_minishell *shell)
 
 void	init_cmds(t_minishell *shell)
 {
-	int		i;
-
-	i = 0;
 	if (shell->exit_status == 0)
 	{
 		shell->paths = get_paths(shell->env);

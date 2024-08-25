@@ -6,11 +6,11 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 21:37:11 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/11 21:58:03 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/25 11:15:23 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "minishell.h"
 
 void	close_pipe_fds(t_minishell *shell)
 {
@@ -37,8 +37,8 @@ void	close_exec_pipe_fds(t_minishell *shell)
 	{
 		if (shell->pipe[i])
 		{
-			close(cmds->pipe[i][0]);
-			close(cmds->pipe[i][1]);
+			close(shell->pipe[i][0]);
+			close(shell->pipe[i][1]);
 		}
 		i++;
 	}

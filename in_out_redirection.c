@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 18:58:01 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/17 19:12:39 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/25 12:23:13 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,13 @@ static int	ambiguous_redirect(t_minishell *shell, char **file, t_exit_status mod
 		return (0);
 	tmp = ft_strdup(*file + 2);
 	if (!tmp)
-		return (error(shell, MALLOC, FATAL, 1));
-	expand(shell, file);
+		return (error(shell, ERR_MALLOC, FATAL, 1));
+//	expand(shell, file);
 	while (file[0][i] && file[0][i] != ' ')
 		i++;
 	if (i == 2 || file[0][i] == ' ')
 	{
-		msg = ft_strjoin(tmp, UNEXPECTED_EXIT);
+		msg = ft_strjoin(tmp, ": ambiguous redirect");
 		free(tmp);
 		error(shell, msg, mode, 1);
 		free(msg);
@@ -103,7 +103,7 @@ void	redir_to_file(t_minishell *shell, t_cmd_data *c, t_exit_status mode)
 			dup_and_close(c->out, STDOUT_FILENO);
 		}
 		if (c->infile == -1 || c->out == -1)
-			p_error(shell, c->redir[i] + 2, mode, 1);
+			error(shell, c->redir[i] + 2, mode, 1);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 15:04:58 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/19 22:08:58 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/25 10:09:19 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void initialize_minishell_struct(t_minishell *minishell, char **envp) {
     minishell->old_pwd = strdup("/home");
 }
 
-int main(int argc, char **argv, char **envp) {
+int test_main(int argc, char **argv, char **envp) {
     t_minishell minishell;
     int i, j;
 

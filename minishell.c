@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:39:11 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/15 23:38:58 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/25 10:44:40 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 
+	int test = test_main(argc, argv, envp); //debug builtin and pipe
+	if (test != 0)
+		return (test);
+	else
+		return (0);
+	//debug fiinish
+	
 	if (!argv || argc < 1)
 		return (0);
 	//shell_init(&shell, envp);
@@ -29,7 +36,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		shell.line = readline("my_minishell: ");
 		if (shell.line == NULL)
-			shell_exit(&shell);
+			free_and_exit(&shell, 0); //Pavel I correct this (only for test), but you can use your version.
 		if(*shell.line)
 		{
 			add_history(shell.line);

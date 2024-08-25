@@ -5,10 +5,13 @@
 *
 */
 
-#include <minishell.h>
+#include "minishell.h"
 
 static void	new_line(int signal);
 static void	reset_prompt(int signo);
+static void	toggle_caret(int is_on);
+static void	signal_handler(int signal);
+static void	heredoc_handler(int signal);
 
 void	signals_wait_cmd(void)
 {
@@ -37,7 +40,7 @@ static void	reset_prompt(int signo)
 	rl_redisplay();
 }
 
-void	toggle_signal(t_signal mode)
+void	toggle_signal(t_signals mode)
 {
 	if (mode == DEFAULT)
 	{
@@ -45,7 +48,7 @@ void	toggle_signal(t_signal mode)
 		signal(SIGQUIT, SIG_DFL);
 		signal(SIGINT, SIG_DFL);
 	}
-	else if (mode == HANDLER)
+	else if (mode == INTERACTIVE)
 	{
 		toggle_caret(0);
 		signal(SIGQUIT, SIG_IGN);
@@ -56,9 +59,38 @@ void	toggle_signal(t_signal mode)
 		signal(SIGQUIT, SIG_IGN);
 		signal(SIGINT, heredoc_handler);
 	}
-	else if (mode == NO_SIGNALS)
+	else if (mode == IGNORE)
 	{
 		signal(SIGQUIT, SIG_IGN);
 		signal(SIGINT, SIG_IGN);
+	}
+}
+
+static void	toggle_caret(int is_on)
+{
+	struct termios	new_attr;
+
+	tcgetattr(STDIN_FILENO, &new_attr);
+	if (!is_on)
+		new_attr.c_lflag &= ~ECHOCTL;
+	else
+		new_attr.c_lflag |= ECHOCTL;
+	tcsetattr(STDIN_FILENO, TCSANOW, &new_attr);
+}
+
+static void	signal_handler(int signal)
+{
+	if (signal == SIGINT)
+	{
+		write(1, "\n", 1);
+	}
+}
+
+static void	heredoc_handler(int signal)
+{
+	if (signal == SIGINT)
+	{
+		write(1, "\n", 1);
+		exit(1);
 	}
 }

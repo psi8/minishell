@@ -1,33 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/10 18:22:09 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/25 12:53:02 by dlevinsc         ###   ########.fr       */
+/*   Created: 2024/08/25 11:35:18 by dlevinsc          #+#    #+#             */
+/*   Updated: 2024/08/25 11:35:25 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-char	**get_paths(char **env)
+int	ft_isspace(int c)
 {
-	size_t	i;
-	char	**paths;
-	char	*trim_path;
-
-	i = 0;
-	while (env[i] && ft_strncmp(env[i], "PATH=", 5))
-		i++;
-	if (env[i])
-	{
-		trim_path = ft_substr(env[i], 5, ft_strlen(env[i]));
-		paths = ft_split(trim_path, ':');
-		free(trim_path);
-		return (paths);
-	}
-	else
-		return (NULL);
+	if (c == ' ' || c == '\t' || c == '\n' || c == '\r'
+		|| c == '\v' || c == '\f')
+		return (c);
+	return (0);
 }

@@ -6,11 +6,11 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 21:33:00 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/19 22:47:04 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/25 10:54:21 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "minishell.h"
 
 //static int	open_out_file(t_commands *cmds, char *file, bool trunc);
 

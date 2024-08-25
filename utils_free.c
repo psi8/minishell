@@ -6,13 +6,13 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 18:06:20 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/19 23:17:39 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/25 12:56:46 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	close_fds(t_minishell shell, t_bool reset_file)
+void	close_fds(t_minishell *shell, t_bool reset_file)
 {
 	if (shell->pipes_allocated)
 	{
@@ -21,9 +21,12 @@ void	close_fds(t_minishell shell, t_bool reset_file)
 		if (shell->std_out != -1)
 			close(shell->std_out);
 		if (reset_file == true)
-			restore_file(cmds->io);
+		{
+			;
+//			restore_file(cmds->io); should to do
+		}
+//	close_pipe_fds(shell); // should to do
 	}
-	close_pipe_fds(cmds);
 }
 
 void	free_ptr(void *ptr)

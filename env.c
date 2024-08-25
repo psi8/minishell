@@ -6,11 +6,13 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 23:13:50 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/19 23:27:46 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/25 11:51:53 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "minishell.h"
+
+int	env_var_count(char **envp);
 
 static char	*check_equal(char *var)
 {
@@ -57,7 +59,7 @@ int	get_env_var_index(char **env, char *var)
 	return (-1);
 }
 
-bool	set_env_var(t_minishell *shell, char *key, char *value)
+t_bool	set_env_var(t_minishell *shell, char *key, char *value)
 {
 	char	*temp;
 	int		index;
@@ -80,7 +82,7 @@ bool	set_env_var(t_minishell *shell, char *key, char *value)
 			return (false);
 		shell->env[index] = ft_strjoin(key, temp);
 	}
-	free_ptr(temp);
+	free(temp);
 	return (true);
 }
 

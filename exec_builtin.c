@@ -10,19 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "minishell.h"
 
-static void	cd_special_case(t_minishell *shell, t_cmd_data cmd)
+static void	cd_special_case(t_minishell *shell, t_cmd_data *cmd)
 {
 	char	*path;
 
 	shell->pid[0] = fork();
-	if (cmds->pid[0] == -1)
+	if (shell->pid[0] == -1)
 		error_msg_cmd("fork", NULL, strerror(errno), EXIT_FAILURE);
 	else if (shell->pid[0] == 0)
 	{
 		redir_to_pipe(shell, cmd);
-		path = get_env_var_value(data->env, shell->pwd);
+		path = get_env_var_value(shell->env, shell->pwd);
 		if (!path)
 			;
 		else
@@ -42,7 +42,7 @@ int	wait_child(t_minishell *shell)
 	status = 0;
 	save_status = 0;
 	while (++i < shell->cmd_count - 1)
-		waitpid(shel->pid[i], NULL, 0);
+		waitpid(shell->pid[i], NULL, 0);
 	waitpid(shell->pid[i], &save_status, 0);
 	if (WIFEXITED(save_status))
 		status = WEXITSTATUS(save_status);
@@ -63,9 +63,9 @@ void	exec_builtin_without_output(t_minishell *shell, t_cmd_data *cmd)
 	else
 	{
 		g_sigint_received = call_builtin(shell, cmd);
-		if (ft_strncmp(cmd->cmd[0], "cd", 3) == 0 && \
-			cmd.args[1] && g_sigint_received == 0 && \
-			ft_strncmp(cmd->args[1], "-", 2) == 0)
+		if (ft_strncmp(shell->cmd_tree[0].cmd, "cd", 3) == 0 && \
+			shell->cmd_tree[0].args[0] && g_sigint_received == 0 && \
+			ft_strncmp(shell->cmd_tree[0].args[0], "-", 2) == 0)
 		{
 			cd_special_case(shell, cmd);
 			g_sigint_received = wait_child(shell);

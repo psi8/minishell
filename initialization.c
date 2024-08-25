@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialization.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 20:42:00 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/15 22:05:24 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/08/25 10:52:58 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	tree_init(t_minishell *shell)
 	shell->cmd_tree[i].line = NULL;
 	shell->pid = (int *)malloc(sizeof(int) * shell->cmd_count);
 	if(!shell->pid)
-		error();
+		error(shell, ERR_MALLOC, FATAL, 1);
 	shell->pid_allocated = 1;
-	paths(shell, shell->env);
+	shell->paths = get_paths(shell->env); //Pavel, I correct this (only for test), but you can use your version.
 }

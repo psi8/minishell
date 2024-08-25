@@ -12,7 +12,6 @@ SRCS = builtins_handler.c \
        minishell.c \
        paths.c \
        rd_output_handler.c \
-       syntax.c \
        validate_cmd.c \
        close_pipes.c \
        cmd_exit.c \
@@ -36,9 +35,12 @@ SRCS = builtins_handler.c \
        cmd_pwd.c \
        errors_handling/errors_handling.c \
        exit/exit.c \
-       parsing/parsing.c \
-       parsing/quotes_parse.c \
-       parsing/space_parsing.c
+       
+
+#syntax.c \
+#parsing/parsing.c \
+#       parsing/quotes_parse.c \
+#       parsing/space_parsing.c
 
 OBJS = $(SRCS:.c=.o)
 

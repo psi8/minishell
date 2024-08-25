@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:23:15 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/19 23:30:32 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/25 12:36:06 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ extern volatile sig_atomic_t	g_sigint_received;
 # define MAX_PATH 4096
 
 //DLevinsc
+
+int test_main(int argc, char **argv, char **envp); //debug builtin and pipe
+
 char **get_paths(char **env);
 int         exec_main(t_minishell *shell);
 t_bool	    is_builtin_without_output(t_cmd_data *cmd);
@@ -51,9 +54,9 @@ int	cmd_exit(t_minishell *shell, char **argv);
 int	cmd_export(t_minishell *shell, char **argv);
 int	cmd_pwd(void);
 int	cmd_unset(t_minishell *shell, char **argv);
-void	close_fds(t_minishell shell, t_bool reset_file);
+void	close_fds(t_minishell *shell, t_bool reset_file);
 int	error_msg_cmd(char *cmd, char *detail, char *msg, int status_code);
-void	redirection_handler(t_minishell shell, t_cmd_data *cmd);
+void	redirection_handler(t_minishell *shell, t_cmd_data *cmd);
 int	open_out_file(char *file, t_bool trunc);
 void	heredoc(t_minishell *shell, t_cmd_data *cmd);
 int	open_in_file(char *file);
@@ -63,13 +66,20 @@ void	redir_to_file(t_minishell *shell, t_cmd_data *c, t_exit_status mode);
 char	*get_env_var_value(char **env, char *var);
 void	close_pipes(t_minishell *shell);
 int	wait_child(t_minishell *shell);
-void	execute_cmd(t_minishell *shell, int n_cmd);
+void	execute_cmd(t_minishell *shell, t_cmd_data *cmd_vars);
 void	set_pipe_fds(t_minishell *shell, int i);
 void	validate_command(t_minishell *shell, t_cmd_data *cmd_vars);
-int	exec_child(t_minishell *shell, t_cmd_data *cmd, int num_cmd);
+int	exec_child(t_minishell *shell, int num_cmd);
 int	exec_cmd(t_minishell *shell);
 int	get_env_var_index(char **env, char *var);
 void	env_var_remove(t_minishell *shell, int index);
+void	free_ptr(void *ptr);
+char	**env_var_realloc(t_minishell *shell, int size);
+
+//FOR TEST
+void	toggle_signal(t_signals mode);
+void	signals_wait_cmd(void);
+void	signals_run_cmd(void);
 
 //Pavel
 int		quotes_skip(char *str, int i);
@@ -83,7 +93,10 @@ int		invalid_pipe(t_minishell *shell, char *str);
 void	mark_work_pipe(char *str);
 void	tree_init(t_minishell *shell);
 void	free_and_exit(t_minishell *shell, int status);
+int error(t_minishell *shell, char *msg, t_exit_status status, int code);
+void	paths(t_minishell *shell, char **envp);
 
 int	child_error(t_minishell *shell, char *msg, t_exit_status status, int code); //add to test. Pavel you can replace it to your functions
+
 
 #endif

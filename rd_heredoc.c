@@ -6,13 +6,15 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 21:33:35 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/15 22:30:27 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/25 12:40:16 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "minishell.h"
 
-static bool	heredoc_prompt(t_cmd_data *cmd, char *file, char *delimiter)
+static t_bool	prompt_heredoc_exit(char **user_in, char *delimiter);
+
+static t_bool	heredoc_prompt(char *file, char *delimiter)
 {
 	int		fd;
 	char	*user_input;
@@ -58,11 +60,11 @@ static char	*heredoc_filename(t_minishell *shell)
 
 	tmp = ft_itoa(shell->heredoc_index);
 	if (!tmp)
-		error(shell, MALLOC_ERR, FATAL, 1);
+		error(shell, ERR_MALLOC, FATAL, 1);
 	file = ft_strjoin("/tmp/.heredoc", tmp);
 	free(tmp);
 	if (!file)
-		error(shell, MALLOC_ERR, FATAL, 1);
+		error(shell, ERR_MALLOC, FATAL, 1);
 	return (file);
 }
 
@@ -79,13 +81,12 @@ int	add_heredoc_to_array(t_minishell *shell, char **redir, char **file)
 	*redir = ft_strjoin("< ", *file);
 	free(*file);
 	if (!*redir)
-		error(shell, MALLOC_ERR, FATAL, 1);
+		error(shell, ERR_MALLOC, FATAL, 1);
 	return (0);
 }
 
 void	heredoc(t_minishell *shell, t_cmd_data *cmd)
 {
-	int		pid;
 	int		i;
 	char	*file;
 	char *delimiter;
@@ -97,7 +98,7 @@ void	heredoc(t_minishell *shell, t_cmd_data *cmd)
 		{
 			file = heredoc_filename(shell);
 			delimiter = cmd->redir[i] + 2;
-			heredoc_prompt(cmd, file, delimiter, i);
+			heredoc_prompt(file, delimiter);
 			if (add_heredoc_to_array(shell, &cmd->redir[i], &file))
 				return ;
 			shell->heredoc_index++;

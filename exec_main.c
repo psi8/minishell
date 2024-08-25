@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "minishell.h"
 
 int	exec_main(t_minishell *shell)
 {
@@ -26,7 +26,7 @@ int	exec_main(t_minishell *shell)
 			exec_builtin_without_output(shell, &shell->cmd_tree[i]);
 		else
 		{
-			status_code = exec_child(shell, &shell->cmd_tree);
+			status_code = exec_child(shell, i);
 			g_status_code = wait_child(shell);
 			if (status_code != 0)
 				g_status_code = status_code;

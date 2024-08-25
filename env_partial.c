@@ -6,11 +6,11 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 19:19:25 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/19 23:25:40 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/25 11:51:29 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "minishell.h"
 
 char	*get_env_var_value(char **env, char *var)
 {
@@ -66,7 +66,7 @@ char	**env_var_realloc(t_minishell *shell, int size)
 	while (shell->env[i] && i < size)
 	{
 		new_env_var[i] = ft_strdup(shell->env[i]);
-		free_ptr(data->env[i]);
+		free_ptr(shell->env[i]);
 		i++;
 	}
 	free_ptr(shell->env);
