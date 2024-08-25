@@ -6,7 +6,7 @@
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 20:32:07 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/20 14:41:24 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/08/25 12:54:05 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,14 @@ static void token (t_minishell *shell, t_cmd_data *cmd)
 {
 	if (quotes_not_closed(cmd->line))
 	{
-		error();
+		error(shell, SYNTAX_QUOTES, ERROR, 1);
 		return ;
 	}
 	redir_extract(shell, cmd);
+	if (cmd->redir_count > 0 && shell->status != ERROR)
+		heredoc(shell, cmd);
+	
+		
 }
 
 void	line_parse(t_minishell *shell)

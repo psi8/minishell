@@ -6,7 +6,7 @@
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 00:12:00 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/22 23:44:14 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/08/25 11:55:08 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,20 +77,30 @@ void	mark_work_pipe(char *str)
 	}
 }
 
-static void	print_errors(char *errmsg, char *str, char c)
-{
-	ft_putstr_fd(errmsg, 2);
-	if (c)
-		ft_putchar_fd(c, 2);
-	else
-		ft_putstr_fd(" newline", 2);
-	if (str)
-		ft_putstr_fd(str, 2);
-	ft_putstr_fd(" \"\n", 2);
-}
-
 int	wrong_arrows(t_minishell *shell, char *line, char arrow, int i)
 {
 	if (line[i] == '\0')
-		return (error(shell, ERR_SYNTAX))
+		return (error(shell, SYNTAX_NL, ERROR, 258));
+	else if (line[i] == '>' && arrow == '<')
+		return (error(shell, SYNTAX_INFILE, ERROR, 258));
+	else if (line[i] == '<' && arrow == '>')
+		return (error(shell, SYNTAX_OUTFILE, ERROR, 258));
+	else if (line[i] == '<' && line[i + 1] == '<')
+		return (error(shell, SYNTAX_INFILE, ERROR, 258));
+	else if (line[i] == '<' && line[i + 1] == '>')
+		return (error(shell, SYNTAX_OUTFILE, ERROR, 258));
+	else if (line[i] == '>' && line[i + 1] == '<')
+		return (error(shell, SYNTAX_INFILE, ERROR, 258));
+	else if (line[i] == '>' && line[i + 1] == '>')
+		return (error(shell, SYNTAX_OUTFILE, ERROR, 258));
+	i++;
+	while (line[i] == ' ')
+		i++;
+	if (!line[i])
+		return (error(shell, SYNTAX_NL, ERROR, 258));
+	if (line[i] == '<')
+		return (error(shell, SYNTAX_INFILE, ERROR, 258));
+	if (line[i] == '>')
+		return (error(shell, SYNTAX_OUTFILE, ERROR, 258));
+	return (0);
 }

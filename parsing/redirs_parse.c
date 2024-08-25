@@ -10,7 +10,27 @@ void	redir_extract(t_minishell *shell, t_cmd_data *cmd)
 	t_parsed_data	pars;
 
 	init_t_parse(&pars);
-	if ()
+	if (redir_check(shell, cmd))
+		return ;
+	cmd->redir = (char **)malloc(sizeof(char *) * (cmd->redir_count + 1));
+	if (!cmd->redir)
+		error(shell, MALLOC_ERR, FATAL, 1);
+	while (cmd->line[p.i])
+	{
+		if (cmd->line[pars.i] == '\'' || cmd->line[pars.i] == '\"')
+			pars.i = skip_quotes(cmd->line, pars.i) + 1;
+		else if (cmd->line[pars.i] == '>' || cmd->line[pars.i] == '<')
+		{
+			pars.j = pars.i;
+			cmd->redir[pars.k] = get_redirection(shell, cmd->line, &pars.i);
+			tidy_format(shell, cmd, pars.k);
+			replace_with_spaces(cmd->line, pars.j, pars.i);
+			pars.k++;
+		}
+		else
+			pars.i++;
+	}
+	cmd->redir[pars.k] = NULL;
 }
 
 static int redir_check(t_minishell *shell, t_cmd_data *cmd)
