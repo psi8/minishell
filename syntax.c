@@ -6,7 +6,7 @@
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 00:12:00 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/25 11:55:08 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/08/26 19:12:57 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	invalid_pipe(t_minishell *shell, char *str)
 	
 	i = 0;
 	if (starting_pipe(str) || ending_pipe(str))
-		return (error);
+		return (error(shell, SYNTAX_PIPE, ERROR, 258));
 	while (str[i])
 	{
 		if(str[i] == '\'' || str[i] == '\"')
@@ -31,7 +31,7 @@ int	invalid_pipe(t_minishell *shell, char *str)
 				i++;
 			}
 			if (str[i] == '|')
-				return (error);
+				return (error(shell, SYNTAX_PIPE, ERROR, 258));
 		}
 		i++;
 	}

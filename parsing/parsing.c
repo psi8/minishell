@@ -6,7 +6,7 @@
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 20:32:07 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/25 12:54:05 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/08/26 16:59:56 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void	split_pipe(t_minishell *shell, char *str)
 	
 }
 
-static void token (t_minishell *shell, t_cmd_data *cmd)
+static void token(t_minishell *shell, t_cmd_data *cmd)
 {
 	if (quotes_not_closed(cmd->line))
 	{
@@ -80,8 +80,10 @@ static void token (t_minishell *shell, t_cmd_data *cmd)
 	redir_extract(shell, cmd);
 	if (cmd->redir_count > 0 && shell->status != ERROR)
 		heredoc(shell, cmd);
-	
-		
+	if (shell->status == ERROR)
+		return ;
+	if (ft_strchr(cmd->line, '$'))
+		expand(shell, &cmd->line);
 }
 
 void	line_parse(t_minishell *shell)
@@ -97,7 +99,7 @@ void	line_parse(t_minishell *shell)
 	}
 	if (quotes_not_closed(shell->line))
 	{
-		//error(shell, SYNTAX_QUOTES, ERROR, 1);
+		error(shell, SYNTAX_QUOTES, ERROR, 1);
 		return ;
 	}
 	if (invalid_pipe(shell, shell->line))

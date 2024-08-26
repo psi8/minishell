@@ -6,7 +6,7 @@
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:23:15 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/25 12:58:32 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/08/26 19:05:07 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,11 @@ void	signal_toggle(t_signals status);
 void	exit_shell(t_minishell *shell);
 int		wrong_arrows(t_minishell *shell, char *line, char arrow, int i);
 void	heredoc(t_minishell *shell, t_cmd_data *cmd);
-
+char	*join_and_free(char *str1, char *str2);
+char	*make_err_msg_strerr(char *name);
+int		heredoc_2_array(t_minishell *shell, char **redir, char **file);
+void	expand(t_minishell *shell, char **str);
+char	*empty_strdup(t_minishell *shell);
+char	*get_env(t_minishell *shell, char *search);
 
 #endif
