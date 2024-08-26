@@ -6,18 +6,19 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 21:36:38 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/11 21:48:25 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/26 18:45:54 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "minishell.h"
 
 static t_bool	response_with_quotes(char *cmd);
+char	*join_strs(char *str, char *add);
 
 int	error_msg_cmd(char *cmd, char *detail, char *msg, int status_code)
 {
 	char	*full_msg;
-	bool	is_quotes;
+	t_bool	is_quotes;
 
 	if (cmd != NULL)
 		is_quotes = response_with_quotes(cmd);
@@ -47,4 +48,18 @@ static t_bool	response_with_quotes(char *cmd)
 	if (ft_strncmp(cmd, "export", 6) == 0)
 		return (true);
 	return (false);
+}
+
+char	*join_strs(char *str, char *add)
+{
+	char	*tmp;
+
+	if (!add)
+		return (str);
+	if (!str)
+		return (ft_strdup(add));
+	tmp = str;
+	str = ft_strjoin(tmp, add);
+	free_ptr(tmp);
+	return (str);
 }

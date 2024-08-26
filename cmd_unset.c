@@ -6,13 +6,11 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 14:52:35 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/19 23:21:58 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/26 18:13:30 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-t_bool	is_valid_var_name(char *name);
 
 int	cmd_unset(t_minishell *shell, char **args)
 {

@@ -6,22 +6,22 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 18:06:45 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/17 22:20:29 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/26 18:59:10 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int error(t_minishell *shell, char *msg, t_exit_status status, int code)
 {
-	char	*error_mes;
-
 	if(!msg)
 		free_and_exit(shell, 1);
 	if(shell->parent_redir)
-		
+		code = 1;
+	if (code)
+		code = 3;
+	return status;
 }
-
 /*
 * Copy two that functions without changes. Only for test. 
 * Pavel you can replace their on your functions
@@ -39,24 +39,18 @@ static void	restore_std(t_minishell *shell)
 
 int	child_error(t_minishell *shell, char *msg, t_exit_status status, int code)
 {
-	char	*error_msg;
-
+	code = 0;
 	if (!msg)
 		free_and_exit(shell, 1);
 	if (shell->parent_redir)
 		restore_std(shell);
-	error_msg = create_error_msg(msg);
-	if (!error_msg)
-		free_and_exit(shell, 1);
-	else
-	{
-		write(2, error_msg, ft_strlen(error_msg));
-		free(error_msg);
-	}
+//	error_msg = create_error_msg(msg);
+	write(2, "xxx", ft_strlen("XXX"));
 	free(msg);
+	code = 1; 
 	shell->status = status;
 	shell->exit_status = code;
 	if (shell->status == FATAL)
 		free_and_exit(shell, code);
-	return (1);
+	return (code);
 }

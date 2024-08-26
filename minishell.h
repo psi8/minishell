@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:23:15 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/25 12:36:06 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/26 19:06:20 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int         cmd_cd(t_minishell *shell, char **argv);
 int	cmd_echo(char **argv);
 int	cmd_env(t_minishell *shell, t_cmd_data *cmd);
 int	cmd_exit(t_minishell *shell, char **argv);
-int	cmd_export(t_minishell *shell, char **argv);
+void	cmd_export(t_minishell *shell, char **argv);
 int	cmd_pwd(void);
 int	cmd_unset(t_minishell *shell, char **argv);
 void	close_fds(t_minishell *shell, t_bool reset_file);
@@ -75,11 +75,17 @@ int	get_env_var_index(char **env, char *var);
 void	env_var_remove(t_minishell *shell, int index);
 void	free_ptr(void *ptr);
 char	**env_var_realloc(t_minishell *shell, int size);
+char	*ft_get_env(t_minishell *shell, char *to_find);
+void	ft_update_pwd(t_minishell *shell);
+t_bool	is_valid_var_name(char *name);
+char	**add_to_array(t_minishell *shell, char **array, char *new, t_exit_status mode);
+
 
 //FOR TEST
 void	toggle_signal(t_signals mode);
 void	signals_wait_cmd(void);
 void	signals_run_cmd(void);
+int test_main(int argc, char **argv, char **envp); //debug builtin and pipe
 
 //Pavel
 int		quotes_skip(char *str, int i);

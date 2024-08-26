@@ -12,6 +12,7 @@ SRCS = builtins_handler.c \
        minishell.c \
        paths.c \
        rd_output_handler.c \
+       rd_input_handler.c \
        validate_cmd.c \
        close_pipes.c \
        cmd_exit.c \
@@ -35,6 +36,7 @@ SRCS = builtins_handler.c \
        cmd_pwd.c \
        errors_handling/errors_handling.c \
        exit/exit.c \
+       test_main.c
        
 
 #syntax.c \

@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 14:36:23 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/19 22:51:25 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/26 19:01:35 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	call_builtin(t_minishell *shell, t_cmd_data *cmd)
 	else if (ft_strncmp(cmd->cmd, "unset", 6) == 0)
 		cmd_code = cmd_unset(shell, cmd->args);
 	else if (ft_strncmp(cmd->cmd, "export", 7) == 0)
-		cmd_code = cmd_export(shell, cmd->args);
+		cmd_export(shell, cmd->args);
 	else
 		exit(EXIT_SUCCESS);
 	return (cmd_code);

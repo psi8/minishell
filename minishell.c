@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:39:11 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/25 10:44:40 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/26 19:04:56 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ volatile sig_atomic_t	g_sigint_received = 0;
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_minishell		shell;
+//	t_minishell		shell;
 	
 	(void)argc;
 	(void)argv;
@@ -28,7 +28,7 @@ int	main(int argc, char **argv, char **envp)
 		return (0);
 	//debug fiinish
 	
-	if (!argv || argc < 1)
+/*	if (!argv || argc < 1)
 		return (0);
 	//shell_init(&shell, envp);
 	//switch_signal(INTERACTIVE);
@@ -43,6 +43,7 @@ int	main(int argc, char **argv, char **envp)
 			line_parse(&shell);
 		}
 	}
+*/
 }
 
 /* void	signal_intercept(int status)

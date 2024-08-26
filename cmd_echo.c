@@ -6,18 +6,18 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 14:45:12 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/19 22:48:29 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/26 18:46:38 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static bool	exist_n_option(char **argv);
+static t_bool	exist_n_option(char **argv);
 
 int	cmd_echo(char **argv)
 {
 	int		i;
-	bool	option_n;
+	t_bool	option_n;
 
 	option_n = exist_n_option(argv);
 	if (option_n == true)
@@ -36,7 +36,7 @@ int	cmd_echo(char **argv)
 	return(EXIT_SUCCESS);
 }
 
-static bool	exist_n_option(char **argv)
+static t_bool	exist_n_option(char **argv)
 {
 	if (argv[1] && ft_strncmp(argv[1], "-n", 3) == 0)
 		return (true);
