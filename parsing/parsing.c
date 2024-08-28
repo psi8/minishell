@@ -6,7 +6,7 @@
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 20:32:07 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/26 16:59:56 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/08/28 13:52:10 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	split_pipe(t_minishell *shell, char *str)
 	{
 		shell->cmd_tree[j].index = j;
 		shell->cmd_tree[j].line = substr_create(shell, str, &i);
-		token(shell, &shell->cmd_tree[j])
+		token(shell, &shell->cmd_tree[j]);
 		j++;
 	}
 	
