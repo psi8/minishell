@@ -6,7 +6,7 @@
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 00:12:00 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/26 19:12:57 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/08/28 13:56:42 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	ending_pipe(char *str)
 	return (0);
 }
 
-void	mark_work_pipe(char *str)
+void	mark_working_pipe(char *str)
 {
 	int	i;
 	

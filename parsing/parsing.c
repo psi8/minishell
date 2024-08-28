@@ -6,7 +6,7 @@
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 20:32:07 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/28 13:54:08 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/08/28 14:30:13 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static char *substr_create(t_minishell *shell, char *s, int *i)
 	str = ft_substr(s, start, *i - start);
 	if (!str)
 	{
-		error();
+		error(shell, MALLOC_ERR, FATAL, 1);
 	}
 	if(s[*i])
 		(*i)++;

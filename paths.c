@@ -6,7 +6,7 @@
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 22:17:19 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/26 19:04:28 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/08/28 14:29:36 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	paths(t_minishell *shell, char **envp)
 		{
 			shell->paths = ft_split(envp[i] + 5, ':');
 			if(shell->paths == NULL)
-				error();
+				error(shell, MALLOC_ERR, FATAL, 1);
 			return;
 		}
 		i++;
