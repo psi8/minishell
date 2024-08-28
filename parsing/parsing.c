@@ -6,7 +6,7 @@
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 20:32:07 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/28 13:52:10 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/08/28 13:54:08 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	count_cmd(char *str)
 	return (count + 1);
 }
 
-static void substr_create(t_minishell *shell, char *s, int *i)
+static char *substr_create(t_minishell *shell, char *s, int *i)
 {
 	int	start;
 	int	*str;
