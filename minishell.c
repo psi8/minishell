@@ -6,7 +6,7 @@
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:39:11 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/30 23:21:17 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/08/30 23:27:52 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		shell.line = readline("my_minishell: ");
 		if (shell.line == NULL)
-			shell_exit(&shell);
+			exit_shell(&shell);
 		if(*shell.line)
 		{
 			add_history(shell.line);
