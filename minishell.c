@@ -6,11 +6,13 @@
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:39:11 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/17 20:55:38 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/08/30 23:21:17 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+//test
 
 volatile sig_atomic_t	g_sigint_received = 0;
 
