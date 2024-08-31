@@ -38,7 +38,7 @@ int	exec_main(t_minishell *shell)
 
 void	execute_cmd(t_minishell *shell, t_cmd_data *cmd_vars)
 {
-	toggle_signal(DEFAULT);
+	signal_toggle(DEFAULT);
 	if (shell->cmd_count > 1)
 		redir_to_pipe(shell, cmd_vars);
 	if (cmd_vars->redir_count > 0)

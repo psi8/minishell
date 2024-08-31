@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 00:12:00 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/28 13:56:42 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/08/31 15:16:20 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+static int	starting_pipe(char *str);
+static int	ending_pipe(char *str);
+void	mark_working_pipe(char *str);
+int	wrong_arrows(t_minishell *shell, char *line, char arrow, int i);
+
 
 int	invalid_pipe(t_minishell *shell, char *str)
 {

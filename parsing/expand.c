@@ -1,7 +1,8 @@
-#include "minishell.h"
+#include "../minishell.h"
 
 void	expand(t_minishell *shell, char **str);
 static void	exp_env(t_minishell *shell, char **str, int *i);
+static int	fin_char(char c);
 static char	*get_exp(t_minishell *shell, char *str);
 static char *get_exit_status(t_minishell *shell);
 
@@ -19,7 +20,7 @@ void	expand(t_minishell *shell, char **str)
 		if ((*str)[i] == '\"')
 			in_doubles = !in_doubles;
 		if ((*str)[i + 1] && (*str)[i] == '\'' && !in_doubles)
-			i = skip_quotes(*str, i);
+			i = quotes_skip(*str, i);
 		if ((*str)[i + 1] && (*str)[i] == '$' && (*str)[i + 1] != ' ')
 		{
 			exp_env(shell, str, &i);
@@ -43,7 +44,7 @@ static void	exp_env(t_minishell *shell, char **str, int *i)
 	(*i) = start + ft_strlen(value) - 1;
 	new = join_and_free(ft_substr(*str, 0, start - 1), value);
 	if (!new)
-		error(shell, MALLOC_ERR, FATAL, 1);
+		error(shell, ERR_MALLOC, FATAL, 1);
 	if ((*str)[start] != '?')
 		while (!fin_char((*str)[start]))
 			start++;
@@ -52,47 +53,48 @@ static void	exp_env(t_minishell *shell, char **str, int *i)
 	if ((*str)[start])
 		new = join_and_free(new, ft_strdup(&(*str)[start]));
 	if (!new)
-		error(shell, MALLOC_ERR, FATAL, 1);
+		error(shell, ERR_MALLOC, FATAL, 1);
 	free(*str);
 	*str = new;
 }
 
 static int	fin_char(char c)
 {
-	if (c == '/' 
-		|| c == '\"' 
-		|| c == '\''  
-		|| c == '\0' 
-		|| c == ' ' 
-		|| c == '$'
-		|| c == '=' 
-		|| c == ':'
-		|| c == '@')
+	if (c == '\0' || 
+		c == ' ' || 
+		c == '/' || 
+		c == '$'|| 
+		c == '\"' || 
+		c == '\'' || 
+		c == '=' || 
+		c == ':'|| 
+		c == '@')
 		return (1);
 	return (0);
 }
 
+
 static char	*get_exp(t_minishell *shell, char *str)
 {
-	int		len;
 	char	*env;
-	char	*value;
+	char	*val;
+	int		l;
 
-	len = 0;
-	if (str[len] == '?')
+	l = 0;
+	if (str[l] == '?')
 		return (get_exit_status(shell));
-	while (!fin_char(str[len]))
-		len++;
-	if (len == 0)
+	while (!fin_char(str[l]))
+		l++;
+	if (l == 0)
 		return (empty_strdup(shell));
-	env = ft_substr(str, 0, len);
+	env = ft_substr(str, 0, l);
 	if (!env)
-		error(shell, MALLOC_ERR, FATAL, 1);
-	value = ft_getenv(shell, env);
-	if (!value)
-		value = empty_strdup(shell);
+		error(shell, ERR_MALLOC, FATAL, 1);
+	val = get_env(shell, env);
+	if (!val)
+		val = empty_strdup(shell);
 	free(env);
-	return (value);
+	return (val);
 }
 
 static char *get_exit_status(t_minishell *shell)
@@ -104,6 +106,6 @@ static char *get_exit_status(t_minishell *shell)
 	else
 		value = ft_itoa(shell->exit_status);
 	if (!value)
-		error(shell, MALLOC_ERR, FATAL, 1);
+		error(shell, ERR_MALLOC, FATAL, 1);
 	return (value);
 }

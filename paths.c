@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 22:17:19 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/31 14:07:39 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/31 14:53:45 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	paths(t_minishell *shell, char **envp)
 		{
 			shell->paths = ft_split(envp[i] + 5, ':');
 			if(shell->paths == NULL)
-				error(shell, MALLOC_ERR, FATAL, 1);
+				error(shell, ERR_MALLOC, FATAL, 1);
 			return;
 		}
 		i++;
@@ -51,7 +51,7 @@ char	*get_env(t_minishell *shell, char *search)
 			{
 				str = ft_strdup(shell->env[i] + len + 1);
 				if (str == NULL)
-					error(shell, MALLOC_ERR, FATAL, 1);
+					error(shell, ERR_MALLOC, FATAL, 1);
 				return (str);
 			}
 		}

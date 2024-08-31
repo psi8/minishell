@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:23:15 by psitkin           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/08/26 19:06:20 by dlevinsc         ###   ########.fr       */
-=======
-/*   Updated: 2024/08/28 13:57:11 by psitkin          ###   ########.fr       */
->>>>>>> origin/pavel
+/*   Updated: 2024/08/31 17:17:35 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +40,6 @@ extern volatile sig_atomic_t	g_sigint_received;
 # define MAX_PATH 4096
 
 //DLevinsc
-
-int test_main(int argc, char **argv, char **envp); //debug builtin and pipe
-
 char **get_paths(char **env);
 int         exec_main(t_minishell *shell);
 t_bool	    is_builtin_without_output(t_cmd_data *cmd);
@@ -86,8 +79,7 @@ char	**add_to_array(t_minishell *shell, char **array, char *new, t_exit_status m
 
 
 //FOR TEST
-void	signals_run_cmd(void);
-int test_main(int argc, char **argv, char **envp); //debug builtin and pipe
+int test_main(char **envp); //debug builtin and pipe
 int	child_error(t_minishell *shell, char *msg, t_exit_status status, int code); //add to test. Pavel you can replace it to your functions
 
 //Pavel
@@ -104,7 +96,7 @@ void	paths(t_minishell *shell, char **envp);
 void	mark_working_pipe(char *str);
 void	tree_init(t_minishell *shell);
 void	paths(t_minishell *shell, char **envp);
-char	*ft_substr(char *s, unsigned int start, size_t len);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
 void	redir_extract(t_minishell *shell, t_cmd_data *cmd);
 void	init_t_parse(t_parsed_data *parsed);
 void	restore_std(t_minishell *shell);
@@ -114,6 +106,8 @@ void	tree_free(t_minishell *shell);
 void	all_free(t_minishell *shell);
 void	free_and_exit(t_minishell *shell, int status);
 void	signal_toggle(t_signals status);
+void	signals_run_cmd(void);
+void	signals_wait_cmd(void);
 void	exit_shell(t_minishell *shell);
 int		wrong_arrows(t_minishell *shell, char *line, char arrow, int i);
 void	heredoc(t_minishell *shell, t_cmd_data *cmd);
@@ -123,5 +117,14 @@ int		heredoc_2_array(t_minishell *shell, char **redir, char **file);
 void	expand(t_minishell *shell, char **str);
 char	*empty_strdup(t_minishell *shell);
 char	*get_env(t_minishell *shell, char *search);
+int	error_p(t_minishell *shell, char *msg, t_exit_status status, int code);
+int	quotes_skip(char *str, int i);
+void	n_terminate(char *str, int i);
+int	quotes_not_closed(char *str);
+void	quotes_remove(char *str);
+void	n_terminate(char *str, int i);
+void	change_2_space(char *line, int start, int end);
+void	extract_cmd(t_minishell *shell, t_cmd_data *cmd);
+void	extract_args(t_minishell *shell, t_cmd_data *cmd);
 
 #endif

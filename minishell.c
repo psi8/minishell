@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:39:11 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/31 14:02:51 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/31 14:52:47 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ volatile sig_atomic_t	g_sigint_received = 0;
 
 int	main(int argc, char **argv, char **envp)
 {
-//	t_minishell		shell;
+	t_minishell		shell;
 	
 	(void)argc;
 	(void)argv;

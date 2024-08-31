@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   space_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 16:38:21 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/13 17:44:45 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/08/31 17:03:47 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
+
+void	tabs_to_spaces(char *str);
+int	only_spaces(char *str);
+void	change_2_space(char *line, int start, int end);
+
 
 void	tabs_to_spaces(char *str)
 {
@@ -41,3 +46,11 @@ int	only_spaces(char *str)
 	return (1);
 }
 
+void	change_2_space(char *line, int start, int end)
+{
+	while (start < end)
+	{
+		line[start] = ' ';
+		start++;
+	}
+}

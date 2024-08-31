@@ -3,18 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 20:32:07 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/28 14:30:13 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/08/31 17:18:47 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
+
 
 //list of func
 static void token (t_minishell *shell, t_cmd_data *cmd);
-
+static int	count_cmd(char *str);
+static char *substr_create(t_minishell *shell, char *s, int *i);
+void	split_pipe(t_minishell *shell, char *str);
+static void token(t_minishell *shell, t_cmd_data *cmd);
+void	line_parse(t_minishell *shell);
 
 static int	count_cmd(char *str)
 {
@@ -34,8 +39,8 @@ static int	count_cmd(char *str)
 
 static char *substr_create(t_minishell *shell, char *s, int *i)
 {
-	int	start;
-	int	*str;
+	int		start;
+	char	*str;
 	
 	start = *i;
 	while(s[*i] && s[*i] != 31)
@@ -43,21 +48,21 @@ static char *substr_create(t_minishell *shell, char *s, int *i)
 	str = ft_substr(s, start, *i - start);
 	if (!str)
 	{
-		error(shell, MALLOC_ERR, FATAL, 1);
+		error(shell, ERR_MALLOC, FATAL, 1);
 	}
 	if(s[*i])
 		(*i)++;
 	return(str);
 }
 
-static void	split_pipe(t_minishell *shell, char *str)
+void	split_pipe(t_minishell *shell, char *str)
 {
 	int	i;
 	int j;
 
 	i = 0;
 	j = 0;
-	mark_work_pipes(str);
+	mark_working_pipe(str);
 	shell->cmd_count = count_cmd(str);
 	tree_init(shell);
 	while (str[i] && shell->cmd_count && shell->status != ERROR)
@@ -84,6 +89,10 @@ static void token(t_minishell *shell, t_cmd_data *cmd)
 		return ;
 	if (ft_strchr(cmd->line, '$'))
 		expand(shell, &cmd->line);
+	if (only_spaces(cmd->line))
+		return ;
+	extract_cmd(shell, cmd);
+	extract_args(shell, cmd);
 }
 
 void	line_parse(t_minishell *shell)
@@ -94,7 +103,7 @@ void	line_parse(t_minishell *shell)
 	tabs_to_spaces(shell->line);
 	if(only_spaces(shell->line))
 	{
-		shell->line = ERROR;
+		shell->status = ERROR;
 		return;
 	}
 	if (quotes_not_closed(shell->line))

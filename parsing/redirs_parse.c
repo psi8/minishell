@@ -1,4 +1,5 @@
-#include "minishell.h"
+#include "../minishell.h"
+
 
 //list of func
 void	redir_extract(t_minishell *shell, t_cmd_data *cmd);
@@ -14,7 +15,7 @@ void	redir_extract(t_minishell *shell, t_cmd_data *cmd)
 		return ;
 	cmd->redir = (char **)malloc(sizeof(char *) * (cmd->redir_count + 1));
 	if (!cmd->redir)
-		error(shell, MALLOC_ERR, FATAL, 1);
+		error(shell, ERR_MALLOC, FATAL, 1);
 	while (cmd->line[p.i])
 	{
 		if (cmd->line[pars.i] == '\'' || cmd->line[pars.i] == '\"')

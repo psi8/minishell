@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 18:06:45 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/26 18:59:10 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/31 15:03:28 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,8 @@ int error(t_minishell *shell, char *msg, t_exit_status status, int code)
 		code = 3;
 	return status;
 }
-/*
-* Copy two that functions without changes. Only for test. 
-* Pavel you can replace their on your functions
-*
-*/
 
-static void	restore_std(t_minishell *shell)
+void	restore_std(t_minishell *shell)
 {
 	dup2(shell->std_in, STDIN_FILENO);
 	dup2(shell->std_out, STDOUT_FILENO);

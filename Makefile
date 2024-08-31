@@ -3,6 +3,7 @@ NAME = minishell
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 LIBFT_DIR = ./libft
+READLINE := -lreadline
 LIBFT = $(LIBFT_DIR)/libft.a
 SRCS = builtins_handler.c \
        cmd_env.c \
@@ -30,19 +31,23 @@ SRCS = builtins_handler.c \
        utils_free.c \
        cmd_cd.c \
        cmd_export.c \
-       error_handler.c \
-       ft_libft.c \
        cmd_echo.c \
        cmd_pwd.c \
        errors_handling/errors_handling.c \
        exit/exit.c \
-       test_main.c
-       
+       test_main.c \
+       syntax.c \
+       parsing/expand.c \
+       parsing/heredoc.c \
+       parsing/parsing.c \
+       parsing/parsing_helpers.c \
+       parsing/quotes_parse.c \
+       parsing/redirs_parse.c \
+       parsing/space_parsing.c \
+       exit/exit.c \
+       free.c \
 
-#syntax.c \
-#parsing/parsing.c \
-#       parsing/quotes_parse.c \
-#       parsing/space_parsing.c
+       
 
 OBJS = $(SRCS:.c=.o)
 
@@ -53,7 +58,7 @@ $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(READLINE) $(LIBFT)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@

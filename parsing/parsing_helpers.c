@@ -1,7 +1,11 @@
 
-#include <minishell.h>
+#include "../minishell.h"
 
-char	*ft_substr(char *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*join_and_free(char *str1, char *str2);
+char	*empty_strdup(t_minishell *shell);
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*str;
 	size_t	i;
@@ -12,7 +16,7 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 		len = 0;
 	if (len >= ft_strlen(s) - start)
 		len = ft_strlen(s) - start;
-	str = (char *) malloc(sizeof(char) * (len + 1))
+	str = (char *) malloc(sizeof(char) * (len + 1));
 	if (str == NULL)
 		return (NULL);
 	i = 0;
@@ -53,6 +57,6 @@ char	*empty_strdup(t_minishell *shell)
 
 	str = ft_strdup("");
 	if (!str)
-		error(shell, MALLOC_ERR, FATAL, 1);
+		error(shell, ERR_MALLOC, FATAL, 1);
 	return (str);
 }
