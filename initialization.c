@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 20:42:00 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/25 10:52:58 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/31 14:01:23 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,17 @@ void	tree_init(t_minishell *shell)
 	shell->cmd_tree[i].line = NULL;
 	shell->pid = (int *)malloc(sizeof(int) * shell->cmd_count);
 	if(!shell->pid)
-		error(shell, ERR_MALLOC, FATAL, 1);
+		error(shell, MALLOC_ERR, FATAL, 1);
 	shell->pid_allocated = 1;
-	shell->paths = get_paths(shell->env); //Pavel, I correct this (only for test), but you can use your version.
+	paths(shell, shell->env);
+}
+
+void	init_t_parse(t_parsed_data *parsed)
+{
+	parsed->i = 0;
+	parsed->k = 0;
+	parsed->inside_singles = 0;
+	parsed->inside_doubles = 0;
+	parsed->in_quotes = 0;
+	parsed->quote = 0;
 }

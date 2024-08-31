@@ -6,7 +6,7 @@
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 00:12:00 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/14 00:56:48 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/08/28 13:56:42 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	invalid_pipe(t_minishell *shell, char *str)
 	
 	i = 0;
 	if (starting_pipe(str) || ending_pipe(str))
-		return (error);
+		return (error(shell, SYNTAX_PIPE, ERROR, 258));
 	while (str[i])
 	{
 		if(str[i] == '\'' || str[i] == '\"')
@@ -31,7 +31,7 @@ int	invalid_pipe(t_minishell *shell, char *str)
 				i++;
 			}
 			if (str[i] == '|')
-				return (error);
+				return (error(shell, SYNTAX_PIPE, ERROR, 258));
 		}
 		i++;
 	}
@@ -62,7 +62,7 @@ static int	ending_pipe(char *str)
 	return (0);
 }
 
-void	mark_work_pipe(char *str)
+void	mark_working_pipe(char *str)
 {
 	int	i;
 	
@@ -75,4 +75,32 @@ void	mark_work_pipe(char *str)
 			str[i] = 31;
 		i++;
 	}
+}
+
+int	wrong_arrows(t_minishell *shell, char *line, char arrow, int i)
+{
+	if (line[i] == '\0')
+		return (error(shell, SYNTAX_NL, ERROR, 258));
+	else if (line[i] == '>' && arrow == '<')
+		return (error(shell, SYNTAX_INFILE, ERROR, 258));
+	else if (line[i] == '<' && arrow == '>')
+		return (error(shell, SYNTAX_OUTFILE, ERROR, 258));
+	else if (line[i] == '<' && line[i + 1] == '<')
+		return (error(shell, SYNTAX_INFILE, ERROR, 258));
+	else if (line[i] == '<' && line[i + 1] == '>')
+		return (error(shell, SYNTAX_OUTFILE, ERROR, 258));
+	else if (line[i] == '>' && line[i + 1] == '<')
+		return (error(shell, SYNTAX_INFILE, ERROR, 258));
+	else if (line[i] == '>' && line[i + 1] == '>')
+		return (error(shell, SYNTAX_OUTFILE, ERROR, 258));
+	i++;
+	while (line[i] == ' ')
+		i++;
+	if (!line[i])
+		return (error(shell, SYNTAX_NL, ERROR, 258));
+	if (line[i] == '<')
+		return (error(shell, SYNTAX_INFILE, ERROR, 258));
+	if (line[i] == '>')
+		return (error(shell, SYNTAX_OUTFILE, ERROR, 258));
+	return (0);
 }

@@ -6,11 +6,13 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:39:11 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/26 19:04:56 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/31 14:02:51 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+//test
 
 volatile sig_atomic_t	g_sigint_received = 0;
 
@@ -28,7 +30,7 @@ int	main(int argc, char **argv, char **envp)
 		return (0);
 	//debug fiinish
 	
-/*	if (!argv || argc < 1)
+	if (!argv || argc < 1)
 		return (0);
 	//shell_init(&shell, envp);
 	//switch_signal(INTERACTIVE);
@@ -36,14 +38,13 @@ int	main(int argc, char **argv, char **envp)
 	{
 		shell.line = readline("my_minishell: ");
 		if (shell.line == NULL)
-			free_and_exit(&shell, 0); //Pavel I correct this (only for test), but you can use your version.
+			exit_shell(&shell);
 		if(*shell.line)
 		{
 			add_history(shell.line);
 			line_parse(&shell);
 		}
 	}
-*/
 }
 
 /* void	signal_intercept(int status)

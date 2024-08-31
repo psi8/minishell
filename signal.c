@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   signal.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/15 22:12:42 by dlevinsc          #+#    #+#             */
+/*   Updated: 2024/08/31 14:08:27 by dlevinsc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 /*
 *   Pavel! You are able to delete all this function and file. Needs only for test.
@@ -9,9 +20,10 @@
 
 static void	new_line(int signal);
 static void	reset_prompt(int signo);
-static void	toggle_caret(int is_on);
-static void	signal_handler(int signal);
-static void	heredoc_handler(int signal);
+void	signal_toggle(t_signals status);
+static void	caret_toggle(int on);
+static void	sig_hand(int signal);
+static void	heredoc_hand(int signal);
 
 void	signals_wait_cmd(void)
 {
@@ -40,53 +52,55 @@ static void	reset_prompt(int signo)
 	rl_redisplay();
 }
 
-void	toggle_signal(t_signals mode)
+void	signal_toggle(t_signals status)
 {
-	if (mode == DEFAULT)
+	if (status == DEFAULT)
 	{
-		toggle_caret(1);
-		signal(SIGQUIT, SIG_DFL);
-		signal(SIGINT, SIG_DFL);
+		caret_toggle(1);
+		signal (SIGQUIT, SIG_DFL);
+		signal (SIGINT, SIG_DFL);
 	}
-	else if (mode == INTERACTIVE)
+	else if (status == INTERACTIVE)
 	{
-		toggle_caret(0);
+		caret_toggle(0);
+		signal(SIGQUIT,SIG_IGN);
+		signal (SIGINT, sig_hand);
+	}
+	else if (status == HEREDOC)
+	{
 		signal(SIGQUIT, SIG_IGN);
-		signal(SIGINT, signal_handler);
+		signal(SIGINT, heredoc_hand);
 	}
-	else if (mode == HEREDOC)
-	{
-		signal(SIGQUIT, SIG_IGN);
-		signal(SIGINT, heredoc_handler);
-	}
-	else if (mode == IGNORE)
+	else if (status == IGNORE)
 	{
 		signal(SIGQUIT, SIG_IGN);
 		signal(SIGINT, SIG_IGN);
 	}
 }
 
-static void	toggle_caret(int is_on)
+static void	caret_toggle(int on)
 {
-	struct termios	new_attr;
-
-	tcgetattr(STDIN_FILENO, &new_attr);
-	if (!is_on)
-		new_attr.c_lflag &= ~ECHOCTL;
+	struct termios	new_att;
+	tcgetattr(STDIN_FILENO, &new_att);
+	if (!on)
+		new_att.c_cflag &= ~ECHOCTL;
 	else
-		new_attr.c_lflag |= ECHOCTL;
-	tcsetattr(STDIN_FILENO, TCSANOW, &new_attr);
+		new_att.c_cflag |= ECHOCTL;
+	tcsetattr(STDIN_FILENO, TCSANOW, &new_att);
 }
 
-static void	signal_handler(int signal)
+static void	sig_hand(int signal)
 {
 	if (signal == SIGINT)
 	{
 		write(1, "\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
 	}
 }
 
-static void	heredoc_handler(int signal)
+static void	heredoc_hand(int signal)
 {
 	if (signal == SIGINT)
 	{
