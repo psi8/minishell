@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   errors_handling.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 18:06:45 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/31 15:03:28 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/31 19:26:00 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+/*
 int error(t_minishell *shell, char *msg, t_exit_status status, int code)
 {
 	if(!msg)
@@ -22,7 +23,8 @@ int error(t_minishell *shell, char *msg, t_exit_status status, int code)
 		code = 3;
 	return status;
 }
-
+*/
+/*
 void	restore_std(t_minishell *shell)
 {
 	dup2(shell->std_in, STDIN_FILENO);
@@ -31,6 +33,7 @@ void	restore_std(t_minishell *shell)
 	close(shell->std_out);
 	shell->parent_redir = 0;
 }
+*/
 
 int	child_error(t_minishell *shell, char *msg, t_exit_status status, int code)
 {

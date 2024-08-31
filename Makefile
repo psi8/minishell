@@ -34,6 +34,8 @@ SRCS = builtins_handler.c \
        cmd_echo.c \
        cmd_pwd.c \
        errors_handling/errors_handling.c \
+       errors/error_handler.c \
+       errors/errors_main.c \
        exit/exit.c \
        test_main.c \
        syntax.c \
@@ -44,8 +46,9 @@ SRCS = builtins_handler.c \
        parsing/quotes_parse.c \
        parsing/redirs_parse.c \
        parsing/space_parsing.c \
-       exit/exit.c \
+       parsing/parse_cmd_args.c \
        free.c \
+       redir.c \
 
        
 

@@ -3,25 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   in_out_redirection.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 18:58:01 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/25 12:23:13 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/31 19:12:42 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 void	close_pipes(t_minishell *shell);
-
-void	restore_std(t_minishell *shell)
-{
-	dup2(shell->std_in, STDIN_FILENO);
-	dup2(shell->std_out, STDOUT_FILENO);
-	close(shell->std_in);
-	close(shell->std_out);
-	shell->parent_redir = 0;
-}
 
 static void	dup_and_close(int file, int fd)
 {

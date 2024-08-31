@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:23:15 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/31 17:17:35 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/31 20:22:59 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,13 @@ int	quotes_not_closed(char *str);
 void	quotes_remove(char *str);
 void	n_terminate(char *str, int i);
 void	change_2_space(char *line, int start, int end);
+void	del_space(char *str);
+char	*add_space(char *str);
 void	extract_cmd(t_minishell *shell, t_cmd_data *cmd);
 void	extract_args(t_minishell *shell, t_cmd_data *cmd);
+char	**array_copy(t_minishell *shell, char **array);
+void	shlvl_increment(t_minishell *shell);
+void	rm_fr_array(char **arr, char *id);
+void	shell_init(t_minishell *shell, char **envp);
 
 #endif

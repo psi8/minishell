@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_parse.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 16:42:29 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/31 17:01:51 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/31 18:13:14 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,28 +54,28 @@ int	quotes_not_closed(char *str)
 
 void	quotes_remove(char *str)
 {
-	t_parsed_data	p;
+	t_parsed_data	parse;
 
-	init_t_parse(&p);
-	while (str[p.i])
+	init_t_parse(&parse);
+	while (str[parse.i])
 	{
-		if (str[p.i] == '\'' && !p.inside_doubles)
+		if (str[parse.i] == '\'' && !parse.inside_doubles)
 		{
-			p.inside_singles = !p.inside_singles;
-			p.i++;
+			parse.inside_singles = !parse.inside_singles;
+			parse.i++;
 			continue ;
 		}
-		if (str[p.i] == '\"' && !p.inside_singles)
+		if (str[parse.i] == '\"' && !parse.inside_singles)
 		{
-			p.inside_doubles = !p.inside_doubles;
-			p.i++;
+			parse.inside_doubles = !parse.inside_doubles;
+			parse.i++;
 			continue ;
 		}
-		str[p.k] = str[p.i];
-		p.i++;
-		p.k++;
+		str[parse.k] = str[parse.i];
+		parse.i++;
+		parse.k++;
 	}
-	n_terminate(str, p.k);
+	n_terminate(str, parse.k);
 }
 
 void	n_terminate(char *str, int i)

@@ -6,7 +6,7 @@
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 17:47:19 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/25 11:30:47 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/08/31 20:01:55 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define ERR_MALLOC "Error: malloc unexpectedly failed"
 # define ERR_PIPE "unexpected error while opening pipe"
 # define ERR_EXEC "unexpected error while executing command"
-# define ERR_CWD "unexpected error while executing cwd"
+# define ERR_CWD "unexpected error while executing getcwd"
 # define ERR_FORK "unexpected error while creating fork"
 # define ERR_EXP "not a valid identifier"
 # define ERR_HD "unexpected error while creating heredoc temp file"

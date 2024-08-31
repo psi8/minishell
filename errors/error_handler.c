@@ -6,18 +6,13 @@
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 21:36:38 by dlevinsc          #+#    #+#             */
-<<<<<<< HEAD:error_handler.c
-/*   Updated: 2024/08/26 18:45:54 by dlevinsc         ###   ########.fr       */
-=======
-/*   Updated: 2024/08/26 16:24:38 by psitkin          ###   ########.fr       */
->>>>>>> origin/pavel:errors/error_handler.c
+/*   Updated: 2024/08/31 19:44:17 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 static t_bool	response_with_quotes(char *cmd);
-char	*join_strs(char *str, char *add);
 
 int	error_msg_cmd(char *cmd, char *detail, char *msg, int status_code)
 {
@@ -29,19 +24,19 @@ int	error_msg_cmd(char *cmd, char *detail, char *msg, int status_code)
 	full_msg = ft_strdup("minishell: ");
 	if (cmd != NULL)
 	{
-		full_msg = join_strs(full_msg, cmd);
-		full_msg = join_strs(full_msg, ": ");
+		full_msg = join_and_free(full_msg, cmd);
+		full_msg = join_and_free(full_msg, ": ");
 	}
 	if (detail != NULL)
 	{
 		if (is_quotes)
-			full_msg = join_strs(full_msg, "`");
-		full_msg = join_strs(full_msg, detail);
+			full_msg = join_and_free(full_msg, "`");
+		full_msg = join_and_free(full_msg, detail);
 		if (is_quotes)
-			full_msg = join_strs(full_msg, "'");
-		full_msg = join_strs(full_msg, ": ");
+			full_msg = join_and_free(full_msg, "'");
+		full_msg = join_and_free(full_msg, ": ");
 	}
-	full_msg = join_strs(full_msg, msg);
+	full_msg = join_and_free(full_msg, msg);
 	ft_putendl_fd(full_msg, STDERR_FILENO);
 	free_ptr(full_msg);
 	return (status_code);
@@ -53,22 +48,7 @@ static t_bool	response_with_quotes(char *cmd)
 		return (true);
 	return (false);
 }
-
-<<<<<<< HEAD:error_handler.c
-char	*join_strs(char *str, char *add)
-{
-	char	*tmp;
-
-	if (!add)
-		return (str);
-	if (!str)
-		return (ft_strdup(add));
-	tmp = str;
-	str = ft_strjoin(tmp, add);
-	free_ptr(tmp);
-	return (str);
-}
-=======
+/*
 char *make_err_msg(char *msg)
 {
 	char	*err_msg;
@@ -88,6 +68,7 @@ char *make_err_msg(char *msg)
 	free(temp);
 	return (err_msg);
 }
+*/
 
 char	*make_err_msg_strerr(char *name)
 {
@@ -98,8 +79,8 @@ char	*make_err_msg_strerr(char *name)
 	msg = ft_strjoin(strerror(errno), "\n");
 	if (!msg)
 		return (NULL);
-	error_msg = ft_strjoin("minishell: ", name);
-	if (!error_msg)
+	err_msg = ft_strjoin("minishell: ", name);
+	if (!err_msg)
 	{
 		free(msg);
 		return (NULL);
@@ -117,4 +98,3 @@ char	*make_err_msg_strerr(char *name)
 		return (NULL);
 	return (err_msg);
 }
->>>>>>> origin/pavel:errors/error_handler.c

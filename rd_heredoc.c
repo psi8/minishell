@@ -3,70 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   rd_heredoc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 21:33:35 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/31 15:00:29 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/31 19:19:37 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static t_bool	prompt_heredoc_exit(char **user_in, char *delimiter);
-
-static t_bool	heredoc_prompt(char *file, char *delimiter)
-{
-	int		fd;
-	char	*user_input;
-
-	fd = open(file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	user_input = NULL;
-	while (true)
-	{
-		signals_wait_cmd();
-		user_input = readline("heredoc> ");
-		signals_run_cmd();
-		if (prompt_heredoc_exit(&user_input, delimiter) == true)
-			break ;
-		ft_putendl_fd(user_input, fd);
-		free_ptr(user_input);
-	}
-	close(fd);
-	free_ptr(user_input);
-	return (true);
-}
-
-static t_bool	prompt_heredoc_exit(char **user_in, char *delimiter)
-{
-	if (*user_in == NULL)
-	{
-		error_msg_cmd("here-doc", "end-of-file: expected",
-			delimiter, true);
-		return (true);
-	}
-	if (ft_strncmp(*user_in, delimiter,
-			ft_strlen(delimiter)) == 0)
-	{
-		return (true);
-	}
-	return (false);
-}
-
-
-static char	*heredoc_filename(t_minishell *shell)
-{
-	char	*file;
-	char	*tmp;
-
-	tmp = ft_itoa(shell->heredoc_index);
-	if (!tmp)
-		error(shell, ERR_MALLOC, FATAL, 1);
-	file = ft_strjoin("/tmp/.heredoc", tmp);
-	free(tmp);
-	if (!file)
-		error(shell, ERR_MALLOC, FATAL, 1);
-	return (file);
-}
 
 int	add_heredoc_to_array(t_minishell *shell, char **redir, char **file)
 {
@@ -84,7 +28,7 @@ int	add_heredoc_to_array(t_minishell *shell, char **redir, char **file)
 		error(shell, ERR_MALLOC, FATAL, 1);
 	return (0);
 }
-
+/*
 void	heredoc(t_minishell *shell, t_cmd_data *cmd)
 {
 	int		i;
@@ -106,3 +50,4 @@ void	heredoc(t_minishell *shell, t_cmd_data *cmd)
 		i++;
 	}
 }
+*/

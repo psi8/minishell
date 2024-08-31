@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   paths.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 22:17:19 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/31 14:53:45 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/31 20:27:16 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 
 char	*get_env(t_minishell *shell, char *search);
 void	paths(t_minishell *shell, char **envp);
+
+static void	shlvl_warning(int shlvl)
+{
+	ft_putstr_fd("minishell: warning: shell level (", 2);
+	ft_putnbr_fd(shlvl, 2);
+	ft_putendl_fd(") too high, resetting to 1", 2);
+}
 
 void	paths(t_minishell *shell, char **envp)
 {
@@ -58,4 +65,49 @@ char	*get_env(t_minishell *shell, char *search)
 		i++;
 	}
 	return (NULL);
+}
+
+static void	export_shlvl(t_minishell *shell, char **shlvl_str)
+{
+	char	*output;
+
+	rm_fr_array(shell->env, "SHLVL");
+	output = ft_strjoin("SHLVL=", *shlvl_str);
+	if (!output)
+	{
+		free(*shlvl_str);
+		*shlvl_str = NULL;
+		error(shell, ERR_MALLOC, FATAL, 1);
+	}
+	shell->env = add_to_array(shell, shell->env, output, FREEABLE);
+	free(*shlvl_str);
+	free(output);
+}
+
+void	shlvl_increment(t_minishell *shell)
+{
+	int		shlvl;
+	char	*shlvl_str;
+
+	shlvl_str = get_env(shell, "SHLVL");
+	if (!shlvl_str)
+		shlvl = 1;
+	else
+	{
+		shlvl = ft_atoi(shlvl_str);
+		if (shlvl < 0)
+			shlvl = 0;
+		else
+			shlvl = shlvl + 1;
+		if (shlvl > 1000)
+		{
+			shlvl_warning(shlvl);
+			shlvl = 1;
+		}
+		free(shlvl_str);
+	}
+	shlvl_str = ft_itoa(shlvl);
+	if (!shlvl_str)
+		error(shell, ERR_MALLOC, FATAL, 1);
+	export_shlvl(shell, &shlvl_str);
 }

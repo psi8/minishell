@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:39:11 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/31 14:52:47 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/31 20:23:55 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,17 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 
-	int test = test_main(argc, argv, envp); //debug builtin and pipe
+/*	int test = test_main(envp); //debug builtin and pipe
 	if (test != 0)
 		return (test);
 	else
 		return (0);
 	//debug fiinish
-	
+*/	
 	if (!argv || argc < 1)
 		return (0);
-	//shell_init(&shell, envp);
-	//switch_signal(INTERACTIVE);
+	shell_init(&shell, envp);
+	signal_toggle(INTERACTIVE);
 	while(shell.status == RUNNING)
 	{
 		shell.line = readline("my_minishell: ");

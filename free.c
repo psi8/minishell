@@ -32,7 +32,7 @@ void	pipes_free(t_minishell *shell)
 	i = 0;
 	while (i <shell->pipes_allocated)
 	{
-		free (shell->pipe[i])
+		free (shell->pipe[i]);
 		i++;
 	}
 	free(shell->pipe);
@@ -44,7 +44,7 @@ void	tree_free(t_minishell *shell)
 	int	i;
 
 	i = 0;
-	while (i < shell->cmd_tree)
+	while (i < shell->cmd_count)
 	{
 		if (shell->cmd_tree[i].line)
 		{

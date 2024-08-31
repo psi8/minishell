@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialization.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 20:42:00 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/31 14:51:50 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/08/31 20:22:22 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,32 @@ void	init_t_parse(t_parsed_data *parsed)
 	parsed->inside_doubles = 0;
 	parsed->in_quotes = 0;
 	parsed->quote = 0;
+}
+
+void	shell_init(t_minishell *shell, char **envp)
+{
+	shell->line = NULL;
+	shell->status = RUNNING;
+	shell->cmd_count = 0;
+	shell->cmd_tree = NULL;
+	shell->pid = NULL;
+	shell->pid_allocated = 0;
+	shell->pipe = NULL;
+	shell->pipes_allocated = 0;
+	shell->paths = NULL;
+	shell->exit_status = 0;
+	shell->cmd_count = 0;
+	shell->paths = NULL;
+	shell->old_pwd = NULL;
+	shell->pwd = NULL;
+	shell->env = array_copy(shell, envp);
+	shell->pwd = getcwd(NULL, 0);
+	if (!shell->pwd)
+		ft_putendl_fd(ERR_CWD, 2);
+	if (isatty(STDIN_FILENO))
+	{
+		shlvl_increment(shell);
+		rm_fr_array(shell->env, "OLDPWD");
+		shell->env = add_to_array(shell, shell->env, "OLDPWD", 0);
+	}
 }
