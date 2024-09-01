@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 18:02:06 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/25 12:31:55 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/09/01 14:08:45 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	init_cmds(t_minishell *shell)
 {
 	if (shell->exit_status == 0)
 	{
-		shell->paths = get_paths(shell->env);
+//		shell->paths = get_paths(shell->env);
 		init_pipe(shell);
 		shell->pid = (int *)ft_calloc(sizeof(int *), shell->cmd_count + 1);
 //		shell->cmd_tree = (t_cmd_data *) ft_calloc(sizeof(t_cmd_data *), shell->cmd_count + 1); //Pavel initializes it

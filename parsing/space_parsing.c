@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   space_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 16:38:21 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/31 18:14:46 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/09/01 14:12:02 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int	only_spaces(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == ' ')
-			return(1);
+		if (str[i] != ' ')
+			return(0);
 		i++;
 	}
 	return (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:23:15 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/31 20:22:59 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/09/01 14:53:04 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,13 @@ char	*ft_get_env(t_minishell *shell, char *to_find);
 void	ft_update_pwd(t_minishell *shell);
 t_bool	is_valid_var_name(char *name);
 char	**add_to_array(t_minishell *shell, char **array, char *new, t_exit_status mode);
+t_bool	is_builtin(char *cmd);
 
 
 //FOR TEST
 int test_main(char **envp); //debug builtin and pipe
 int	child_error(t_minishell *shell, char *msg, t_exit_status status, int code); //add to test. Pavel you can replace it to your functions
+void print_cmd(t_minishell *minishell);
 
 //Pavel
 int		quotes_skip(char *str, int i);

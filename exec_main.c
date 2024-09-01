@@ -45,7 +45,7 @@ void	execute_cmd(t_minishell *shell, t_cmd_data *cmd_vars)
 		redir_to_file(shell, cmd_vars, FATAL);
 	if (cmd_vars->cmd == NULL)
 		free_and_exit(shell, 0);
-	if (call_builtin(shell, cmd_vars))
+	if (is_builtin(cmd_vars->cmd))
 		free_and_exit(shell, shell->exit_status);
 	if (cmd_vars->cmd[0])
 		validate_command(shell, cmd_vars);

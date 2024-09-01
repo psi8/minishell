@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 20:57:16 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/25 12:07:03 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/09/01 14:23:04 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ int	exec_child(t_minishell *shell, int num_cmd)
 	{
 		if (shell->cmd_tree[num_cmd].redir_count)
 			redirection_handler(shell, &shell->cmd_tree[num_cmd]);
-		if (shell->cmd_tree[num_cmd].cmd && shell->cmd_tree[num_cmd].args[0])
+		if (shell->cmd_tree[num_cmd].cmd)
 		{
 			shell->pid[num_cmd] = fork();
 			if (shell->pid[num_cmd] == -1)
 				return (error_msg_cmd("fork", NULL, strerror(errno),
 						EXIT_FAILURE));
-			else if (shell->pid[num_cmd] == 0)
+			else
 				execute_cmd(shell, &shell->cmd_tree[num_cmd]);
 		}
 		if (!shell->cmd_tree[num_cmd].cmd[0] && shell->cmd_tree[num_cmd].redir_count)

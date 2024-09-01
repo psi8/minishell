@@ -1,6 +1,6 @@
 # Variables
 NAME = minishell
-CC = gcc
+CC = gcc -g
 CFLAGS = -Wall -Wextra -Werror
 LIBFT_DIR = ./libft
 READLINE := -lreadline

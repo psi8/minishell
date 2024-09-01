@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:39:11 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/31 20:23:55 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/09/01 14:52:55 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int	main(int argc, char **argv, char **envp)
 		{
 			add_history(shell.line);
 			line_parse(&shell);
+			print_cmd(&shell);
+			exec_cmd(&shell);
 		}
 	}
 }
