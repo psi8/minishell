@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   test_main.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/03 15:04:58 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/09/01 14:56:33 by dlevinsc         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -167,7 +156,8 @@ void print_cmd(t_minishell *minishell)
     int i = 0;
     int j;
        
-    while (i < minishell->cmd_count) {
+    while (i < minishell->cmd_count) 
+    {
         printf("Command %d: %s\n", i + 1, minishell->cmd_tree[i].cmd);
         j = 0;
         while (j < minishell->cmd_tree[i].arg_count) {
