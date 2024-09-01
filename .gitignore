@@ -1,1 +1,14 @@
+*.vscode
+.vscode
+*.o
+/objs/
+minishell
+libft.a
+*test*
+sh_test.sh
+.vscode/
+*.dSYM/
+*.swp
+*.pdf
+*.out
 .vscode/

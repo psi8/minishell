@@ -1,36 +1,44 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/01 20:39:11 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/02 00:25:54 by psitkin          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "minishell.h"
 
-volatile sig_atomic_t	g_sigint_received = 0;
+//test
 
-void		signal_intercept(int status);
-static void	interceptor_init(void (*hand_one)(int), void (*hand_two)(int));
-void		int_sig_handler(int signum);
-void		signal_set(int status);
+volatile sig_atomic_t	g_sigint_received = 0;
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_minishell		*shell;
-	t_command_data	cmd_data;
+	t_minishell		shell;
+	
+	(void)argc;
+	(void)argv;
 
+/*	int test = test_main(envp); //debug builtin and pipe
+	if (test != 0)
+		return (test);
+	else
+		return (0);
+	//debug fiinish
+*/	
 	if (!argv || argc < 1)
 		return (0);
-	signal_interceptor(IGNORE);
-	signal_set(IMPLICIT);
+	shell_init(&shell, envp);
+	signal_toggle(INTERACTIVE);
+	while(shell.status == RUNNING)
+	{
+		shell.line = readline("my_minishell: ");
+		if (shell.line == NULL)
+			exit_shell(&shell);
+		if(*shell.line)
+		{
+			add_history(shell.line);
+			line_parse(&shell);
+			print_cmd(&shell);
+			exec_cmd(&shell);
+		}
+	}
 }
 
-void	signal_intercept(int status)
+/* void	signal_intercept(int status)
 {
 	if (status == DEFAULT)
 		init_intercept(SIG_DFL, SIG_DFL);
@@ -85,3 +93,4 @@ void	signal_set(int status)
 		term.c_lflag &= ~ECHOCTL;
 	tcsetattr(STDIN_FILENO, TCSANOW, &term);
 }
+*/
