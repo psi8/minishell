@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:23:15 by psitkin           #+#    #+#             */
-/*   Updated: 2024/09/01 14:53:04 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/09/02 22:51:27 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,17 @@ void	redirection_handler(t_minishell *shell, t_cmd_data *cmd);
 int	open_out_file(char *file, t_bool trunc);
 void	heredoc(t_minishell *shell, t_cmd_data *cmd);
 int	open_in_file(char *file);
-int	call_builtin(t_minishell *shell, t_cmd_data *cmd);
+t_bool	call_builtin(t_minishell *shell, t_cmd_data *cmd);
 void	redir_to_pipe(t_minishell *shell, t_cmd_data *cmd_vars);
-void	redir_to_file(t_minishell *shell, t_cmd_data *c, t_exit_status mode);
+void redirect_to_io(t_minishell *sh, t_cmd_data *cmd, t_exit_status exit_mode);
 char	*get_env_var_value(char **env, char *var);
-void	close_pipes(t_minishell *shell);
+
 int	wait_child(t_minishell *shell);
 void	execute_cmd(t_minishell *shell, t_cmd_data *cmd_vars);
 void	set_pipe_fds(t_minishell *shell, int i);
 void	validate_command(t_minishell *shell, t_cmd_data *cmd_vars);
 int	exec_child(t_minishell *shell, int num_cmd);
-int	exec_cmd(t_minishell *shell);
+void process_execution(t_minishell *sh);
 int	get_env_var_index(char **env, char *var);
 void	env_var_remove(t_minishell *shell, int index);
 void	free_ptr(void *ptr);

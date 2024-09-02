@@ -6,53 +6,38 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 18:02:06 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/09/01 14:08:45 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/09/02 22:58:03 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	init_cmds(t_minishell *shell);
-static void	init_pipe(t_minishell *shell);
-
-int	exec_cmd(t_minishell *shell)
+void process_execution(t_minishell *sh)
 {
-	int			status_code;
+    if (sh->status == ERROR)
+        return;
 
-	shell->exit_status = 0;
-	status_code = 0;
-	init_cmds(shell);
-	shell->exit_status = exec_main(shell);
-	if (status_code == 0 && shell->exit_status != 0)
-		status_code = shell->exit_status;
-	close_fds(shell, false);
-//	free_cmds(shell);
-	return (status_code);
-}
+    if (sh->cmd_count == 1 && is_builtin(&sh->cmd_tree[0].cmd))
+    {
+        if (sh->cmd_tree[0].redir_count > 0)
+        {
+            sh->parent_redir = 1;
+            sh->std_in = dup(STDIN_FILENO);
+            sh->std_out = dup(STDOUT_FILENO);
+            redirect_to_io(sh, &sh->cmd_tree[0], ERROR);
+        }
+        if (sh->status != ERROR)
+            run_builtin(sh, &sh->cmd_tree[0]);
 
-static void	init_pipe(t_minishell *shell)
-{
-	int	i;
+        if (sh->parent_redir)
+            restore_std(sh);
+        
+        return;
+    }
 
-	i = 0;
-	shell->pipe = (int **) ft_calloc(shell->cmd_count, sizeof(int *));
-	while (i < shell->cmd_count)
-	{
-		shell->pipe[i] = ft_calloc(sizeof(int), 2);
-		if (!shell->pipe[i])
-			exit(6);
-		i++;
-	}
-}
+    if (sh->cmd_count > 1)
+        open_pipes(sh);
 
-void	init_cmds(t_minishell *shell)
-{
-	if (shell->exit_status == 0)
-	{
-//		shell->paths = get_paths(shell->env);
-		init_pipe(shell);
-		shell->pid = (int *)ft_calloc(sizeof(int *), shell->cmd_count + 1);
-//		shell->cmd_tree = (t_cmd_data *) ft_calloc(sizeof(t_cmd_data *), shell->cmd_count + 1); //Pavel initializes it
-	}
+    do_fork(sh);
 }
 
