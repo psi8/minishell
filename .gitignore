@@ -11,3 +11,4 @@ sh_test.sh
 *.swp
 *.pdf
 *.out
+.vscode/
