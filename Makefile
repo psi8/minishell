@@ -29,7 +29,6 @@ SRCS = builtins_handler.c \
        cmd_export.c \
        cmd_echo.c \
        cmd_pwd.c \
-       errors_handling/errors_handling.c \
        errors/error_handler.c \
        errors/errors_main.c \
        exit/exit.c \
