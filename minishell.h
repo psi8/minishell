@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:23:15 by psitkin           #+#    #+#             */
-/*   Updated: 2024/09/02 22:51:27 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/09/05 20:38:26 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ extern volatile sig_atomic_t	g_sigint_received;
 
 //DLevinsc
 char **get_paths(char **env);
-int         exec_main(t_minishell *shell);
-t_bool	    is_builtin_without_output(t_cmd_data *cmd);
-void	exec_builtin_without_output(t_minishell *shell, t_cmd_data *cmd);
+void    exec_main(t_minishell *shell);
+//t_bool	    is_builtin_without_output(t_cmd_data *cmd);
+//void	exec_builtin_without_output(t_minishell *shell, t_cmd_data *cmd);
 int         cmd_cd(t_minishell *shell, char **argv);
 int	cmd_echo(char **argv);
 int	cmd_env(t_minishell *shell, t_cmd_data *cmd);
@@ -53,20 +53,20 @@ int	cmd_pwd(void);
 int	cmd_unset(t_minishell *shell, char **argv);
 void	close_fds(t_minishell *shell, t_bool reset_file);
 int	error_msg_cmd(char *cmd, char *detail, char *msg, int status_code);
-void	redirection_handler(t_minishell *shell, t_cmd_data *cmd);
-int	open_out_file(char *file, t_bool trunc);
+//void	redirection_handler(t_minishell *shell, t_cmd_data *cmd);
+//int	open_out_file(char *file, t_bool trunc);
 void	heredoc(t_minishell *shell, t_cmd_data *cmd);
 int	open_in_file(char *file);
 t_bool	call_builtin(t_minishell *shell, t_cmd_data *cmd);
-void	redir_to_pipe(t_minishell *shell, t_cmd_data *cmd_vars);
+//void	redir_to_pipe(t_minishell *shell, t_cmd_data *cmd_vars);
 void redirect_to_io(t_minishell *sh, t_cmd_data *cmd, t_exit_status exit_mode);
 char	*get_env_var_value(char **env, char *var);
 
-int	wait_child(t_minishell *shell);
-void	execute_cmd(t_minishell *shell, t_cmd_data *cmd_vars);
-void	set_pipe_fds(t_minishell *shell, int i);
+//int	wait_child(t_minishell *shell);
+//void	execute_cmd(t_minishell *shell, t_cmd_data *cmd_vars);
+//void	set_pipe_fds(t_minishell *shell, int i);
 void	validate_command(t_minishell *shell, t_cmd_data *cmd_vars);
-int	exec_child(t_minishell *shell, int num_cmd);
+//int	exec_child(t_minishell *shell, int num_cmd);
 void process_execution(t_minishell *sh);
 int	get_env_var_index(char **env, char *var);
 void	env_var_remove(t_minishell *shell, int index);
@@ -77,7 +77,9 @@ void	ft_update_pwd(t_minishell *shell);
 t_bool	is_valid_var_name(char *name);
 char	**add_to_array(t_minishell *shell, char **array, char *new, t_exit_status mode);
 t_bool	is_builtin(char *cmd);
-
+//void initialize_pipes(t_minishell *sh);
+void redirect_to_pipe(t_minishell *sh, t_cmd_data *cmd_data);
+void terminate_pipes(t_minishell *sh);
 
 //FOR TEST
 int test_main(char **envp); //debug builtin and pipe

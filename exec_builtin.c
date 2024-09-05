@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
 #include "minishell.h"
 
 static void	cd_special_case(t_minishell *shell, t_cmd_data *cmd)
@@ -72,3 +73,4 @@ void	exec_builtin_without_output(t_minishell *shell, t_cmd_data *cmd)
 		}
 	}
 }
+*/

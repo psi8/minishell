@@ -114,7 +114,7 @@ int test_main(char **envp)
 
     //RUN
 
-    exec_cmd(&minishell);
+    process_execution(&minishell);
 
     // Free allocated memory (not fully implemented for brevity)
     free(minishell.line);

@@ -8,7 +8,6 @@ LIBFT = $(LIBFT_DIR)/libft.a
 SRCS = builtins_handler.c \
        cmd_env.c \
        cmd_unset.c \
-       exec_builtin.c \
        initialization.c \
        minishell.c \
        paths.c \
@@ -19,13 +18,10 @@ SRCS = builtins_handler.c \
        cmd_exit.c \
        env.c \
        env_partial.c \
-       exec_child.c \
        exec_main.c \
        in_out_redirection.c \
        init_pipe_run_exec.c \
-       pipe.c \
        rd_heredoc.c \
-       redirection_handler.c \
        signal.c \
        utils.c \
        utils_free.c \

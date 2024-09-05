@@ -6,10 +6,11 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 20:57:16 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/09/01 14:23:04 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/09/05 20:37:40 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
 #include "minishell.h"
 
 static void	create_redirection(t_minishell *shell, int n_cmd)
@@ -51,3 +52,4 @@ int	exec_child(t_minishell *shell, int num_cmd)
 	}
 	return (0);
 }
+*/

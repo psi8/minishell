@@ -6,11 +6,12 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 21:32:35 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/25 12:45:20 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/09/05 20:45:19 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+/*
+
 
 void	redirection_handler(t_minishell *shell, t_cmd_data *cmd)
 {
@@ -32,3 +33,5 @@ void	redirection_handler(t_minishell *shell, t_cmd_data *cmd)
 		i++;
 	}
 }
+
+*/

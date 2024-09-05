@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 18:58:01 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/09/02 22:55:02 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/09/05 19:29:49 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,22 +94,22 @@ void redirect_to_io(t_minishell *sh, t_cmd_data *cmd, t_exit_status exit_mode)
     index = -1;
     while (cmd->redir[++index] && sh->status != ERROR)
     {
-        if (ambiguous_redirect(sh, &cmd->redir[index], exit_mode))
+        if (unclear_redirect(sh, &cmd->redir[index], exit_mode))
             return;
         if (ft_strncmp(&cmd->redir[index][0], "< ", 2) == 0)
         {
             cmd->infile = open(cmd->redir[index] + 2, O_RDONLY);
-            dup_and_close(cmd->infile, STDIN_FILENO);
+            duplicate_and_close(cmd->infile, STDIN_FILENO);
         }
         else if (ft_strncmp(&cmd->redir[index][0], "> ", 2) == 0)
         {
             cmd->out = open(cmd->redir[index] + 2, O_CREAT | O_RDWR | O_TRUNC, 0644);
-            dup_and_close(cmd->out, STDOUT_FILENO);
+            duplicate_and_close(cmd->out, STDOUT_FILENO);
         }
         else if (ft_strncmp(&cmd->redir[index][0], ">>", 2) == 0)
         {
             cmd->out = open(cmd->redir[index] + 2, O_CREAT | O_APPEND | O_RDWR, 0644);
-            dup_and_close(cmd->out, STDOUT_FILENO);
+            duplicate_and_close(cmd->out, STDOUT_FILENO);
         }
         if (cmd->infile == -1 || cmd->out == -1)
             error(sh, cmd->redir[index] + 2, exit_mode, 1);

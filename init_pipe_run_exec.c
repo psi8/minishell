@@ -6,18 +6,20 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 18:02:06 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/09/02 22:58:03 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/09/05 20:43:33 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static void initialize_pipes(t_minishell *sh);
+static void setup_pipes(t_minishell *sh);
+
 void process_execution(t_minishell *sh)
 {
     if (sh->status == ERROR)
-        return;
-
-    if (sh->cmd_count == 1 && is_builtin(&sh->cmd_tree[0].cmd))
+        return ;
+    if (sh->cmd_count == 1 && is_builtin(sh->cmd_tree[0].cmd))
     {
         if (sh->cmd_tree[0].redir_count > 0)
         {
@@ -27,17 +29,64 @@ void process_execution(t_minishell *sh)
             redirect_to_io(sh, &sh->cmd_tree[0], ERROR);
         }
         if (sh->status != ERROR)
-            run_builtin(sh, &sh->cmd_tree[0]);
-
+            call_builtin(sh, &sh->cmd_tree[0]);
         if (sh->parent_redir)
-            restore_std(sh);
-        
-        return;
+            restore_std(sh);        
+        return ;
     }
-
     if (sh->cmd_count > 1)
-        open_pipes(sh);
-
-    do_fork(sh);
+        initialize_pipes(sh);
+    exec_main(sh);
 }
 
+/**
+ * initialize_pipes - Opens pipes for inter-process communication.
+ * @sh: Pointer to the main minishell structure.
+ */
+static void initialize_pipes(t_minishell *sh)
+{
+    int pipe_index;
+
+    pipe_index = 0;
+    setup_pipes(sh);
+    while (pipe_index < sh->cmd_count)
+    {
+        pipe(sh->pipe[pipe_index]);
+        if (sh->pipe[pipe_index][0] == -1 || sh->pipe[pipe_index][1] == -1)
+            error_p(sh, ERR_PIPE, FATAL, 1);
+        pipe_index++;
+    }
+}
+
+/**
+ * setup_pipes - Allocates memory for pipes based on command count.
+ * @sh: Pointer to the main minishell structure.
+ */
+static void setup_pipes(t_minishell *sh)
+{
+    int pipe_index;
+
+    pipe_index = 0;
+    sh->pipe = (int **)malloc(sh->cmd_count * sizeof(int *));
+    if (sh->pipe == NULL)
+        error(sh, ERR_MALLOC, FATAL, 1);  // Updated to ERR_MALLOC
+    while (pipe_index < sh->cmd_count)
+    {
+        sh->pipe[pipe_index] = (int *)malloc(2 * sizeof(int));
+        if (!sh->pipe[pipe_index])
+            error(sh, ERR_MALLOC, FATAL, 1);  // Updated to ERR_MALLOC
+        sh->pipes_allocated++;
+        pipe_index++;
+    }
+}
+
+/**
+ * setup_pipes - Allocates memory for the pipe file descriptors in the minishell instance.
+ * @sh: Pointer to the main minishell structure.
+ */
+void	set_pipe_fds(t_minishell *shell, int i)
+{
+	dup2(shell->pipe[i][1], STDOUT_FILENO);
+	dup2(shell->pipe[i - 1][0], STDIN_FILENO);
+	terminate_pipes(shell);
+}
