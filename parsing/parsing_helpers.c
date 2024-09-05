@@ -22,7 +22,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	i = 0;
 	while (i < len)
 	{
-		str[i] = s[start + 1];
+		str[i] = s[start + i];
 		i++;
 	}
 	str[i] = '\0';

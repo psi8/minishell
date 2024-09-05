@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 14:36:23 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/26 19:01:35 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/09/02 22:48:51 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,26 +46,23 @@ t_bool	is_builtin(char *cmd)
 		return (false);
 }
 
-int	call_builtin(t_minishell *shell, t_cmd_data *cmd)
+t_bool	call_builtin(t_minishell *shell, t_cmd_data *cmd)
 {
-	int	cmd_code;
-
-	cmd_code = 0;
 	if (ft_strncmp(cmd->cmd, "echo", 5) == 0)
-		cmd_code = cmd_echo(cmd->args);
+		cmd_echo(cmd->args);
 	else if (ft_strncmp(cmd->cmd, "exit", 5) == 0)
-		cmd_code = cmd_exit(shell, cmd->args);
+		cmd_exit(shell, cmd->args);
 	else if (ft_strncmp(cmd->cmd, "pwd", 4) == 0)
-		cmd_code = cmd_pwd();
+		cmd_pwd();
 	else if (ft_strncmp(cmd->cmd, "env", 4) == 0)
-		cmd_code = cmd_env(shell, cmd);
+		cmd_env(shell, cmd);
 	else if (ft_strncmp(cmd->cmd, "cd", 3) == 0)
-		cmd_code = cmd_cd(shell, cmd->args);
+		cmd_cd(shell, cmd->args);
 	else if (ft_strncmp(cmd->cmd, "unset", 6) == 0)
-		cmd_code = cmd_unset(shell, cmd->args);
+		cmd_unset(shell, cmd->args);
 	else if (ft_strncmp(cmd->cmd, "export", 7) == 0)
 		cmd_export(shell, cmd->args);
 	else
-		exit(EXIT_SUCCESS);
-	return (cmd_code);
+		return(false);
+	return (true);
 }

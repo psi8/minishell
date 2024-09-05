@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 18:06:45 by psitkin           #+#    #+#             */
-/*   Updated: 2024/09/01 14:44:11 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/09/05 22:21:45 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	restore_std(t_minishell *shell)
 	shell->parent_redir = 0;
 }
 */
-
+/*
 int	child_error(t_minishell *shell, char *msg, t_exit_status status, int code)
 {
 	code = 0;
@@ -52,3 +52,4 @@ int	child_error(t_minishell *shell, char *msg, t_exit_status status, int code)
 //		free_and_exit(shell, code);
 	return (code);
 }
+*/

@@ -6,53 +6,87 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 18:02:06 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/09/01 14:08:45 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/09/05 20:43:33 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	init_cmds(t_minishell *shell);
-static void	init_pipe(t_minishell *shell);
+static void initialize_pipes(t_minishell *sh);
+static void setup_pipes(t_minishell *sh);
 
-int	exec_cmd(t_minishell *shell)
+void process_execution(t_minishell *sh)
 {
-	int			status_code;
-
-	shell->exit_status = 0;
-	status_code = 0;
-	init_cmds(shell);
-	shell->exit_status = exec_main(shell);
-	if (status_code == 0 && shell->exit_status != 0)
-		status_code = shell->exit_status;
-	close_fds(shell, false);
-//	free_cmds(shell);
-	return (status_code);
+    if (sh->status == ERROR)
+        return ;
+    if (sh->cmd_count == 1 && is_builtin(sh->cmd_tree[0].cmd))
+    {
+        if (sh->cmd_tree[0].redir_count > 0)
+        {
+            sh->parent_redir = 1;
+            sh->std_in = dup(STDIN_FILENO);
+            sh->std_out = dup(STDOUT_FILENO);
+            redirect_to_io(sh, &sh->cmd_tree[0], ERROR);
+        }
+        if (sh->status != ERROR)
+            call_builtin(sh, &sh->cmd_tree[0]);
+        if (sh->parent_redir)
+            restore_std(sh);        
+        return ;
+    }
+    if (sh->cmd_count > 1)
+        initialize_pipes(sh);
+    exec_main(sh);
 }
 
-static void	init_pipe(t_minishell *shell)
+/**
+ * initialize_pipes - Opens pipes for inter-process communication.
+ * @sh: Pointer to the main minishell structure.
+ */
+static void initialize_pipes(t_minishell *sh)
 {
-	int	i;
+    int pipe_index;
 
-	i = 0;
-	shell->pipe = (int **) ft_calloc(shell->cmd_count, sizeof(int *));
-	while (i < shell->cmd_count)
-	{
-		shell->pipe[i] = ft_calloc(sizeof(int), 2);
-		if (!shell->pipe[i])
-			exit(6);
-		i++;
-	}
+    pipe_index = 0;
+    setup_pipes(sh);
+    while (pipe_index < sh->cmd_count)
+    {
+        pipe(sh->pipe[pipe_index]);
+        if (sh->pipe[pipe_index][0] == -1 || sh->pipe[pipe_index][1] == -1)
+            error_p(sh, ERR_PIPE, FATAL, 1);
+        pipe_index++;
+    }
 }
 
-void	init_cmds(t_minishell *shell)
+/**
+ * setup_pipes - Allocates memory for pipes based on command count.
+ * @sh: Pointer to the main minishell structure.
+ */
+static void setup_pipes(t_minishell *sh)
 {
-	if (shell->exit_status == 0)
-	{
-//		shell->paths = get_paths(shell->env);
-		init_pipe(shell);
-		shell->pid = (int *)ft_calloc(sizeof(int *), shell->cmd_count + 1);
-//		shell->cmd_tree = (t_cmd_data *) ft_calloc(sizeof(t_cmd_data *), shell->cmd_count + 1); //Pavel initializes it
-	}
+    int pipe_index;
+
+    pipe_index = 0;
+    sh->pipe = (int **)malloc(sh->cmd_count * sizeof(int *));
+    if (sh->pipe == NULL)
+        error(sh, ERR_MALLOC, FATAL, 1);  // Updated to ERR_MALLOC
+    while (pipe_index < sh->cmd_count)
+    {
+        sh->pipe[pipe_index] = (int *)malloc(2 * sizeof(int));
+        if (!sh->pipe[pipe_index])
+            error(sh, ERR_MALLOC, FATAL, 1);  // Updated to ERR_MALLOC
+        sh->pipes_allocated++;
+        pipe_index++;
+    }
 }
 
+/**
+ * setup_pipes - Allocates memory for the pipe file descriptors in the minishell instance.
+ * @sh: Pointer to the main minishell structure.
+ */
+void	set_pipe_fds(t_minishell *shell, int i)
+{
+	dup2(shell->pipe[i][1], STDOUT_FILENO);
+	dup2(shell->pipe[i - 1][0], STDIN_FILENO);
+	terminate_pipes(shell);
+}

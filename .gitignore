@@ -12,3 +12,4 @@ sh_test.sh
 *.pdf
 *.out
 .vscode/
+*.txt
