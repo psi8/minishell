@@ -32,7 +32,7 @@ int	main(int argc, char **argv, char **envp)
 		{
 			add_history(shell.line);
 			line_parse(&shell);
-			print_cmd(&shell);
+//			print_cmd(&shell);
 			process_execution(&shell);
 		}
 	}

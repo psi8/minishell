@@ -6,13 +6,13 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 14:52:35 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/26 18:13:30 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/09/06 22:49:37 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	cmd_unset(t_minishell *shell, char **args)
+int	cmd_unset(t_minishell *shell, t_cmd_data *cmd, char **args)
 {
 	int	i;
 	int	index;
@@ -24,8 +24,8 @@ int	cmd_unset(t_minishell *shell, char **args)
 	{
 		if (is_valid_var_name(args[i]) == false)
 		{
-			status_code = error_msg_cmd("unset", args[i],
-					"not a valid identifier", EXIT_FAILURE);
+			unset_error_msg(shell, cmd->args[i]);
+			status_code = 1;
 		}
 		else
 		{

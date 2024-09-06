@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:23:15 by psitkin           #+#    #+#             */
-/*   Updated: 2024/09/05 20:38:26 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/09/06 23:30:53 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,17 @@ void    exec_main(t_minishell *shell);
 int         cmd_cd(t_minishell *shell, char **argv);
 int	cmd_echo(char **argv);
 int	cmd_env(t_minishell *shell, t_cmd_data *cmd);
-int	cmd_exit(t_minishell *shell, char **argv);
+void cmd_exit(t_minishell *sh, t_cmd_data *cmd_data);
 void	cmd_export(t_minishell *shell, char **argv);
-int	cmd_pwd(void);
-int	cmd_unset(t_minishell *shell, char **argv);
+void	cmd_pwd(t_minishell *shell);
+int	cmd_unset(t_minishell *shell, t_cmd_data *cmd, char **argv);
 void	close_fds(t_minishell *shell, t_bool reset_file);
-int	error_msg_cmd(char *cmd, char *detail, char *msg, int status_code);
+void	export_error_msg(t_minishell *shell, char *arg);
+void	unset_error_msg(t_minishell *shell, char *arg);
 //void	redirection_handler(t_minishell *shell, t_cmd_data *cmd);
 //int	open_out_file(char *file, t_bool trunc);
 void	heredoc(t_minishell *shell, t_cmd_data *cmd);
-int	open_in_file(char *file);
+//int	open_in_file(char *file);
 t_bool	call_builtin(t_minishell *shell, t_cmd_data *cmd);
 //void	redir_to_pipe(t_minishell *shell, t_cmd_data *cmd_vars);
 void redirect_to_io(t_minishell *sh, t_cmd_data *cmd, t_exit_status exit_mode);

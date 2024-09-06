@@ -6,59 +6,106 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 14:49:13 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/25 11:32:07 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/09/06 23:05:03 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	exit_code_handler(char *arg, t_bool *error);
-
-int	cmd_exit(t_minishell *shell, char **argv)
+/**
+ * handle_exit_error - Handles the error message when a non-numeric exit argument is provided.
+ * @sh: Pointer to the main minishell structure.
+ * @str: The string that caused the error.
+ */
+static void handle_exit_error(t_minishell *sh, char *str)
 {
-	int		exit_code;
-	t_bool	error;
+    char *error_msg;
+    char *tmp;
 
-	error = false;
-	if (!argv[1])
-		exit_code = shell->exit_status;
-	else
-	{
-		exit_code = exit_code_handler(argv[1], &error);
-		if (error)
-			exit_code = error_msg_cmd("exit", argv[1], "numeric argument required", STDERR_FILENO);
-		else if (argv[2])
-		{
-			shell->exit_status = 1;
-			return (error_msg_cmd("exit", NULL, "too many arguments", EXIT_FAILURE));
-		}
-	}
-	ft_putendl_fd("exit", STDOUT_FILENO);
-	free_and_exit(shell, exit_code);
-	return (STDERR_FILENO);
+    tmp = ft_strjoin("minishell: exit: ", str);
+    if (!tmp)
+        error(sh, ERR_MALLOC, FATAL, 1);
+    error_msg = ft_strjoin(tmp, ": numeric argument required\n");
+    free(tmp);
+    if (!error_msg)
+        error(sh, ERR_MALLOC, FATAL, 1);
+    write(2, error_msg, ft_strlen(error_msg));
+    free(error_msg);
+    free_and_exit(sh, 255);  // Updated function name
 }
 
-static int	exit_code_handler(char *arg, t_bool *error)
+/**
+ * is_non_numeric - Checks if the provided argument is non-numeric.
+ * @sh: Pointer to the main minishell structure.
+ * @str: The string to check.
+ * @return: 1 if non-numeric, 0 otherwise.
+ */
+static int is_non_numeric(t_minishell *sh, char *str)
 {
-	unsigned long long	i;
+    int index;
 
-	if (!arg)
-		return (0);
-	i = 0;
-	while (ft_isspace(arg[i]))
-		i++;
-	if (arg[i] == '\0')
-		*error = true;
-	if (arg[i] == '-' || arg[i] == '+')
-		i++;
-	if (!ft_isdigit(arg[i]))
-		*error = true;
-	while (arg[i])
-	{
-		if (!ft_isdigit(arg[i]) && !ft_isspace(arg[i]))
-			*error = true;
-		i++;
-	}
-	i = ft_ato_long(arg, error);
-	return (i % 256);
+    index = 0;
+    if (str[index] == '-' || str[index] == '+')
+        index++;
+    while (str[index])
+    {
+        if (!ft_isdigit(str[index]))
+        {
+            handle_exit_error(sh, str);
+            return (1);
+        }
+        index++;
+    }
+    return (0);
+}
+
+/**
+ * parse_exit_value - Converts the exit string to an integer and handles errors.
+ * @sh: Pointer to the main minishell structure.
+ * @str: The string representing the exit value.
+ * @return: The converted integer.
+ */
+static int parse_exit_value(t_minishell *sh, char *str)
+{
+    int num;
+
+    if (!ft_strncmp(str, "9223372036854775807", 19))
+        return (255);
+    if (!ft_strncmp(str, "-9223372036854775808", 19))
+        return (0);
+    num = ft_atoi(str);
+    if (num == -1 && ft_strncmp(str, "-1", 2))
+        handle_exit_error(sh, str);
+    if (num == 0 && ft_strncmp(str, "0", 1))
+        handle_exit_error(sh, str);
+    return (num);
+}
+
+/**
+ * execute_exit - Handles the `exit` command in minishell.
+ * @sh: Pointer to the main minishell structure.
+ * @cmd_data: Pointer to the command-specific data.
+ */
+void cmd_exit(t_minishell *sh, t_cmd_data *cmd_data)
+{
+    if (sh->parent_redir)
+        restore_std(sh);
+    if (isatty(STDIN_FILENO) && sh->cmd_count == 1)
+        write(2, "exit\n", 5);
+    if (cmd_data->args[1])
+    {
+        if (is_non_numeric(sh, cmd_data->args[1]))
+            sh->exit_status = 255;
+        else
+            sh->exit_status = parse_exit_value(sh, cmd_data->args[1]);
+        if (cmd_data->args[2])
+        {
+            write(2, "minishell: exit: too many arguments\n", 37);
+            sh->exit_status = 1;
+            return;
+        }
+    }
+    else
+        sh->exit_status = WEXITSTATUS(sh->exit_status);
+    free_and_exit(sh, sh->exit_status);  // Updated function name
 }

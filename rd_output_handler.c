@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 21:33:00 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/25 10:54:21 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/09/06 22:50:19 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	rd_output_handler(t_minishell shell, t_cmd_data *cmd, char *red, t_bool trun
 	return (status_code);
 }
 */
-
+/*
 int	open_out_file(char *file, t_bool trunc)
 {
 //	if (cmds->io->out_file && cmds->io->out_file[0] == '\0')
@@ -50,3 +50,4 @@ int	open_out_file(char *file, t_bool trunc)
 		return (error_msg_cmd(file, NULL, strerror(errno), false));
 	return (fd);
 }
+*/

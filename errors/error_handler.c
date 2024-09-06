@@ -3,50 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   error_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 21:36:38 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/31 19:44:17 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/09/06 22:43:36 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static t_bool	response_with_quotes(char *cmd);
-
-int	error_msg_cmd(char *cmd, char *detail, char *msg, int status_code)
+void	export_error_msg(t_minishell *shell, char *arg)
 {
-	char	*full_msg;
-	t_bool	is_quotes;
+	char	*error_msg;
+	char	*temp;
 
-	if (cmd != NULL)
-		is_quotes = response_with_quotes(cmd);
-	full_msg = ft_strdup("minishell: ");
-	if (cmd != NULL)
-	{
-		full_msg = join_and_free(full_msg, cmd);
-		full_msg = join_and_free(full_msg, ": ");
-	}
-	if (detail != NULL)
-	{
-		if (is_quotes)
-			full_msg = join_and_free(full_msg, "`");
-		full_msg = join_and_free(full_msg, detail);
-		if (is_quotes)
-			full_msg = join_and_free(full_msg, "'");
-		full_msg = join_and_free(full_msg, ": ");
-	}
-	full_msg = join_and_free(full_msg, msg);
-	ft_putendl_fd(full_msg, STDERR_FILENO);
-	free_ptr(full_msg);
-	return (status_code);
+	temp = ft_strjoin("export: `", arg);
+	if (temp == NULL)
+		error(shell, ERR_MALLOC, FATAL, 1);
+	error_msg = ft_strjoin(temp, "': not a valid identifier");
+	free(temp);
+	if (error_msg == NULL)
+		error(shell, ERR_MALLOC, FATAL, 1);
+	error(shell, error_msg, ERROR, 1);
+	free(error_msg);
 }
 
-static t_bool	response_with_quotes(char *cmd)
+void	unset_error_msg(t_minishell *shell, char *arg)
 {
-	if (ft_strncmp(cmd, "export", 6) == 0)
-		return (true);
-	return (false);
+	char	*error_msg;
+	char	*temp;
+
+	temp = ft_strjoin("unset: `", arg);
+	if (temp == NULL)
+		error(shell, ERR_MALLOC, FATAL, 1);
+	error_msg = ft_strjoin(temp, "': not a valid identifier");
+	free(temp);
+	if (error_msg == NULL)
+		error(shell, ERR_MALLOC, FATAL, 1);
+	error(shell, error_msg, ERROR, 1);
+	free(error_msg);
 }
 /*
 char *make_err_msg(char *msg)
@@ -79,7 +74,7 @@ char	*make_err_msg_strerr(char *name)
 	msg = ft_strjoin(strerror(errno), "\n");
 	if (!msg)
 		return (NULL);
-	err_msg = ft_strjoin("minishell: ", name);
+	err_msg = ft_strjoin("my_minishell: ", name);
 	if (!err_msg)
 	{
 		free(msg);

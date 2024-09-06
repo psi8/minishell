@@ -27,7 +27,7 @@ void exec_main(t_minishell *sh)
     while (process_index < sh->cmd_count)
     {
         sh->pid[process_index] = fork();
-        printf("Parent process with PID %d, child PID %d\n", getpid(), sh->pid[process_index]);
+//        printf("Parent process with PID %d, child PID %d\n", getpid(), sh->pid[process_index]);
 //      wait(NULL); // add for debugging 
         if (sh->pid[process_index] == -1)
         {
@@ -36,7 +36,7 @@ void exec_main(t_minishell *sh)
         }
         if (sh->pid[process_index] == 0)
         {
-            printf("Child process with PID %d\n", getpid());
+//            printf("Child process with PID %d\n", getpid());
 //        	pause();  // Or use an infinite loop: while(1);
             handle_child_process(sh, &sh->cmd_tree[process_index]);
         }
