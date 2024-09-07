@@ -13,3 +13,4 @@ sh_test.sh
 *.out
 .vscode/
 *.txt
+*.sh

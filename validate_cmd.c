@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 21:56:15 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/25 11:13:46 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/09/07 18:30:19 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	check_cmd_path(t_minishell *shell, t_cmd_data *cmd_vars)
 	i = -1;
 	cmd_one = ft_strjoin("/", cmd_vars->cmd);
 	if (cmd_one == NULL)
-		error(shell, cmd_vars->cmd, FATAL, 1); //Change for test
+		error(shell, ERR_MALLOC, FATAL, 1); //Change for test
 	while (shell->paths[++i])
 	{
 		cmd_path = ft_strjoin(shell->paths[i], cmd_one);

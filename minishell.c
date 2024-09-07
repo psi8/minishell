@@ -35,6 +35,9 @@ int	main(int argc, char **argv, char **envp)
 //			print_cmd(&shell);
 			process_execution(&shell);
 		}
+		else
+			free(shell.line);
+		shell.status = RUNNING;
 	}
 }
 

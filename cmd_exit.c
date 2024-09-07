@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 14:49:13 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/09/06 23:05:03 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/09/07 17:50:05 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void handle_exit_error(t_minishell *sh, char *str)
         error(sh, ERR_MALLOC, FATAL, 1);
     write(2, error_msg, ft_strlen(error_msg));
     free(error_msg);
-    free_and_exit(sh, 255);  // Updated function name
+    free_and_exit(sh, 2);  // Updated function name
 }
 
 /**
@@ -40,7 +40,7 @@ static void handle_exit_error(t_minishell *sh, char *str)
  * @str: The string to check.
  * @return: 1 if non-numeric, 0 otherwise.
  */
-static int is_non_numeric(t_minishell *sh, char *str)
+static t_bool is_non_numeric(t_minishell *sh, char *str)
 {
     int index;
 
@@ -50,13 +50,10 @@ static int is_non_numeric(t_minishell *sh, char *str)
     while (str[index])
     {
         if (!ft_isdigit(str[index]))
-        {
             handle_exit_error(sh, str);
-            return (1);
-        }
         index++;
     }
-    return (0);
+    return (false);
 }
 
 /**
@@ -94,9 +91,7 @@ void cmd_exit(t_minishell *sh, t_cmd_data *cmd_data)
         write(2, "exit\n", 5);
     if (cmd_data->args[1])
     {
-        if (is_non_numeric(sh, cmd_data->args[1]))
-            sh->exit_status = 255;
-        else
+        if (!is_non_numeric(sh, cmd_data->args[1]))
             sh->exit_status = parse_exit_value(sh, cmd_data->args[1]);
         if (cmd_data->args[2])
         {

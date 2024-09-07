@@ -8,7 +8,7 @@ int	error(t_minishell *shell, char *msg, t_exit_status status, int code)
 		free_and_exit(shell, 1);
 	if (shell->parent_redir)
 		restore_std(shell);
-	err_msg = make_err_msg_strerr(msg);
+	err_msg = generate_error_message(msg);
 	if (!err_msg)
 		free_and_exit(shell, 1);
 	else
@@ -16,8 +16,8 @@ int	error(t_minishell *shell, char *msg, t_exit_status status, int code)
 		write(2, err_msg, ft_strlen(err_msg));
 		free(err_msg);
 	}
-	shell->status = code;
-	shell->exit_status = status;
+	shell->status = status;
+	shell->exit_status = code;
 	if (shell->status == FATAL)
 		free_and_exit(shell, code);
 	return (1);
@@ -39,8 +39,8 @@ int	error_p(t_minishell *shell, char *msg, t_exit_status status, int code)
 		write(2, err_msg, ft_strlen(err_msg));
 		free(err_msg);
 	}
-	shell->status = code;
-	shell->exit_status = status;
+	shell->status = status;
+	shell->exit_status = code;
 	if (shell->status == FATAL)
 		free_and_exit(shell, code);
 	return (1);
@@ -54,7 +54,7 @@ int	child_error(t_minishell *shell, char *msg, t_exit_status status, int code)
 		free_and_exit(shell, 1);
 	if (shell->parent_redir)
 		restore_std(shell);
-	error_msg = make_err_msg_strerr(msg);
+	error_msg = generate_error_message(msg);
 	if (!error_msg)
 		free_and_exit(shell, 1);
 	else
@@ -63,8 +63,8 @@ int	child_error(t_minishell *shell, char *msg, t_exit_status status, int code)
 		free(error_msg);
 	}
 	free(msg);
-	shell->status = code;
-	shell->exit_status = status;
+	shell->status = status;
+	shell->exit_status = code;
 	if (shell->status == FATAL)
 		free_and_exit(shell, code);
 	return (1);

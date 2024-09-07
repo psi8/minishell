@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:23:15 by psitkin           #+#    #+#             */
-/*   Updated: 2024/09/06 23:30:53 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/09/07 16:13:58 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ t_bool	is_builtin(char *cmd);
 //void initialize_pipes(t_minishell *sh);
 void redirect_to_pipe(t_minishell *sh, t_cmd_data *cmd_data);
 void terminate_pipes(t_minishell *sh);
+
+char *generate_error_message(char *msg);
 
 //FOR TEST
 int test_main(char **envp); //debug builtin and pipe

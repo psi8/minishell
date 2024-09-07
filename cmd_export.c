@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 14:50:36 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/09/06 23:26:13 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/09/07 17:32:34 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	cmd_export(t_minishell *shell, char **argv)
 	index = 1;
 	if (!argv[index])
 	{
-		shell->status = display_environment(shell->env);
+		display_environment(shell->env);
 		return ;
 	}
 	while (argv[index])
@@ -82,7 +82,7 @@ void	cmd_export(t_minishell *shell, char **argv)
 		if (!is_valid_var_name(argv[index]))
 			export_error_msg(shell, argv[index]);
 		else
-			add_to_array(shell, shell->env, argv[index], 1);
+			shell->env = add_to_array(shell, shell->env, argv[index], 0);
 		index++;
 	}
 	return ;

@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 21:36:38 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/09/06 22:43:36 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/09/07 16:21:02 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,3 +93,29 @@ char	*make_err_msg_strerr(char *name)
 		return (NULL);
 	return (err_msg);
 }
+
+/**
+ * generate_error_message - Creates and returns a formatted error message.
+ * @msg: The original error message.
+ * @return: A dynamically allocated formatted error message, or NULL on failure.
+ */
+char *generate_error_message(char *msg)
+{
+    char *formatted_msg;
+    char *temp_msg;
+
+    if (!msg)
+        return (NULL);
+    temp_msg = ft_strjoin("my_minishell: ", msg);
+    if (!temp_msg)
+        return (NULL);
+    formatted_msg = ft_strjoin(temp_msg, "\n");
+    if (!formatted_msg)
+    {
+        free(temp_msg);
+        return (NULL);
+    }
+    free(temp_msg);
+    return (formatted_msg);
+}
+
