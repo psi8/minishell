@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 14:36:23 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/09/06 23:31:16 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/09/09 20:00:38 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ t_bool	is_builtin_without_output(t_cmd_data *cmd)
 
 t_bool	is_builtin(char *cmd)
 {
+	if (cmd == NULL)
+		return (false);
 	if (ft_strncmp(cmd, "echo", 5) == 0)
 		return (true);
 	else if (ft_strncmp(cmd, "exit", 5) == 0)

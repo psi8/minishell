@@ -27,18 +27,20 @@ int	main(int argc, char **argv, char **envp)
 	{
 		shell.line = readline("my_minishell: ");
 		if (shell.line == NULL)
-			exit_shell(&shell);
+			terminate_shell(&shell);
 		if(*shell.line)
 		{
 			add_history(shell.line);
 			line_parse(&shell);
 //			print_cmd(&shell);
 			process_execution(&shell);
+			all_free(&shell);
 		}
 		else
 			free(shell.line);
 		shell.status = RUNNING;
 	}
+	terminate_shell(&shell);
 }
 
 /* void	signal_intercept(int status)

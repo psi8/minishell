@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:23:15 by psitkin           #+#    #+#             */
-/*   Updated: 2024/09/07 16:13:58 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/09/09 21:23:56 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void	free_and_exit(t_minishell *shell, int status);
 void	signal_toggle(t_signals status);
 void	signals_run_cmd(void);
 void	signals_wait_cmd(void);
-void	exit_shell(t_minishell *shell);
+void terminate_shell(t_minishell *sh);
 int		wrong_arrows(t_minishell *shell, char *line, char arrow, int i);
 void	heredoc(t_minishell *shell, t_cmd_data *cmd);
 char	*join_and_free(char *str1, char *str2);

@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 14:49:13 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/09/07 17:50:05 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/09/09 20:24:18 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void cmd_exit(t_minishell *sh, t_cmd_data *cmd_data)
             sh->exit_status = parse_exit_value(sh, cmd_data->args[1]);
         if (cmd_data->args[2])
         {
-            write(2, "minishell: exit: too many arguments\n", 37);
+            write(2, "my_minishell: exit: too many arguments\n", 40);
             sh->exit_status = 1;
             return;
         }
