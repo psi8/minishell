@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expand.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/11 21:50:32 by psitkin           #+#    #+#             */
+/*   Updated: 2024/09/11 21:50:33 by psitkin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
-void	expand(t_minishell *shell, char **str);
+void		expand(t_minishell *shell, char **str);
 static void	exp_env(t_minishell *shell, char **str, int *i);
 static int	fin_char(char c);
 static char	*get_exp(t_minishell *shell, char *str);
-static char *get_exit_status(t_minishell *shell);
+static char	*get_exit_status(t_minishell *shell);
 
 void	expand(t_minishell *shell, char **str)
 {
@@ -60,19 +72,11 @@ static void	exp_env(t_minishell *shell, char **str, int *i)
 
 static int	fin_char(char c)
 {
-	if (c == '\0' || 
-		c == ' ' || 
-		c == '/' || 
-		c == '$'|| 
-		c == '\"' || 
-		c == '\'' || 
-		c == '=' || 
-		c == ':'|| 
-		c == '@')
+	if (c == '\0' || c == ' ' || c == '/' || c == '$' || c == '\"'
+		|| c == '\'' || c == '=' || c == ':' || c == '@')
 		return (1);
 	return (0);
 }
-
 
 static char	*get_exp(t_minishell *shell, char *str)
 {
@@ -97,7 +101,7 @@ static char	*get_exp(t_minishell *shell, char *str)
 	return (val);
 }
 
-static char *get_exit_status(t_minishell *shell)
+static char	*get_exit_status(t_minishell *shell)
 {
 	char	*value;
 

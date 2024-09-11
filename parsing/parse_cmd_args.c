@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_cmd_args.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/11 21:52:47 by psitkin           #+#    #+#             */
+/*   Updated: 2024/09/11 21:53:25 by psitkin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
-void	extract_cmd(t_minishell *shell, t_cmd_data *cmd);
-void	extract_args(t_minishell *shell, t_cmd_data *cmd);
+void		extract_cmd(t_minishell *shell, t_cmd_data *cmd);
+void		extract_args(t_minishell *shell, t_cmd_data *cmd);
 static int	count_args(char *line);
-void	fetch_args(t_minishell *shell, t_cmd_data *cmd);
-char	*fetch_substr(t_minishell *shell, char *line, int start, int len);
+void		fetch_args(t_minishell *shell, t_cmd_data *cmd);
+char		*fetch_substr(t_minishell *shell, char *line, int start, int len);
 
 void	extract_cmd(t_minishell *shell, t_cmd_data *cmd)
 {

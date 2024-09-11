@@ -3,32 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   space_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 16:38:21 by psitkin           #+#    #+#             */
-/*   Updated: 2024/09/01 14:12:02 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/09/11 22:19:34 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 void	tabs_to_spaces(char *str);
-int	only_spaces(char *str);
+int		only_spaces(char *str);
 void	change_2_space(char *line, int start, int end);
 char	*add_space(char *str);
 void	del_space(char *str);
 
-
 void	tabs_to_spaces(char *str)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	while (str[i])
 	{
-		if(str[i] == '\'' || str[i] == '\"')
+		if (str[i] == '\'' || str[i] == '\"')
 			i = quotes_skip(str, i);
-		if(str[i] == '\t')
+		if (str[i] == '\t')
 			str[i] = ' ';
 		i++;
 	}
@@ -42,7 +41,7 @@ int	only_spaces(char *str)
 	while (str[i])
 	{
 		if (str[i] != ' ')
-			return(0);
+			return (0);
 		i++;
 	}
 	return (1);
@@ -59,8 +58,8 @@ void	change_2_space(char *line, int start, int end)
 
 void	del_space(char *str)
 {
-	int		i;
-	int		j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;

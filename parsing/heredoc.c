@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/11 21:50:50 by psitkin           #+#    #+#             */
+/*   Updated: 2024/09/11 21:52:23 by psitkin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
-
 static char	*filename_heredoc(t_minishell *shell);
-void	heredoc(t_minishell *shell, t_cmd_data *cmd);
-int		heredoc_2_array(t_minishell *shell, char **redir, char **file);
-void	child_heredoc(t_minishell *shell, t_cmd_data *cmd, char *file, int i);
+void		heredoc(t_minishell *shell, t_cmd_data *cmd);
+int			heredoc_2_array(t_minishell *shell, char **redir, char **file);
+void		child_heredoc(t_minishell *shell, t_cmd_data *cmd, char *file, int i);
 
 void	heredoc(t_minishell *shell, t_cmd_data *cmd)
 {
@@ -15,7 +26,7 @@ void	heredoc(t_minishell *shell, t_cmd_data *cmd)
 	i = 0;
 	while (i < cmd->redir_count)
 	{
-		if (ft_strncmp (cmd->redir[i], "<<" , 2) == 0)
+		if (ft_strncmp (cmd->redir[i], "<<", 2) == 0)
 		{
 			file = filename_heredoc(shell);
 			pid = fork();
