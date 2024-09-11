@@ -36,7 +36,7 @@ char	*get_env(t_minishell *shell, char *search)
 	char	*str;
 	
 	i = 0;
-	if (search)
+	if (!search)
 		return (NULL);
 	len = ft_strlen(search);
 	while (shell->env[i])

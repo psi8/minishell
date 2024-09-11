@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 21:56:15 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/25 11:13:46 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/09/09 20:15:35 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	check_access(t_minishell *shell, t_cmd_data *cmd, char *path, char *c
 		{
 			free(c);
 			
-			error(shell, path, FATAL, 126);
+			error_p(shell, path, FATAL, 126);
 			free(path);
 		}
 		free(cmd->cmd);
@@ -53,7 +53,7 @@ static void	check_cmd_path(t_minishell *shell, t_cmd_data *cmd_vars)
 	i = -1;
 	cmd_one = ft_strjoin("/", cmd_vars->cmd);
 	if (cmd_one == NULL)
-		error(shell, cmd_vars->cmd, FATAL, 1); //Change for test
+		error(shell, ERR_MALLOC, FATAL, 1); //Change for test
 	while (shell->paths[++i])
 	{
 		cmd_path = ft_strjoin(shell->paths[i], cmd_one);
@@ -79,9 +79,9 @@ void	validate_command(t_minishell *shell, t_cmd_data *cmd_vars)
 	if (ft_strchr(cmd_vars->cmd, '/'))
 	{
 		if (access(cmd_vars->cmd, F_OK) == -1)
-			error(shell, cmd_vars->cmd, FATAL, 127);
+			error_p(shell, cmd_vars->cmd, FATAL, 127);
 		else if (access(cmd_vars->cmd, X_OK) == -1)
-			error(shell, cmd_vars->cmd, FATAL, 126);
+			error_p(shell, cmd_vars->cmd, FATAL, 126);
 		if (absolute_path_to_directory(cmd_vars->cmd))
 			child_error(shell, ft_strjoin(cmd_vars->cmd, IS_DIR), FATAL, 126);
 	}

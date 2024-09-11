@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 18:58:01 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/09/05 19:29:49 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/09/07 18:11:45 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void redirect_to_io(t_minishell *sh, t_cmd_data *cmd, t_exit_status exit_mode)
             duplicate_and_close(cmd->out, STDOUT_FILENO);
         }
         if (cmd->infile == -1 || cmd->out == -1)
-            error(sh, cmd->redir[index] + 2, exit_mode, 1);
+            error_p(sh, cmd->redir[index] + 2, exit_mode, 1);
     }
 }
 
