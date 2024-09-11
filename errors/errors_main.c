@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   errors_main.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/11 20:55:55 by psitkin           #+#    #+#             */
+/*   Updated: 2024/09/11 20:56:24 by psitkin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 int	error(t_minishell *shell, char *msg, t_exit_status status, int code)
 {
 	char	*err_msg;
 
-	if(!msg)
+	if (!msg)
 		free_and_exit(shell, 1);
 	if (shell->parent_redir)
 		restore_std(shell);
