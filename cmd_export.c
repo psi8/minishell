@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_export.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/03 14:50:36 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/09/07 17:32:34 by dlevinsc         ###   ########.fr       */
+/*   Created: 2024/09/11 23:02:54 by psitkin           #+#    #+#             */
+/*   Updated: 2024/09/11 23:05:31 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 static char	*add_quotes(char *env)
 {
@@ -38,38 +37,39 @@ static char	*add_quotes(char *env)
 	return (temp_char);
 }
 
-
 /**
- * display_environment - Prints the environment variables with additional formatting.
+ * display_environment - Prints the environment variables with
+ * additional formatting.
  * @data: Pointer to the main data structure.
- * @return: EXIT_SUCCESS or EXIT_FAILURE based on the presence of environment variables.
+ * @return: EXIT_SUCCESS or EXIT_FAILURE based on the presence
+ * of environment variables.
  */
-static int display_environment(char **env)
+static int	display_environment(char **env)
 {
-    char    *formatted_env;
-    int     env_index;
+	char	*formatted_env;
+	int		env_index;
 
-    env_index = 0;
-    if (!env)
-        return (EXIT_FAILURE);
-    while (env[env_index])
-    {
-        ft_putstr_fd("declare -x ", STDOUT_FILENO);
-        formatted_env = add_quotes(env[env_index]);
-        if (formatted_env)
-            ft_putendl_fd(formatted_env, STDOUT_FILENO);
-        else
-            ft_putendl_fd(env[env_index], STDOUT_FILENO);
-        env_index++;
-        free(formatted_env);
-    }
-    return (EXIT_SUCCESS);
+	env_index = 0;
+	if (!env)
+		return (EXIT_FAILURE);
+	while (env[env_index])
+	{
+		ft_putstr_fd("declare -x ", STDOUT_FILENO);
+		formatted_env = add_quotes(env[env_index]);
+		if (formatted_env)
+			ft_putendl_fd(formatted_env, STDOUT_FILENO);
+		else
+			ft_putendl_fd(env[env_index], STDOUT_FILENO);
+		env_index++;
+		free(formatted_env);
+	}
+	return (EXIT_SUCCESS);
 }
 
 void	cmd_export(t_minishell *shell, char **argv)
 {
-//	int		result;
-	int		index;
+//	int	result;
+	int	index;
 
 	index = 1;
 	if (!argv[index])

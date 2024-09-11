@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_cd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 14:41:57 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/09/06 23:23:31 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/09/11 22:22:04 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	cmd_cd(t_minishell *shell, char **argv)
 	char	*path;
 
 	if (!argv[1] || ft_isspace(argv[1][0]) || argv[1][0] == '\0'
-		|| ft_strncmp(argv[1], "--", 3) == 0 || ft_strncmp(argv[1], " ", 2) == 0)
+		|| ft_strncmp(argv[1], "--", 3) == 0
+		|| ft_strncmp(argv[1], " ", 2) == 0)
 	{
 		path = ft_get_env(shell, "HOME");
 		if (!path || *path == '\0' || ft_isspace(*path))
@@ -29,7 +30,7 @@ int	cmd_cd(t_minishell *shell, char **argv)
 		return (change_dir(shell, path));
 	}
 	else if (argv[2])
-		return (error(shell,  "cd: too many arguments", ERROR, 1));
+		return (error(shell, "cd: too many arguments", ERROR, 1));
 	else if (ft_strncmp(argv[1], "-", 2) == 0)
 	{
 		path = ft_get_env(shell, "OLDPWD");

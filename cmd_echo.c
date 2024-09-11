@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_echo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 14:45:12 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/26 18:46:38 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/09/11 22:22:38 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	cmd_echo(char **argv)
 	}
 	if (option_n == false)
 		ft_putchar_fd('\n', STDOUT_FILENO);
-	return(EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }
 
 static t_bool	exist_n_option(char **argv)
