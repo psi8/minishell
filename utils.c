@@ -6,15 +6,15 @@
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 18:22:09 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/31 20:29:38 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/09/12 21:04:11 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_array(char ***array);
-int	array_len(char **array);
+void	free_array(char ***a);
 void	malloc_error(t_minishell *shell, char *str, t_exit_status status);
+int		array_len(char **array);
 
 char	**get_paths(char **env)
 {
@@ -78,36 +78,35 @@ void	ft_update_pwd(t_minishell *shell)
 	shell->pwd = getcwd(NULL, 0);
 	if (!shell->pwd)
 		error(shell, ERR_CWD, ERROR, 1);
-//	update_wd_env(shell);
 }
 
-char	**add_to_array(t_minishell *shell, char **array, char *new, t_exit_status mode)
+char	**add_to_array(t_minishell *s, char **a, char *new, t_exit_status m)
 {
 	int		i;
-	char	**new_array;
+	char	**new_a;
 
 	i = -1;
-	new_array = malloc(sizeof(char *) * (array_len(array) + 2));
-	if (!new_array)
-		malloc_error(shell, new, mode);
-	while (array[++i])
+	new_a = malloc(sizeof(char *) * (array_len(a) + 2));
+	if (!new_a)
+		malloc_error(s, new, m);
+	while (a[++i])
 	{
-		new_array[i] = ft_strdup(array[i]);
-		if (!new_array[i])
+		new_a[i] = ft_strdup(a[i]);
+		if (!new_a[i])
 		{
-			free_array(&new_array);
-			malloc_error(shell, new, mode);
+			free_array(&new_a);
+			malloc_error(s, new, m);
 		}
 	}
-	new_array[i] = ft_strdup(new);
-	if (!new_array[i])
+	new_a[i] = ft_strdup(new);
+	if (!new_a[i])
 	{
-		free_array(&new_array);
-		malloc_error(shell, new, mode);
+		free_array(&new_a);
+		malloc_error(s, new, m);
 	}
-	new_array[i + 1] = NULL;
-	free_array(&array);
-	return (new_array);
+	new_a[i + 1] = NULL;
+	free_array(&a);
+	return (new_a);
 }
 
 int	array_len(char **array)
@@ -118,91 +117,4 @@ int	array_len(char **array)
 	while (array[i])
 		i++;
 	return (i);
-}
-
-void	free_array(char ***array)
-{
-	int	i;
-
-	i = 0;
-	while ((*array)[i])
-	{
-		free((*array)[i]);
-		(*array)[i] = NULL;
-		i++;
-	}
-	free(*array);
-	*array = NULL;
-}
-
-void	malloc_error(t_minishell *shell, char *str, t_exit_status status)
-{
-	if (status == FREEABLE)
-		free(str);
-	error(shell, ERR_MALLOC, FATAL, 1);
-}
-
-char	**array_copy(t_minishell *shell, char **arr)
-{
-	int		i;
-	char	**new_arr;
-
-	i = 0;
-	new_arr = malloc(sizeof(char *) * (array_len(arr) + 1));
-	if (!new_arr)
-		error(shell, ERR_MALLOC, FATAL, 1);
-	while (arr[i])
-	{
-		new_arr[i] = ft_strdup(arr[i]);
-		if (!new_arr[i])
-		{
-			free_array(&new_arr);
-			error(shell, ERR_MALLOC, FATAL, 1);
-		}
-		i++;
-	}
-	new_arr[i] = NULL;
-	return (new_arr);
-}
-
-int	find_in_array(char **array, char *identifier)
-{
-	int	i;
-
-	i = 0;
-	while (array[i])
-	{
-		if (ft_strncmp(array[i], identifier, ft_strlen(identifier)) == 0)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-void	rm_fr_array(char **arr, char *id)
-{
-	int	i;
-
-	i = 0;
-	if (!id || !find_in_array(arr, id))
-		return ;
-	while (arr[i])
-	{
-		if (ft_strncmp(arr[i], id, ft_strlen(id)) == 0
-			&& (arr[i][ft_strlen(id)] == '\0'
-			|| arr[i][ft_strlen(id)] == '='))
-		{
-			free(arr[i]);
-			break ;
-		}
-		i++;
-	}
-	if (!arr[i])
-		return ;
-	while (arr[i + 1])
-	{
-		arr[i] = arr[i + 1];
-		i++;
-	}
-	arr[i] = NULL;
 }

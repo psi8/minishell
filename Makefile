@@ -19,9 +19,10 @@ SRCS = builtins_handler.c \
        exec_main.c \
        in_out_redirection.c \
        init_pipe_run_exec.c \
-       rd_heredoc.c \
        signal.c \
+       signal_helper.c \
        utils.c \
+       utils2.c \
        utils_free.c \
        cmd_cd.c \
        cmd_export.c \
@@ -30,7 +31,6 @@ SRCS = builtins_handler.c \
        errors/error_handler.c \
        errors/errors_main.c \
        exit/exit.c \
-       test_main.c \
        syntax.c \
        parsing/expand.c \
        parsing/heredoc.c \
@@ -41,7 +41,7 @@ SRCS = builtins_handler.c \
        parsing/space_parsing.c \
        parsing/parse_cmd_args.c \
        free.c \
-       redir.c \
+       redir.c
 
        
 

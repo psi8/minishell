@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_handler.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 14:36:23 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/09/09 20:00:38 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/09/11 22:21:19 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,6 @@ t_bool	call_builtin(t_minishell *shell, t_cmd_data *cmd)
 	else if (ft_strncmp(cmd->cmd, "export", 7) == 0)
 		cmd_export(shell, cmd->args);
 	else
-		return(false);
+		return (false);
 	return (true);
 }

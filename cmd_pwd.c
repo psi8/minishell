@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_pwd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 14:51:35 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/09/06 23:41:06 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/09/12 20:16:06 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void cmd_pwd(t_minishell *sh)
+void	cmd_pwd(t_minishell *sh)
 {
-    ft_putendl_fd(sh->pwd, 1);
+	ft_putendl_fd(sh->pwd, 1);
 }
-

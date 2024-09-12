@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_helpers.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/11 22:15:27 by psitkin           #+#    #+#             */
+/*   Updated: 2024/09/11 22:16:06 by psitkin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../minishell.h"
 
@@ -11,7 +22,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t	i;
 
 	if (s == NULL)
-		return(NULL);
+		return (NULL);
 	if (start >= ft_strlen(s))
 		len = 0;
 	if (len >= ft_strlen(s) - start)
