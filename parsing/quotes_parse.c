@@ -6,23 +6,22 @@
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 16:42:29 by psitkin           #+#    #+#             */
-/*   Updated: 2024/08/31 18:13:14 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/09/11 22:17:16 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	quotes_skip(char *str, int i);
+int		quotes_skip(char *str, int i);
 void	n_terminate(char *str, int i);
-int	quotes_not_closed(char *str);
+int		quotes_not_closed(char *str);
 void	quotes_remove(char *str);
 void	n_terminate(char *str, int i);
 
-
 int	quotes_skip(char *str, int i)
 {
-	char quote;
-	
+	char	quote;
+
 	quote = str[i];
 	i++;
 	while (str[i] && str[i] != quote)
@@ -36,15 +35,15 @@ int	quotes_not_closed(char *str)
 	char	quote;
 
 	i = 0;
-	while(str[i])
+	while (str[i])
 	{
-		if(str[i] == '\"' || str[i] == '\'')
+		if (str[i] == '\"' || str[i] == '\'')
 		{
 			quote = str[i];
 			i++;
-			while(str[i] && str[i] != quote)
+			while (str[i] && str[i] != quote)
 				i++;
-			if(!str[i])
+			if (!str[i])
 				return (1);
 		}
 		i++;

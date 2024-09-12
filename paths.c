@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   paths.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/12 00:00:26 by psitkin           #+#    #+#             */
+/*   Updated: 2024/09/12 00:00:53 by psitkin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -16,14 +27,14 @@ void	paths(t_minishell *shell, char **envp)
 	int	i;
 
 	i = 0;
-	while(envp[i])
+	while (envp[i])
 	{
-		if(!ft_strncmp(envp[i], "PATH", 4))
+		if (!ft_strncmp(envp[i], "PATH", 4))
 		{
 			shell->paths = ft_split(envp[i] + 5, ':');
-			if(shell->paths == NULL)
+			if (shell->paths == NULL)
 				error(shell, ERR_MALLOC, FATAL, 1);
-			return;
+			return ;
 		}
 		i++;
 	}
@@ -34,9 +45,9 @@ char	*get_env(t_minishell *shell, char *search)
 	int		i;
 	int		len;
 	char	*str;
-	
+
 	i = 0;
-	if (search)
+	if (!search)
 		return (NULL);
 	len = ft_strlen(search);
 	while (shell->env[i])

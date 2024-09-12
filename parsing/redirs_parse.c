@@ -1,9 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redirs_parse.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/11 22:17:33 by psitkin           #+#    #+#             */
+/*   Updated: 2024/09/11 22:18:11 by psitkin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
-
-
 //list of func
-void	redir_extract(t_minishell *shell, t_cmd_data *cmd);
-static int redir_check(t_minishell *shell, t_cmd_data *cmd);
+void		redir_extract(t_minishell *shell, t_cmd_data *cmd);
+static int	redir_check(t_minishell *shell, t_cmd_data *cmd);
 static char	*get_redir(t_minishell *shell, char *l, int *i);
 static void	tidy_fmt(t_minishell *shell, t_cmd_data *cmd, int i);
 
@@ -35,7 +45,7 @@ void	redir_extract(t_minishell *shell, t_cmd_data *cmd)
 	cmd->redir[pars.k] = NULL;
 }
 
-static int redir_check(t_minishell *shell, t_cmd_data *cmd)
+static int	redir_check(t_minishell *shell, t_cmd_data *cmd)
 {
 	int	i;
 
@@ -65,7 +75,7 @@ static int redir_check(t_minishell *shell, t_cmd_data *cmd)
 static char	*get_redir(t_minishell *shell, char *l, int *i)
 {
 	t_parsed_data	parse;
-	char	*str;
+	char			*str;
 
 	init_t_parse(&parse);
 	parse.k = *i;

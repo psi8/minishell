@@ -6,10 +6,11 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 21:33:21 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/26 19:11:17 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/09/06 22:51:29 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
 #include "minishell.h"
 
 int	open_in_file(char *file)
@@ -24,3 +25,4 @@ int	open_in_file(char *file)
 		return (error_msg_cmd(file, NULL, strerror(errno), false));
 	return (status);
 }
+*/

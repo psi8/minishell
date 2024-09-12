@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/11 23:11:35 by psitkin           #+#    #+#             */
+/*   Updated: 2024/09/11 23:11:36 by psitkin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 //used func
@@ -30,7 +42,7 @@ void	pipes_free(t_minishell *shell)
 	int	i;
 
 	i = 0;
-	while (i <shell->pipes_allocated)
+	while (i < shell->pipes_allocated)
 	{
 		free (shell->pipe[i]);
 		i++;
