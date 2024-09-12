@@ -66,6 +66,16 @@ int	heredoc_2_array(t_minishell *shell, char **redir, char **file)
 	return (0);
 }
 
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	while (*s1 && *s1 == *s2)
+	{
+		s1++;
+		s2++;
+	}
+	return ((unsigned char)*s1 - (unsigned char)*s2);
+}
+
 static void	write_to_heredoc(t_minishell *shell, char *limit, int fd)
 {
 	char	*str;
@@ -73,7 +83,7 @@ static void	write_to_heredoc(t_minishell *shell, char *limit, int fd)
 	while (1)
 	{
 		str = readline("> ");
-		if (!str || !ft_strncmp(str, limit, ft_strlen(str)))
+		if (!str || !ft_strcmp(str, limit))
 		{
 			free(str);
 			break ;

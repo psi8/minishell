@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 22:12:42 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/09/05 20:06:20 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/09/12 20:16:52 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ static void	sig_hand(int signal)
 {
 	if (signal == SIGINT)
 	{
+		ioctl(0, TIOCSTI, "\n");
 		write(1, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);

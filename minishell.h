@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:23:15 by psitkin           #+#    #+#             */
-/*   Updated: 2024/09/09 21:23:56 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/09/12 20:21:28 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # endif
 
 # include <unistd.h>
+# include <sys/ioctl.h>
 # include <stdio.h>
 # include <signal.h> // signals on Linux
 # include <fcntl.h>
