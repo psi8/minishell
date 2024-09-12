@@ -6,7 +6,7 @@
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 23:02:54 by psitkin           #+#    #+#             */
-/*   Updated: 2024/09/11 23:05:31 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/09/12 19:52:04 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ static int	display_environment(char **env)
 
 void	cmd_export(t_minishell *shell, char **argv)
 {
-//	int	result;
 	int	index;
 
 	index = 1;

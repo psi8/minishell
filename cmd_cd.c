@@ -6,7 +6,7 @@
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 14:41:57 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/09/11 22:22:04 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/09/12 19:51:46 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ static int	change_dir(t_minishell *shell, char *path)
 
 static void	update_work_dir_var(t_minishell *shell, char *path)
 {
-//	ft_update_pwd(shell);
-//	ft_add_env_hash(shell->hashmap, "PWD", path);
 	if (shell->old_pwd)
 		free(shell->old_pwd);
 	shell->old_pwd = ft_strdup(shell->pwd);

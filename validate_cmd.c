@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_cmd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 21:56:15 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/09/09 20:15:35 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/09/12 21:24:39 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,14 @@ static int	absolute_path_to_directory(char *cmd)
 	return (0);
 }
 
-static int	check_access(t_minishell *shell, t_cmd_data *cmd, char *path, char *c)
+static int	check_access(t_minishell *sh, t_cmd_data *cmd, char *path, char *c)
 {
 	if (access(path, 0) == 0)
 	{
 		if (access(path, X_OK) == -1)
 		{
 			free(c);
-			
-			error_p(shell, path, FATAL, 126);
+			error_p(sh, path, FATAL, 126);
 			free(path);
 		}
 		free(cmd->cmd);
@@ -53,13 +52,13 @@ static void	check_cmd_path(t_minishell *shell, t_cmd_data *cmd_vars)
 	i = -1;
 	cmd_one = ft_strjoin("/", cmd_vars->cmd);
 	if (cmd_one == NULL)
-		error(shell, ERR_MALLOC, FATAL, 1); //Change for test
+		error(shell, ERR_MALLOC, FATAL, 1);
 	while (shell->paths[++i])
 	{
 		cmd_path = ft_strjoin(shell->paths[i], cmd_one);
 		if (!cmd_path)
 			error(shell, cmd_path, FATAL, 1);
-		if (absolute_path_to_directory(cmd_path)) //Change for test
+		if (absolute_path_to_directory(cmd_path))
 		{
 			free(cmd_path);
 			continue ;

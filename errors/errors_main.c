@@ -6,7 +6,7 @@
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 20:55:55 by psitkin           #+#    #+#             */
-/*   Updated: 2024/09/11 20:56:24 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/09/12 21:38:27 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	error_p(t_minishell *shell, char *msg, t_exit_status status, int code)
 	return (1);
 }
 
-int	child_error(t_minishell *shell, char *msg, t_exit_status status, int code)
+int	child_error(t_minishell *shell, char *msg, t_exit_status st, int code)
 {
 	char	*error_msg;
 
@@ -75,7 +75,7 @@ int	child_error(t_minishell *shell, char *msg, t_exit_status status, int code)
 		free(error_msg);
 	}
 	free(msg);
-	shell->status = status;
+	shell->status = st;
 	shell->exit_status = code;
 	if (shell->status == FATAL)
 		free_and_exit(shell, code);

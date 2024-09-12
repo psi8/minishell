@@ -6,7 +6,7 @@
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 21:33:47 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/09/12 00:02:03 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/09/12 20:16:50 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,3 @@ void	set_pipe_fds(t_minishell *shell, int i)
 	dup2(shell->pipe[i - 1][0], STDIN_FILENO);
 	close_pipes(shell);
 }
-

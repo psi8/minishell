@@ -28,18 +28,13 @@ void	exec_main(t_minishell *sh)
 	while (process_index < sh->cmd_count)
 	{
 		sh->pid[process_index] = fork();
-//		printf("Parent process with PID %d, child PID %d\n", getpid(),
-//		sh->pid[process_index]);
 		if (sh->pid[process_index] == -1)
 		{
 			manage_wait(sh, process_index);
 			error_p(sh, "fork", FATAL, 1);
 		}
 		if (sh->pid[process_index] == 0)
-		{
-//			printf("Child process with PID %d\n", getpid());
 			handle_child_process(sh, &sh->cmd_tree[process_index]);
-		}
 		process_index++;
 	}
 	if (sh->cmd_count > 1)
