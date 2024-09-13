@@ -6,7 +6,7 @@
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 22:15:27 by psitkin           #+#    #+#             */
-/*   Updated: 2024/09/11 22:16:06 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/09/13 15:40:05 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,14 @@ char	*empty_strdup(t_minishell *shell)
 	if (!str)
 		error(shell, ERR_MALLOC, FATAL, 1);
 	return (str);
+}
+
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	while (*s1 && *s1 == *s2)
+	{
+		s1++;
+		s2++;
+	}
+	return ((unsigned char)*s1 - (unsigned char)*s2);
 }

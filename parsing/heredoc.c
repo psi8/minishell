@@ -6,7 +6,7 @@
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 21:50:50 by psitkin           #+#    #+#             */
-/*   Updated: 2024/09/12 21:20:57 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/09/13 15:39:36 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,16 +75,6 @@ int	heredoc_2_array(t_minishell *shell, char **redir, char **file)
 	if (!*redir)
 		error(shell, ERR_MALLOC, FATAL, 1);
 	return (0);
-}
-
-int	ft_strcmp(const char *s1, const char *s2)
-{
-	while (*s1 && *s1 == *s2)
-	{
-		s1++;
-		s2++;
-	}
-	return ((unsigned char)*s1 - (unsigned char)*s2);
 }
 
 static void	write_to_heredoc(t_minishell *shell, char *limit, int fd)
