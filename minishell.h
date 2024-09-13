@@ -6,7 +6,7 @@
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:23:15 by psitkin           #+#    #+#             */
-/*   Updated: 2024/09/12 21:38:49 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/09/13 16:01:45 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # endif
 
 # include <unistd.h>
+# include <sys/ioctl.h>
 # include <stdio.h>
 # include <signal.h> // signals on Linux
 # include <fcntl.h>
@@ -61,7 +62,6 @@ void	heredoc(t_minishell *shell, t_cmd_data *cmd);
 t_bool	call_builtin(t_minishell *shell, t_cmd_data *cmd);
 //void	redir_to_pipe(t_minishell *shell, t_cmd_data *cmd_vars);
 void	redirect_to_io(t_minishell *sh, t_cmd_data *cmd, t_exit_status ex_mode);
-char	*get_env_var_value(char **env, char *var);
 
 //int	wait_child(t_minishell *shell);
 //void	execute_cmd(t_minishell *shell, t_cmd_data *cmd_vars);
@@ -137,5 +137,6 @@ char	**array_copy(t_minishell *shell, char **array);
 void	shlvl_increment(t_minishell *shell);
 void	rm_fr_array(char **arr, char *id);
 void	shell_init(t_minishell *shell, char **envp);
+void	write_to_heredoc(t_minishell *shell, char *limit, int fd);
 
 #endif

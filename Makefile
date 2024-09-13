@@ -12,7 +12,6 @@ SRCS = builtins_handler.c \
        minishell.c \
        paths.c \
        validate_cmd.c \
-       close_pipes.c \
        cmd_exit.c \
        env.c \
        env_partial.c \

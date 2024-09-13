@@ -6,7 +6,7 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 17:47:19 by psitkin           #+#    #+#             */
-/*   Updated: 2024/09/02 22:43:20 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/09/12 20:01:16 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@
 # define ERR_PERM ": permission denied"
 # define ERR_DIR ": is a directory"
 
-# define ERR_UNCLEAR_REDIRECTION "unclear redirect"
+# define ERR_UNCLEAR_REDIRECTION ": ambiguous redirect"
 
 #endif

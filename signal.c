@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 22:12:42 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/09/12 20:55:28 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/09/12 22:47:18 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static void	sig_hand(int signal)
 {
 	if (signal == SIGINT)
 	{
+		ioctl(0, TIOCSTI, "\n");
 		write(1, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);

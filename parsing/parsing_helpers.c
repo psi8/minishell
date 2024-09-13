@@ -6,7 +6,7 @@
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 22:15:27 by psitkin           #+#    #+#             */
-/*   Updated: 2024/09/11 22:16:06 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/09/13 15:55:56 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,20 @@ char	*empty_strdup(t_minishell *shell)
 	if (!str)
 		error(shell, ERR_MALLOC, FATAL, 1);
 	return (str);
+}
+
+void	child_heredoc(t_minishell *sh, t_cmd_data *cmd, char *file, int i)
+{
+	int		fd;
+
+	signal_toggle(HEREDOC);
+	fd = open(file, O_CREAT | O_RDWR | O_TRUNC, 0644);
+	if (fd == -1)
+		error_p(sh, file, FATAL, 1);
+	write_to_heredoc(sh, cmd->redir[i] + 2, fd);
+	close(fd);
+	all_free(sh);
+	array_free(&sh->env);
+	signal_toggle(DEFAULT);
+	exit(0);
 }
