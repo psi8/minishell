@@ -6,7 +6,7 @@
 /*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 21:50:50 by psitkin           #+#    #+#             */
-/*   Updated: 2024/09/13 15:39:36 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/09/13 16:02:49 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,16 @@ static char	*filename_heredoc(t_minishell *shell);
 void		heredoc(t_minishell *shell, t_cmd_data *cmd);
 int			heredoc_2_array(t_minishell *shell, char **redir, char **file);
 void		child_heredoc(t_minishell *sh, t_cmd_data *cmd, char *file, int i);
+
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	while (*s1 && *s1 == *s2)
+	{
+		s1++;
+		s2++;
+	}
+	return ((unsigned char)*s1 - (unsigned char)*s2);
+}
 
 void	heredoc(t_minishell *shell, t_cmd_data *cmd)
 {
@@ -77,7 +87,7 @@ int	heredoc_2_array(t_minishell *shell, char **redir, char **file)
 	return (0);
 }
 
-static void	write_to_heredoc(t_minishell *shell, char *limit, int fd)
+void	write_to_heredoc(t_minishell *shell, char *limit, int fd)
 {
 	char	*str;
 
@@ -94,20 +104,4 @@ static void	write_to_heredoc(t_minishell *shell, char *limit, int fd)
 		ft_putendl_fd(str, fd);
 		free(str);
 	}
-}
-
-void	child_heredoc(t_minishell *sh, t_cmd_data *cmd, char *file, int i)
-{
-	int		fd;
-
-	signal_toggle(HEREDOC);
-	fd = open(file, O_CREAT | O_RDWR | O_TRUNC, 0644);
-	if (fd == -1)
-		error_p(sh, file, FATAL, 1);
-	write_to_heredoc(sh, cmd->redir[i] + 2, fd);
-	close(fd);
-	all_free(sh);
-	array_free(&sh->env);
-	signal_toggle(DEFAULT);
-	exit(0);
 }

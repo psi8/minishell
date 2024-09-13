@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:23:15 by psitkin           #+#    #+#             */
-/*   Updated: 2024/09/13 14:46:57 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/09/13 16:01:45 by psitkin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,5 +137,6 @@ char	**array_copy(t_minishell *shell, char **array);
 void	shlvl_increment(t_minishell *shell);
 void	rm_fr_array(char **arr, char *id);
 void	shell_init(t_minishell *shell, char **envp);
+void	write_to_heredoc(t_minishell *shell, char *limit, int fd);
 
 #endif
