@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_export.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psitkin <psitkin@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 23:02:54 by psitkin           #+#    #+#             */
-/*   Updated: 2024/09/12 19:52:04 by psitkin          ###   ########.fr       */
+/*   Updated: 2024/09/13 15:30:56 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static t_bool	is_in_env(char **env, char *id);
 
 static char	*add_quotes(char *env)
 {
@@ -81,8 +83,31 @@ void	cmd_export(t_minishell *shell, char **argv)
 		if (!is_valid_var_name(argv[index]))
 			export_error_msg(shell, argv[index]);
 		else
-			shell->env = add_to_array(shell, shell->env, argv[index], 0);
+		{
+			if (!is_in_env(shell->env, argv[index]))
+				shell->env = add_to_array(shell, shell->env, argv[index], 0);
+		}
 		index++;
 	}
 	return ;
+}
+
+static t_bool	is_in_env(char **env, char *id)
+{
+	int	i;
+	int	len;
+
+	if (!env || !id)
+		return (false);
+	len = 0;
+	while (id[len] && id[len] != '=')
+		len++;
+	i = 0;
+	while (env[i])
+	{
+		if (ft_strncmp(env[i], id, len) == 0 && env[i][len] == '=')
+			return (true);
+		i++;
+	}
+	return (false);
 }

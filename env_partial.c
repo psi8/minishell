@@ -6,35 +6,11 @@
 /*   By: dlevinsc <dlevinsc@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 19:19:25 by dlevinsc          #+#    #+#             */
-/*   Updated: 2024/08/25 11:51:29 by dlevinsc         ###   ########.fr       */
+/*   Updated: 2024/09/13 14:46:45 by dlevinsc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	*get_env_var_value(char **env, char *var)
-{
-	int		i;
-	char	*tmp;
-	char	*result;
-
-	i = 0;
-	tmp = ft_strjoin(var, "=");
-	if (!tmp)
-		return (NULL);
-	while (env[i])
-	{
-		if (ft_strncmp(tmp, env[i], ft_strlen(tmp)) == 0)
-		{
-			free_ptr(tmp);
-			result = ft_strchr(env[i], '=') + 1;
-			return (result);
-		}
-		i++;
-	}
-	free_ptr(tmp);
-	return (NULL);
-}
 
 void	env_var_remove(t_minishell *shell, int index)
 {
